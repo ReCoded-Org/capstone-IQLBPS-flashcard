@@ -4,7 +4,7 @@ const SERVICE_ID = 'service_3tixi8d';
 const TEMPLATE_ID = 'template_tsw4ro5';
 const USER_ID = 'Cprut94nRZj80oKe-';
 
-const handleSubmit = (text) => {
+const senEmail= (text) => {
     emailjs.sendForm(SERVICE_ID, TEMPLATE_ID, text, USER_ID)
       .then((result) => {
         //TODO: create alert if its successful
