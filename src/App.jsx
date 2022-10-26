@@ -1,34 +1,33 @@
 import { Routes, Route, Outlet } from "react-router-dom";
-import Home from "./Pages/Home";
-import About from "./Pages/About";
-import Contact from "./Pages/Contact";
-import Team from "./Pages/Team";
-import Profile from "./Pages/Profile";
-import NoMatch from "./Pages/NoMatch";
+import Home from './pages/Home';
+import About from './pages/About';
+import Contact from './pages/Contact';
+import Team from './pages/Team';
+import Profile from './pages/Profile';
+import NoMatch from './pages/NoMatch';
 
-function App() {
+const App = () => {
   return (
     <Routes>
-    <Route path="/"  element={<Layout />}>
-    <Route index element={<Home/>}/>
-    <Route path="about" element={<About/>}/>
-    <Route path="contact" element={<Contact/>}/>
-    <Route path="team" element={<Team/>}/>
-    <Route path="profile" element={<Profile/>}/>
-    <Route path="*" element={<NoMatch/>}/>
-
-    </Route>
+      <Route path="/" element={<Layout />}>
+        <Route index element={<Home />} />
+        <Route path="about" element={<About />} />
+        <Route path="contact" element={<Contact />} />
+        <Route path="team" element={<Team />} />
+        <Route path="profile" element={<Profile />} />
+        <Route path="*" element={<NoMatch />} />
+      </Route>
     </Routes>
-    
   );
-}
-function Layout(){
-  return(
-<div>
+};
 
-<Outlet/>
-</div>
-
-  )
-}
+const Layout = () => {
+  return (
+    <div>
+      {/* Nav should be here */}
+      <Outlet />
+      {/* Footer should be here */}
+    </div>
+  );
+};
 export default App;
