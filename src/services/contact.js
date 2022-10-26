@@ -13,4 +13,4 @@ const senEmail= (text) => {
       });
 }
 
-export default handleSubmit;
+export default sendEmail;
