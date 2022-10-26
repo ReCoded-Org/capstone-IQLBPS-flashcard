@@ -4,15 +4,13 @@ const SERVICE_ID = 'service_3tixi8d';
 const TEMPLATE_ID = 'template_tsw4ro5';
 const USER_ID = 'Cprut94nRZj80oKe-';
 
-const handleSubmit = (e) => {
-    e.preventDefault();
-    emailjs.sendForm(SERVICE_ID, TEMPLATE_ID, e.target, USER_ID)
+const handleSubmit = (text) => {
+    emailjs.sendForm(SERVICE_ID, TEMPLATE_ID, text, USER_ID)
       .then((result) => {
-        console.log(result.text);
+        //TODO: create alert if its successful
       }, (error) => {
-        console.log(error.text);
+        //TODO: create alert if something went wrong
       });
-    e.target.reset()
 }
 
 export default handleSubmit;
