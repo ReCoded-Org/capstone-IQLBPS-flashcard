@@ -8,12 +8,14 @@
   "overrides": [],
   "parserOptions": {
     "ecmaFeatures": {
-      "jsx": true
+      "jsx": true,
+      "experimentalObjectRestSpread": true
     },
     "ecmaVersion": "latest",
     "sourceType": "module"
   },
   "plugins": ["react"],
+  "parser": "@babel/eslint-parser",
   "rules": {
     "react/jsx-filename-extension": [2, { "extensions": [".js", ".jsx"] }],
     "react/function-component-definition": "off",
@@ -24,6 +26,7 @@
     "no-restricted-exports": "off",
     "react/jsx-props-no-spreading": "off",
     "import/no-cycle": "off",
-    "import/prefer-default-export": "off"
+    "import/prefer-default-export": "off",
+    "import/newline-after-import": "off"
   }
 }
