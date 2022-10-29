@@ -5,6 +5,7 @@ import Contact from './pages/Contact';
 import Team from './pages/Team';
 import Profile from './pages/Profile';
 import NoMatch from './pages/NoMatch';
+import Footer from './components/Footer';
 
 const App = () => {
   return (
@@ -26,7 +27,7 @@ const Layout = () => {
     <div>
       {/* Nav should be here */}
       <Outlet />
-      {/* Footer should be here */}
+      <Footer />
     </div>
   );
 };
