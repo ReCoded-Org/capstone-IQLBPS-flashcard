@@ -1,3 +1,15 @@
 {
-  "Hello": "Hello"
+  "Hello": "Hello",
+  "Please enter you name": "Please enter you name",
+  "Please upload an image": "Please upload an image",
+  "Please enter description": "Please enter description",
+  "Please enter category": "Please enter category",
+  "ADD NEW SET": "ADD NEW SET",
+  "Choose From Current Sets": "Choose From Current Sets",
+  "CANCEL": "CANCEL",
+  "Submit": "Submit",
+  "Set's Name": "Set's Name",
+  "Description": "Description",
+  "Category": "Category",
+  "New Set": "New Set"
 }
