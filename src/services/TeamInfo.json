@@ -1,0 +1,143 @@
+[
+  {
+    "ID": 1,
+    "name": "Ahmad Saleh",
+    " position": "Front-End Developer",
+    " image": "https://flowbite.com/docs/images/people/profile-picture-3.jpg",
+    " social": {
+      "github": " https://github.com/Sarakhalil0",
+      " twitter": " https://my.learn.co/courses/518"
+    }
+  },
+  {
+    "ID": 2,
+    "name": "Ali Sami",
+    "position": "Front-End Developer",
+    "image": "https://flowbite.com/docs/images/people/profile-picture-3.jpg",
+    "social": {
+      "github": " https://github.com/Sarakhalil0",
+      "twitter": " https://my.learn.co/courses/518"
+    }
+  },
+  {
+    "ID": 3,
+    "name": "Hend Mohammed",
+    "position": "Front-End Developer",
+    "image": "https://flowbite.com/docs/images/people/profile-picture-3.jpg",
+    "social": {
+      "github": " https://github.com/Sarakhalil0",
+      "twitter": " https://my.learn.co/courses/518"
+    }
+  },
+
+  {
+    "ID": 4,
+    "name": "Hayat Salawdeh",
+    "position": "Front-End Developer",
+    "image": "https://flowbite.com/docs/images/people/profile-picture-3.jpg",
+    "social": {
+      "github": " https://github.com/Sarakhalil0",
+      "twitter": " https://my.learn.co/courses/518"
+    }
+  },
+  {
+    " ID": 5,
+    "name": "Lilian Manna",
+    "position": "Front-End Developer",
+    " image": "https://flowbite.com/docs/images/people/profile-picture-3.jpg",
+    " social": {
+      " github": " https://github.com/Sarakhalil0",
+      " twitter": " https://my.learn.co/courses/518"
+    }
+  },
+  {
+    " ID": 6,
+    "name": "Nasam Sayour",
+    "position": "Front-End Developer",
+    " image": "https://flowbite.com/docs/images/people/profile-picture-3.jpg",
+    " social": {
+      " github": " https://github.com/Sarakhalil0",
+      " twitter": " https://my.learn.co/courses/518"
+    }
+  },
+  {
+    " ID": 7,
+    "name": "Nizhyar Saeed ",
+    "position": "Front-End Developer",
+    " image": "https://flowbite.com/docs/images/people/profile-picture-3.jpg",
+    " social": {
+      " github": " https://github.com/Sarakhalil0",
+      " twitter": " https://my.learn.co/courses/518"
+    }
+  },
+  {
+    " ID": 8,
+    "name": "Nour Khoury",
+    "position": "Front-End Developer",
+    " image": "https://flowbite.com/docs/images/people/profile-picture-3.jpg",
+    " social": {
+      " github": " https://github.com/Sarakhalil0",
+      " twitter": " https://my.learn.co/courses/518"
+    }
+  },
+  {
+    " ID": 9,
+    "name": "Omar Banat",
+    "position": "Front-End Developer",
+    " image": "https://flowbite.com/docs/images/people/profile-picture-3.jpg",
+    " social": {
+      " github": " https://github.com/Sarakhalil0",
+      " twitter": " https://my.learn.co/courses/518"
+    }
+  },
+  {
+    " ID": 10,
+    "name": "Reem Chalak",
+    "position": "Front-End Developer",
+    " image": "https://flowbite.com/docs/images/people/profile-picture-3.jpg",
+    " social": {
+      " github": " https://github.com/Sarakhalil0",
+      " twitter": " https://my.learn.co/courses/518"
+    }
+  },
+  {
+    " ID": 11,
+    "name": "Roaa Hussam",
+    "position": "Front-End Developer",
+    " image": "https://flowbite.com/docs/images/people/profile-picture-3.jpg",
+    " social": {
+      " github": " https://github.com/Sarakhalil0",
+      " twitter": " https://my.learn.co/courses/518"
+    }
+  },
+  {
+    " ID": 12,
+    "name": "Sara Khalil",
+    "position": "Front-End Developer",
+    " image": "https://flowbite.com/docs/images/people/profile-picture-3.jpg",
+    " social": {
+      " github": " https://github.com/Sarakhalil0",
+      " twitter": " https://my.learn.co/courses/518"
+    }
+  },
+  {
+    " ID": 13,
+    "name": "Sara Ibrahim",
+    "position": "Front-End Developer",
+    " image": "https://flowbite.com/docs/images/people/profile-picture-3.jpg",
+    " social": {
+      " github": " https://github.com/Sarakhalil0",
+      " twitter": " https://my.learn.co/courses/518"
+    }
+  },
+  {
+    " ID": 14,
+    "name": "Sara Manaf",
+    "position": "Front-End Developer",
+    " image": "https://flowbite.com/docs/images/people/profile-picture-3.jpg",
+    " social": {
+      " github": " https://github.com/Sarakhalil0",
+      " twitter": " https://my.learn.co/courses/518"
+    }
+  }
+]
