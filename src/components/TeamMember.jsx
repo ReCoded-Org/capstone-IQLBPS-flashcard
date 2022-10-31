@@ -1,14 +1,14 @@
 import React from 'react';
 
-const TeamMember = ({ key, name, image, position, social }) => {
+const TeamMember = ({name, image, position, social}) => {
   const { github, twitter } = social;
 
   return (
-    <div key={key} className="text-center text-gray-500 dark:text-gray-400 ">
+    <div  className="text-center text-gray-500 dark:text-gray-400 ">
       <img
         className="mx-auto mb-4 w-36 h-36 rounded-lg"
         src={image}
-        alt="Bonnie Avatar"
+        alt={name}
       />
       <h3 className="mb-2 mt-1 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
         {name}
