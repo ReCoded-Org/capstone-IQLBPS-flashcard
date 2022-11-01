@@ -1,6 +1,17 @@
 /* eslint-disable react/destructuring-assignment */
 import { t } from 'i18next';
 import { useForm } from 'react-hook-form';
+import ComboBox from './ComboBox';
+
+const categoriesData = [
+  { id: 1, name: 'Math' },
+  { id: 2, name: 'Algebra' },
+  { id: 3, name: 'Geometry' },
+  { id: 4, name: 'Chemisty' },
+  { id: 5, name: 'Physics' },
+  { id: 6, name: 'Biology' },
+  { id: 7, name: 'History' },
+];
 
 const AddSet = (props) => {
   const {
@@ -58,6 +69,7 @@ const AddSet = (props) => {
             <input
               type="file"
               id="image"
+              // accept=".jpeg,.png,.png" to restrict type of file -- but needs more validation
               className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
               {...register('image', { required: t('Please upload an image') })}
             />
@@ -86,23 +98,12 @@ const AddSet = (props) => {
           </label>
         </div>
         <div className="mb-6">
-          <label
+          {/* <label
             htmlFor="categories"
             className="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300"
-          >
-            <input
-              type="text"
-              id="category"
-              className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-              placeholder={t('Category')}
-              {...register('category', {
-                required: t('Please enter category'),
-              })}
-            />
-            {errors.category && (
-              <div className="text-red-500">{errors.category.message}</div>
-            )}
-          </label>
+          > */}
+          <ComboBox data={categoriesData} register={register} errors={errors} />
+          {/* </label> */}
         </div>
         <button
           type="submit"
