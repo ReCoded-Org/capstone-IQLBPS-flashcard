@@ -1,9 +1,9 @@
 import icon from '../../assets/alert/alertIcon.svg';
 
 
-export default function Alert({ alert }) {
+export default function Alert({ type, title }) {
     let color = ''
-  switch (alert.type) {
+  switch (type) {
     case 'error':
       color='red';
       break;
@@ -24,10 +24,10 @@ export default function Alert({ alert }) {
       role="alert"
     >
       <img className="flex-shrink-0 inline w-5 h-5 mr-3" src={icon} alt="" />
-      <span className="sr-only">Success</span>
+      <span className="sr-only">{type}</span>
       <div>
-        <span className="font-medium">Success alert! </span>
-        {alert.title}
+        <span className="font-medium">{type} alert! </span>
+        {title}
       </div>
     </div>
     </div>
