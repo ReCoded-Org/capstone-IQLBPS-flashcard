@@ -69,7 +69,7 @@ const AddSet = (props) => {
             <input
               type="file"
               id="image"
-              // accept=".jpeg,.png,.png" to restrict type of file -- but needs more validation
+              accept=".jpeg,.png,.jpg"
               className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
               {...register('image', { required: t('Please upload an image') })}
             />
@@ -98,12 +98,7 @@ const AddSet = (props) => {
           </label>
         </div>
         <div className="mb-6">
-          {/* <label
-            htmlFor="categories"
-            className="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300"
-          > */}
           <ComboBox data={categoriesData} register={register} errors={errors} />
-          {/* </label> */}
         </div>
         <button
           type="submit"
