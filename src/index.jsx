@@ -1,5 +1,5 @@
 import React, { Suspense } from 'react';
-// import { Flowbite } from 'flowbite-react';
+import { Flowbite } from 'flowbite-react';
 
 import { createRoot } from 'react-dom/client';
 import { Provider } from 'react-redux';
@@ -16,14 +16,14 @@ const root = createRoot(container);
 root.render(
   <React.StrictMode>
      <BrowserRouter>
-     {/* <Flowbite> */}
+     <Flowbite>
 
       <Provider store={store}>
         <Suspense fallback="loading...">
           <App />
         </Suspense>
       </Provider>
-      {/* </Flowbite> */}
+      </Flowbite>
     </BrowserRouter>
   </React.StrictMode>
 );
