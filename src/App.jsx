@@ -6,12 +6,14 @@ import Team from './pages/Team';
 import Profile from './pages/Profile';
 import NoMatch from './pages/NoMatch';
 import Footer from './components/Footer';
+import Login from './pages/Login';
 
 const App = () => {
   return (
     <Routes>
       <Route path="/" element={<Layout />}>
         <Route index element={<Home />} />
+        <Route path="login" element={<Login />} />
         <Route path="about" element={<About />} />
         <Route path="contact" element={<Contact />} />
         <Route path="team" element={<Team />} />
