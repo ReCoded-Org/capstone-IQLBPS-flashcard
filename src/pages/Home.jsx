@@ -7,9 +7,13 @@ import {
   WEBSITE_FEATURES,
 } from '../assets/feature/Features';
 
+import Hero from "../components/Hero"
+
+
 const Home = () => {
   return (
     <div>
+    <Hero/>
       {LEARNING_FEATURES.map((feature) => (
         <FeatureCard feature={feature} key={feature.name} />
       ))}
