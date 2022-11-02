@@ -1,4 +1,5 @@
 import { Routes, Route, Outlet } from "react-router-dom";
+
 import Home from './pages/Home';
 import About from './pages/About';
 import Contact from './pages/Contact';
@@ -7,14 +8,10 @@ import Profile from './pages/Profile';
 import NoMatch from './pages/NoMatch';
 import Footer from './components/Footer';
 import Login from './pages/Login';
-
-import Nav from './components/Navbar' ;
-
+import Nav from './components/Navbar';
 
 const App = () => {
   return (
- 
-
     <Routes>
       <Route path="/" element={<Layout />}>
         <Route index element={<Home />} />
@@ -32,7 +29,7 @@ const App = () => {
 const Layout = () => {
   return (
     <div>
-     <Nav/>
+      <Nav />
       <Outlet />
       <Footer />
     </div>
