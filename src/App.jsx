@@ -19,12 +19,14 @@ const App = () => {
         <Route path="*" element={<NoMatch />} />
       </Route>
     </Routes>
+    
   );
 };
 
 const Layout = () => {
   return (
     <div>
+      <Contact />
       {/* Nav should be here */}
       <Outlet />
       <Footer />
