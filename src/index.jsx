@@ -1,4 +1,6 @@
 import React, { Suspense } from 'react';
+import { Flowbite } from 'flowbite-react';
+
 import { createRoot } from 'react-dom/client';
 import { Provider } from 'react-redux';
 import { BrowserRouter } from 'react-router-dom';
@@ -14,11 +16,14 @@ const root = createRoot(container);
 root.render(
   <React.StrictMode>
      <BrowserRouter>
+     <Flowbite>
+
       <Provider store={store}>
         <Suspense fallback="loading...">
           <App />
         </Suspense>
       </Provider>
+      </Flowbite>
     </BrowserRouter>
   </React.StrictMode>
 );
