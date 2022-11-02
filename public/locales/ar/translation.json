@@ -1,3 +1,15 @@
 {
-  "Hello": "مرحبا"
+  "Hello": "مرحبا",
+  "Please enter you name": "الرجاء ادخال الاسم",
+  "Please upload an image": "الرجاء اضافة الصورة",
+  "Please enter description": "الرجاء ادخال الشرح",
+  "Please enter category": "الرجاء ادخال الفئة",
+  "ADD NEW SET": "اضافة مجموعة جديدة",
+  "Choose From Current Sets": "اختار من المجموعات الموجودة",
+  "CANCEL": "الغاء",
+  "Submit": "اضافة",
+  "Set's Name": "اسم المجموعة",
+  "Description": "الوصف",
+  "Category": "الفئة",
+  "New Set": "مجموعة جديدة"
 }
