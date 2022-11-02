@@ -31,7 +31,10 @@ const Signup = () => {
     resolver: yupResolver(schema),
   });
 
-  const onSubmit = (data) => console.log(data);
+    const onSubmit = (data) => {
+      // eslint-disable-next-line no-console
+      console.log(data);
+    };
 
   return (
     <div>
