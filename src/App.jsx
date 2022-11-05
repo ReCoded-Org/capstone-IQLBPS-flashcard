@@ -10,6 +10,7 @@ import Footer from './components/Footer';
 import Login from './pages/Login';
 import Nav from './components/Navbar';
 import Signup from './pages/Signup';
+import Library from "./pages/Library";
 
 const App = () => {
   return (
@@ -22,6 +23,7 @@ const App = () => {
         <Route path="contact" element={<Contact />} />
         <Route path="team" element={<Team />} />
         <Route path="profile" element={<Profile />} />
+        <Route path="library" element={<Library />} />
         <Route path="*" element={<NoMatch />} />
       </Route>
     </Routes>
