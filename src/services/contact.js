@@ -7,11 +7,13 @@ const USER_ID = 'CYdQVZe5Ev-tZ83_A';
 const sendEmail = (formElement) => {
   emailjs.sendForm(SERVICE_ID, TEMPLATE_ID, formElement, USER_ID).then(
     (result) => {
+      // eslint-disable-next-line no-console
       console.log('Success', result);
     },
-    (error) => {
-      console.log('error', error);
-    }
+      (error) => {
+        // eslint-disable-next-line no-console
+        console.log('error', error);
+      };
   );
 };
 
