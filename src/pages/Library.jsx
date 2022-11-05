@@ -20,12 +20,12 @@ function Library() {
       <div>
         {
             MyPlaceholderData.map((item) => {
-                <Card
-                key = {item.id}
-                coverImage = {item.image}
-                title = {item.name}
-                description = {item.description}
-                />
+                return <Card
+                    key = {item.id}
+                    coverImage = {item.image}
+                    title = {item.name}
+                    description = {item.description}
+                    />
             })
         }
       </div>  
