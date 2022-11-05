@@ -17,15 +17,17 @@ function Library() {
     ]
 
     return (
-      <div>
+      <div className="flex flex-wrap -mb-4">
         {
             MyPlaceholderData.map((item) => {
-                return <Card
-                    key = {item.id}
-                    coverImage = {item.image}
-                    title = {item.name}
-                    description = {item.description}
-                    />
+                return (<div className="w-1/3 mb-4"> 
+                            <Card
+                                key = {item.id}
+                                coverImage = {item.image}
+                                title = {item.name}
+                                description = {item.description}
+                            />
+                        </div>)
             })
         }
       </div>  
