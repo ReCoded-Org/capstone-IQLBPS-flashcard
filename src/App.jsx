@@ -1,5 +1,5 @@
-import { Routes, Route, Outlet } from "react-router-dom";
-
+import { Routes, Route, Outlet } from 'react-router-dom';
+import React from 'react';
 import Home from './pages/Home';
 import About from './pages/About';
 import Contact from './pages/Contact';
@@ -11,6 +11,7 @@ import Login from './pages/Login';
 import Nav from './components/Navbar';
 import Signup from './pages/Signup';
 
+const UserHome = React.lazy(() => import('./pages/UserHome'));
 const App = () => {
   return (
     <Routes>
@@ -18,6 +19,7 @@ const App = () => {
         <Route index element={<Home />} />
         <Route path="login" element={<Login />} />
         <Route path="signup" element={<Signup />} />
+        <Route path="user-history" element={<UserHome />} />
         <Route path="about" element={<About />} />
         <Route path="contact" element={<Contact />} />
         <Route path="team" element={<Team />} />
