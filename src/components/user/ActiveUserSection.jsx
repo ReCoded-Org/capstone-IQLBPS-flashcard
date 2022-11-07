@@ -8,12 +8,12 @@ export const ActiveUserSection = ({ list, title }) => {
         {'>  '} {title}
       </p>
       <div className="h-96 md:h-full sm:h-full text-black flex flex-row flex-wrap  items-start justify-start gap-8">
-        {list.map((eItem) => (
+        {list.map((item) => (
           <Card
-            coverImage={eItem?.image}
-            description={eItem?.description}
-            title={eItem.title}
-            key={eItem?.id}
+            coverImage={item?.image}
+            description={item?.description}
+            title={item.title}
+            key={item?.id}
           />
         ))}
       </div>
