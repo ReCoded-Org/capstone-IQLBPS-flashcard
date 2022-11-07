@@ -11,6 +11,7 @@ import Login from './pages/Login';
 import Nav from './components/Navbar';
 import Signup from './pages/Signup';
 import Library from './pages/Library';
+import UserHome from './pages/UserHome';
 
 const App = () => {
   return (
@@ -19,6 +20,7 @@ const App = () => {
         <Route index element={<Home />} />
         <Route path="login" element={<Login />} />
         <Route path="signup" element={<Signup />} />
+        <Route path="user-history" element={<UserHome />} /> {/* TODO: fix this later */}
         <Route path="about" element={<About />} />
         <Route path="contact" element={<Contact />} />
         <Route path="team" element={<Team />} />
