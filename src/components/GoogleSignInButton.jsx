@@ -12,7 +12,9 @@ const GoogleSignInButton = () => {
         localStorage.getItem('email', email);
         localStorage.getItem('profilePic', profilePic);
       })
-      .catch((error) => console.log(error));
+      .catch((error) => {
+            // eslint-disable-next-line no-console
+        console.log(error)});
   };
 
   return (
