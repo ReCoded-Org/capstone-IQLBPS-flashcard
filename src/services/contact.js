@@ -13,7 +13,7 @@ const sendEmail = (formElement) => {
       (error) => {
         // eslint-disable-next-line no-console
         console.log('error', error);
-      };
+      }
   );
 };
 
