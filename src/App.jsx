@@ -1,4 +1,4 @@
-import { Routes, Route, Outlet } from "react-router-dom";
+import { Routes, Route, Outlet } from 'react-router-dom';
 
 import Home from './pages/Home';
 import About from './pages/About';
@@ -10,7 +10,7 @@ import Footer from './components/Footer';
 import Login from './pages/Login';
 import Nav from './components/Navbar';
 import Signup from './pages/Signup';
-import Library from "./pages/Library";
+import Library from './pages/Library';
 
 const App = () => {
   return (
