@@ -11,6 +11,7 @@ import Login from './pages/Login';
 import Nav from './components/Navbar';
 import Signup from './pages/Signup';
 import Library from "./pages/Library";
+import Review from './pages/Review';
 
 const App = () => {
   return (
@@ -24,6 +25,7 @@ const App = () => {
         <Route path="team" element={<Team />} />
         <Route path="profile" element={<Profile />} />
         <Route path="library" element={<Library />} />
+        <Route path="review" element={<Review />} />
         <Route path="*" element={<NoMatch />} />
       </Route>
     </Routes>
