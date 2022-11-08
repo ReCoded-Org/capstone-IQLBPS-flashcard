@@ -1,5 +1,7 @@
-import React from 'react';
+import React, { useRef } from 'react';
 import { useForm } from 'react-hook-form';
+
+import sendEmail from '../services/contact';
 
 const Contact = () => {
   const {
@@ -7,15 +9,18 @@ const Contact = () => {
     formState: { errors },
     handleSubmit,
   } = useForm();
-  const onSubmit = (data) => {
-    // eslint-disable-next-line no-console
-    console.log(data);
+
+  const formRef = useRef(null);
+
+  const onSubmit = () => {
+    sendEmail(formRef);
   };
 
   return (
     <section
       className="bg-white dark:bg-gray-900"
       onSubmit={handleSubmit(onSubmit)}
+      ref={formRef}
     >
       <div className="py-8 lg:py-16 px-4 mx-auto max-w-screen-md">
         <h2 className="mb-4 text-4xl tracking-tight font-extrabold text-center text-gray-900 dark:text-white">

@@ -1,4 +1,4 @@
-import { Routes, Route, Outlet } from "react-router-dom";
+import { Routes, Route, Outlet } from 'react-router-dom';
 
 import Home from './pages/Home';
 import About from './pages/About';
@@ -10,8 +10,9 @@ import Footer from './components/Footer';
 import Login from './pages/Login';
 import Nav from './components/Navbar';
 import Signup from './pages/Signup';
-import Library from "./pages/Library";
+import Library from './pages/Library';
 import Review from './pages/Review';
+import UserHome from './pages/UserHome';
 
 const App = () => {
   return (
@@ -20,6 +21,8 @@ const App = () => {
         <Route index element={<Home />} />
         <Route path="login" element={<Login />} />
         <Route path="signup" element={<Signup />} />
+        <Route path="user-history" element={<UserHome />} />{' '}
+        {/* TODO: fix this later */}
         <Route path="about" element={<About />} />
         <Route path="contact" element={<Contact />} />
         <Route path="team" element={<Team />} />

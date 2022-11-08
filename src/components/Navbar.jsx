@@ -1,6 +1,6 @@
 /* eslint-disable jsx-a11y/no-static-element-interactions */
 /* eslint-disable jsx-a11y/click-events-have-key-events */
-import React from 'react'
+import React from 'react';
 import { useLinkClickHandler, Link } from 'react-router-dom';
 import {
   Navbar,
@@ -73,6 +73,9 @@ const Nav = () => {
         <span onClick={useLinkClickHandler('team')}>
           <Navbar.Link href="team">Team</Navbar.Link>
         </span>
+        <span onClick={useLinkClickHandler('user-history')}>
+          <Navbar.Link href="user-history">User History</Navbar.Link>
+        </span>
       </Navbar.Collapse>
 
       <Navbar.Collapse>
@@ -107,4 +110,4 @@ const Nav = () => {
   );
 };
 
-export default Nav
+export default Nav;
