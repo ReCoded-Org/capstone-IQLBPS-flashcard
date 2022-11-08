@@ -6,7 +6,6 @@ import Contact from './pages/Contact';
 import Team from './pages/Team';
 import Profile from './pages/Profile';
 import NoMatch from './pages/NoMatch';
-import Footer from './components/Footer';
 import Login from './pages/Login';
 import Nav from './components/Navbar';
 import Signup from './pages/Signup';
