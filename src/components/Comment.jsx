@@ -1,5 +1,13 @@
-export default function Comment({userName , date, commentText , userImg}){
+import moment from "moment"
 
+
+export default function Comment({userName , date, commentText , userImg}){
+    
+    const commentDate = new Date(date*1000)
+
+    const formatedDate = moment(commentDate).format('DD/MM/yyyy')
+    const dateTimeFormat = moment(commentDate).format('yyyy-MM-DD')
+    console.log(formatedDate)
     return(
         <article className="p-6 text-base bg-white border-t border-gray-200 dark:border-gray-700 dark:bg-gray-900">
         <footer className="flex justify-between items-center mb-2">
@@ -9,10 +17,9 @@ export default function Comment({userName , date, commentText , userImg}){
                         className="mr-2 w-6 h-6 rounded-full"
                         src={userImg}
                         alt={userName}/>
-
                         {userName} </p>
-                <p className="text-sm text-gray-600 dark:text-gray-400"><time dateTime="2022-06-23"
-                        title={date}>{date}</time></p>
+                <p className="text-sm text-gray-600 dark:text-gray-400"><time dateTime={dateTimeFormat}
+                        title={formatedDate}>{formatedDate}</time></p>
             </div>
             
             <button id="dropdownComment4Button" data-dropdown-toggle="dropdownComment4"
