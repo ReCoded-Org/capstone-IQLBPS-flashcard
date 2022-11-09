@@ -1,35 +1,33 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState } from 'react'
 import {
-    collection,
-    query,
-    onSnapshot,
-    // updateDoc,
-    // doc
+    // collection,
+    // query,
+    // onSnapshot,
+    updateDoc,
+    doc
   } from "firebase/firestore";
   import {ref, uploadBytesResumable, getDownloadURL} from "firebase/storage"
   import {db , storage } from '../services/firebaseConfig';
   
 
 const UpdateProfile = () => {
-  const [users, setUsers] = useState([])
   const [name, setName] = useState({name:""})
   const [image, setImage] = useState(null)
   const [url, setUrl] = useState("");
   const [progress, setProgress] = useState(0);
-  const usersCollection = collection(db, "users");
   
-    useEffect(() => {
-        const q = query(usersCollection);
-        const unsub = onSnapshot(q, (querySnapshot) => {
-          const usersArray = [];
-          querySnapshot.forEach((user) => {
-            usersArray.push({ ...user.data(), id: user.id });
-          });
+    // useEffect(() => {
+    //     const q = query(usersCollection);
+    //     const unsub = onSnapshot(q, (querySnapshot) => {
+    //       const usersArray = [];
+    //       querySnapshot.forEach((user) => {
+    //         usersArray.push({ ...user.data(), id: user.id });
+    //       });
            
-          setUsers(usersArray);
-        });
-        return () => unsub();
-      }, []);
+    //       setUsers(usersArray);
+    //     });
+    //     return () => unsub();
+    //   }, []);
 
       
   const handleChange = e => {
@@ -46,9 +44,7 @@ const UpdateProfile = () => {
     }
   }
 
-
-
-  const handleUpload = () => {
+  const handleUpload = async() => {
     const storageRef  = ref(storage, `images/${image.name}`);
     const uploadTask = uploadBytesResumable(storageRef, image);
     uploadTask.on(
@@ -64,16 +60,23 @@ const UpdateProfile = () => {
       },
       () => {
           getDownloadURL(uploadTask.snapshot.ref)
-          .then(urlLink => {
+          .then(async(urlLink) => {
             setUrl(urlLink);
+            const user = doc(db, "users", "8LkT430VVHgZ3K84XPWRfRjYShJ3")
+            console.log("url test", urlLink)
+            await updateDoc(user, { photoURL: urlLink});
           });
       }
-      () => {
-        await updateDoc(doc(db, "users", users.id), { photoURL: url});
-      };
-    );
+    ); 
   };
 
+  const handleUploadName = async()=>{
+    const user = doc(db, "users", "8LkT430VVHgZ3K84XPWRfRjYShJ3")
+    await updateDoc(user, { displayName: name});
+  }
+
+    
+  
   console.log("image: ", image);
 
   return (
@@ -83,7 +86,8 @@ const UpdateProfile = () => {
       <br />
       <input type="file" onChange={handleChange} />
       <button type='button' onClick={handleUpload}>Upload</button>
-      <input type="text" onChange={handleChangeName} />
+      <input type="text" style={{margin: "0px 5px" , border:"1px solid black" }} onChange={handleChangeName} />
+      <button type='button' onClick={handleUploadName}>Save</button>
       <br />
       {url}
       <br />

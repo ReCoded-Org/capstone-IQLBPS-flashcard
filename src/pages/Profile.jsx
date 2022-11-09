@@ -1,5 +1,7 @@
 import { useState } from "react"
+
 import Card from "../components/Card"
+import {updateUserName, updateUserProfile} from '../services/user'
 
 export default function Profile(){
     const myPlaceHolderImage = "https://flowbite.s3.amazonaws.com/blocks/marketing-ui/avatars/bonnie-green.png"
@@ -38,7 +40,6 @@ export default function Profile(){
                 image: "https://flowbite.s3.amazonaws.com/blocks/marketing-ui/avatars/sofia-mcguire.png"
             }
     ]
-
 
     const [popUpState,setPopUpState] = useState('hidden')
 
@@ -120,12 +121,38 @@ export default function Profile(){
 
 
 function PopUp({popUpState,userName,myImage,handlePopUp}){
+    const [updatedName, setUpdatedUserName] = useState(null)
+    const [userImage, setUserImage] = useState(null)
+    const userID = '8LkT430VVHgZ3K84XPWRfRjYShJ3'
 
     function handleGrayClick(event){
         if (event.target.id === 'defaultModal' )
         {
            handlePopUp() 
         }
+    }
+
+    const handleImage = (e) => {
+        if (e.target.files[0]) {
+            setUserImage(e.target.files[0]);
+          }
+    }
+
+    const handleSave = async (e) => {
+        e.preventDefault()
+        console.log(`userImage:`)
+        console.log(updatedName)
+        console.log(`updatedName:${updatedName}`)
+
+        if(userImage != null){
+         const url =   await updateUserProfile(userID, userImage)
+         console.log('url:',url)
+        }
+        
+        if(updatedName !== null || updatedName.length !== 0)
+            await updateUserName(userID,updatedName,);
+
+        handlePopUp() 
     }
 
     return(
@@ -148,7 +175,7 @@ function PopUp({popUpState,userName,myImage,handlePopUp}){
                             <div className="grid">
                                 <img 
                                 className="my-4 border-4 border-primary-50 mx-auto mb-4 h-auto rounded-full col-start-1 col-end-2 row-start-1 row-end-2"
-                                src={myImage} 
+                                src={ myImage} 
                                 alt={`${userName}Avatar`}
                                 />
                             
@@ -163,7 +190,7 @@ function PopUp({popUpState,userName,myImage,handlePopUp}){
                                                 <p className="mb-2 text-sm text-gray-500 dark:text-gray-400">
                                                 <span className="font-semibold">Click to upload</span> or drag and drop</p>
                                             </div>
-                                            <input id="dropzone-file" type="file" className="hidden" accept="image/*" />
+                                            <input onChange={handleImage} id="dropzone-file" type="file" className="hidden" accept="image/*" />
                                         </label>
                                     </div> 
                                 </div>
@@ -174,14 +201,14 @@ function PopUp({popUpState,userName,myImage,handlePopUp}){
                                 <div>
                                     <label htmlFor="name" className="block my-2 text-sm font-medium text-gray-900 dark:text-white">
                                     Change Username
-                                    <input type="text" name="name" id="name" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder={userName} required=""/>
+                                    <input onChange={e => setUpdatedUserName(e.target.value)} type="text" name="name" id="name" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder={userName} required=""/>
                                     </label>
                                 </div>
                             </div>
 
                             <div className="items-center space-y-4 sm:space-x-36 sm:flex sm:space-y-0">
                                 <button id="cancel-button" onClick={handlePopUp} type="button" className="py-2 px-4 w-full text-sm font-medium text-center text-white rounded-lg bg-red-700 sm:w-auto hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-800">Cancel Changes</button>    
-                                <button id="submit-button" type="submit" className="py-2 px-4 w-full text-sm font-medium text-center text-white rounded-lg bg-primary-700 sm:w-auto hover:bg-primary-800 focus:ring-4 focus:outline-none focus:ring-primary-300 dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800">Confirm Changes</button>
+                                <button onClick={handleSave} id="submit-button" type="submit" className="py-2 px-4 w-full text-sm font-medium text-center text-white rounded-lg bg-primary-700 sm:w-auto hover:bg-primary-800 focus:ring-4 focus:outline-none focus:ring-primary-300 dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800">Confirm Changes</button>
                             </div>
                         </form>
                     </div>
