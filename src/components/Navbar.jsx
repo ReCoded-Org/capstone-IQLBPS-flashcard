@@ -1,7 +1,7 @@
 /* eslint-disable jsx-a11y/no-static-element-interactions */
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 import React from 'react';
-import { useLinkClickHandler, Link } from 'react-router-dom';
+import { useLinkClickHandler, Link, useNavigate } from 'react-router-dom';
 import {
   Navbar,
   Button,
@@ -10,9 +10,35 @@ import {
   Avatar,
 } from 'flowbite-react';
 
+import {  useDispatch, useSelector,  } from "react-redux";
+
 import cardlogo from '../assets/feature/flashcardlogoalone.png';
+import { logOut } from '../services/user';
+import { logout } from '../features/user/userSlice';
 
 const Nav = () => {
+
+  // eslint-disable-next-line no-unused-vars
+  const  {user}  = useSelector((state) => state.user)
+  const dispatch = useDispatch();
+  const navigate = useNavigate()
+
+const handleSignout = async () => {
+
+const error = logOut();
+
+if(error  === ""){
+
+await logOut();
+
+dispatch(logout);
+navigate("/")
+
+}
+
+}
+
+
   return (
     <Navbar fluid>
       <Link to="/" className="flex items-center">
@@ -22,7 +48,7 @@ const Nav = () => {
           alt="Flowbite Logo"
         />
       </Link>
-
+{!user &&  (
       <div className="flex space-x-4 md:order-2">
         <Link to="login">
           <Button>Log in</Button>
@@ -30,34 +56,38 @@ const Nav = () => {
 
         <DarkThemeToggle />
       </div>
+) }
 
-      <div className="flex md:order-2">
+{ user && (
+      <div className="flex  space-x-4 md:order-2">
+                <DarkThemeToggle />
+
         <Dropdown
           arrowIcon={false}
           inline
           label={
             <Avatar
               alt="User settings"
-              img="https://flowbite.com/docs/images/people/profile-picture-5.jpg"
+              img= { user.photoUrl ? user.photoUrl : "https://flowbite.com/docs/images/people/profile-picture-5.jpg"}
               rounded
             />
           }
         >
           <Dropdown.Header>
-            <span className="block text-sm">Bonnie Green</span>
+            <span className="block text-sm">  {user.displayName}  </span>
             <span className="block truncate text-sm font-medium">
-              name@flowbite.com
-            </span>
+          {user.email}            </span>
           </Dropdown.Header>
           <Dropdown.Item>Dashboard</Dropdown.Item>
           <Dropdown.Item>Settings</Dropdown.Item>
           <Dropdown.Item>Earnings</Dropdown.Item>
           <Dropdown.Divider />
-          <Dropdown.Item>Sign out</Dropdown.Item>
+          <Dropdown.Item onClick={handleSignout}>Sign out</Dropdown.Item>
         </Dropdown>
         <Navbar.Toggle />
       </div>
 
+)}
       <Navbar.Collapse>
         <span onClick={useLinkClickHandler('/')}>
           <Navbar.Link href="/">Home</Navbar.Link>
