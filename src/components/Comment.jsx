@@ -7,7 +7,6 @@ export default function Comment({userName , date, commentText , userImg}){
 
     const formatedDate = moment(commentDate).format('DD/MM/yyyy')
     const dateTimeFormat = moment(commentDate).format('yyyy-MM-DD')
-    console.log(formatedDate)
     return(
         <article className="p-6 text-base bg-white border-t border-gray-200 dark:border-gray-700 dark:bg-gray-900">
         <footer className="flex justify-between items-center mb-2">
