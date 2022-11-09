@@ -1,5 +1,4 @@
 /* eslint-disable no-unused-vars */
-/* eslint-disable no-console */
 
 import { signInWithPopup, signOut } from 'firebase/auth';
 import {
@@ -50,7 +49,7 @@ const signUpToFirebase = async (userData) => {
       ...userData,
     });
   } catch (e) {
-    console.error('Error adding document: ', e);
+    // console.error('Error adding document: ', e);
   }
 };
 
@@ -71,10 +70,8 @@ export const signInWithGoogle = async () => {
     };
     result.user = { ...userData };
 
-    console.log(googleUserAuth.user);
     await signUpToFirebase(userData);
   } catch (er) {
-    // eslint-disable-next-line no-console
     result.error = er;
   }
 };
@@ -101,12 +98,10 @@ export const registerUser = async (user) => {
     };
     result.user = { ...userData };
 
-    console.log(userAuth);
     await signUpToFirebase(userData);
   } catch (error) {
     result.error = error;
   }
 
-  console.log(result);
   return result;
 };

@@ -72,7 +72,7 @@ try{
 
         }
     catch {
-        console.log('user not updated');
+        // console.log('user not updated');
       };
 
 }
