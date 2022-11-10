@@ -12,6 +12,7 @@ import Signup from './pages/Signup';
 import Library from './pages/Library';
 import Review from './pages/Review';
 import UserHome from './pages/UserHome';
+import Footer from './components/Footer';
 
 const App = () => {
   return (

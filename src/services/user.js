@@ -7,50 +7,27 @@ export const updateUserName = async(userId, userName)=>{
     await updateDoc(user, { displayName: userName});
   }
 
-  async function uploadImagePromise(image){
+  async function uploadImagePromise(image) {
     return new Promise((resolve, reject) => {
-    const storageRef  = ref(storage, `images/${image.name}`);
-    const uploadTask = uploadBytesResumable(storageRef, image);
-    uploadTask.on("state_changed",
-    snapshot => {
-        console.log(snapshot)
-    },
-      (error) => {
-        console.log('inside function error',error);
-        reject()
-      },
-      () => {
-        //   getDownloadURL(uploadTask.snapshot.ref)
-        uploadTask.snapshot.ref.getDownloadURL()
-          .then((urlLink) => {
-            console.log('inside function urlLink',urlLink);
-
-            resolve(urlLink)
+      const storageRef = ref(storage, `images/${image.name}`);
+      const uploadTask = uploadBytesResumable(storageRef, image);
+      uploadTask.on(
+        'state_changed',
+        (error) => {
+          reject(error);
+        },
+        () => {
+          getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
+            resolve(downloadURL);
           });
-      }
-    ); 
-    })
+        }
+      );
+    });
   }
 
-  export const updateUserProfile = async(userId, image) => {
-    console.log('first user.js')
-    console.log(image)
-    const url = await uploadImagePromise(image)
-    console.log('url in user.js',url)
-    const user = doc(db, "users", userId)
-    await updateDoc(user, { photoURL: url});
+  export const updateUserProfile = async (userId, image) => {
+    const url = await uploadImagePromise(image);
+    const user = doc(db, 'users', userId);
+    await updateDoc(user, { photoURL: url });
     return url;
   };
-
-
-
-//   function handleUpload(e) {
-//     e.preventDefault();
-//     const path = `/images/${file.name}`;
-//     const ref = storage.ref(`/images/${file.name}`);
-//     await ref.put(file);
-//     const url = await ref.getDownloadURL();
-//     setURL(url);
-//     setFile(null);
-//   }
-
