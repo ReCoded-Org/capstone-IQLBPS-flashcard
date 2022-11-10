@@ -48,8 +48,6 @@ const App = () => {
         <Route index element={user ? <UserHome /> : <Home />} />
         <Route path="login" element={<Login />} />
         <Route path="signup" element={<Signup />} />
-        <Route path="user-history" element={<UserHome />} />
-        {/* TODO: fix this later */}
         <Route path="about" element={<About />} />
         <Route path="contact" element={<Contact />} />
         <Route path="team" element={<Team />} />
