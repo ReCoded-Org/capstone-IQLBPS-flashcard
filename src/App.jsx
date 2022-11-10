@@ -1,4 +1,5 @@
 import { Routes, Route, Outlet } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 
 import Home from './pages/Home';
 import About from './pages/About';
@@ -36,6 +37,9 @@ const App = () => {
 };
 
 const Layout = () => {
+  const { i18n } = useTranslation();
+  document.body.dir = i18n.dir();
+
   return (
     <div>
       <Nav />

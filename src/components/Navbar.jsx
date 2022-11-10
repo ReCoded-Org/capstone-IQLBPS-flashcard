@@ -11,6 +11,7 @@ import {
 } from 'flowbite-react';
 
 import cardlogo from '../assets/feature/flashcardlogoalone.png';
+import LanguageSelector from './LanguageSelector';
 
 const Nav = () => {
   return (
@@ -29,6 +30,7 @@ const Nav = () => {
         </Link>
 
         <DarkThemeToggle />
+        <LanguageSelector />
       </div>
 
       <div className="flex md:order-2">
