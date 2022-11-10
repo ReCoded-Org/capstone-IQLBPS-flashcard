@@ -1,7 +1,7 @@
 /* eslint-disable jsx-a11y/no-static-element-interactions */
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 import React from 'react';
-import { useLinkClickHandler, Link } from 'react-router-dom';
+import { useLinkClickHandler, Link, useNavigate } from 'react-router-dom';
 import {
   Navbar,
   Button,
@@ -9,11 +9,29 @@ import {
   Dropdown,
   Avatar,
 } from 'flowbite-react';
+import { useDispatch, useSelector } from 'react-redux';
 
 import cardlogo from '../assets/feature/flashcardlogoalone.png';
 import LanguageSelector from './LanguageSelector';
+import { logOut } from '../services/user';
+import { logout } from '../features/user/userSlice';
 
 const Nav = () => {
+  const { user } = useSelector((state) => state.user);
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+
+  const handleSignout = async () => {
+    const error = logOut();
+
+    if (error === '') {
+      await logOut();
+
+      dispatch(logout);
+      navigate('/');
+    }
+  };
+
   return (
     <Navbar fluid>
       <Link to="/" className="flex items-center">
@@ -23,43 +41,50 @@ const Nav = () => {
           alt="Flowbite Logo"
         />
       </Link>
+      {!user && (
+        <div className="flex space-x-4 md:order-2">
+          <Link to="login">
+            <Button>Log in</Button>
+          </Link>
+          <DarkThemeToggle />
+        </div>
+      )}
+      <LanguageSelector />
 
-      <div className="flex space-x-4 md:order-2">
-        <Link to="login">
-          <Button>Log in</Button>
-        </Link>
+      {user && (
+        <div className="flex  space-x-4 md:order-2">
+          <DarkThemeToggle />
 
-        <DarkThemeToggle />
-        <LanguageSelector />
-      </div>
-
-      <div className="flex md:order-2">
-        <Dropdown
-          arrowIcon={false}
-          inline
-          label={
-            <Avatar
-              alt="User settings"
-              img="https://flowbite.com/docs/images/people/profile-picture-5.jpg"
-              rounded
-            />
-          }
-        >
-          <Dropdown.Header>
-            <span className="block text-sm">Bonnie Green</span>
-            <span className="block truncate text-sm font-medium">
-              name@flowbite.com
-            </span>
-          </Dropdown.Header>
-          <Dropdown.Item>Dashboard</Dropdown.Item>
-          <Dropdown.Item>Settings</Dropdown.Item>
-          <Dropdown.Item>Earnings</Dropdown.Item>
-          <Dropdown.Divider />
-          <Dropdown.Item>Sign out</Dropdown.Item>
-        </Dropdown>
-        <Navbar.Toggle />
-      </div>
-
+          <Dropdown
+            arrowIcon={false}
+            inline
+            label={
+              <Avatar
+                alt="User settings"
+                img={
+                  user.photoUrl
+                    ? user.photoUrl
+                    : 'https://flowbite.com/docs/images/people/profile-picture-5.jpg'
+                }
+                rounded
+              />
+            }
+          >
+            <Dropdown.Header>
+              <span className="block text-sm"> {user.displayName} </span>
+              <span className="block truncate text-sm font-medium">
+                {user.email}{' '}
+              </span>
+            </Dropdown.Header>
+            <Dropdown.Item>Dashboard</Dropdown.Item>
+            <Dropdown.Item>Settings</Dropdown.Item>
+            <Dropdown.Item>Earnings</Dropdown.Item>
+            <Dropdown.Divider />
+            <Dropdown.Item onClick={handleSignout}>Sign out</Dropdown.Item>
+          </Dropdown>
+          <Navbar.Toggle />
+        </div>
+      )}
       <Navbar.Collapse>
         <span onClick={useLinkClickHandler('/')}>
           <Navbar.Link href="/">Home</Navbar.Link>
@@ -74,9 +99,6 @@ const Nav = () => {
 
         <span onClick={useLinkClickHandler('team')}>
           <Navbar.Link href="team">Team</Navbar.Link>
-        </span>
-        <span onClick={useLinkClickHandler('user-history')}>
-          <Navbar.Link href="user-history">User History</Navbar.Link>
         </span>
       </Navbar.Collapse>
 
