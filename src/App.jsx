@@ -1,8 +1,8 @@
-import { Routes, Route, Outlet } from 'react-router-dom';
-
 import { useEffect } from 'react';
+import { Routes, Route, Outlet } from 'react-router-dom';
 import { onAuthStateChanged } from 'firebase/auth';
 import { useDispatch, useSelector } from 'react-redux';
+
 import Home from './pages/Home';
 import About from './pages/About';
 import Contact from './pages/Contact';
@@ -20,8 +20,7 @@ import { login, logout, selectUser } from './features/user/userSlice';
 import { auth } from './services/firebaseConfig';
 
 const App = () => {
-
-  // eslint-disable-next-line no-unused-vars
+  const user = useSelector(selectUser);
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -36,18 +35,16 @@ const App = () => {
             photoUrl: userAuth.photoURL,
           })
         );
-        
       } else {
         dispatch(logout());
       }
     });
   }, []);
 
-
   return (
     <Routes>
       <Route path="/" element={<Layout />}>
-        <Route index element={<Home />} />
+        <Route index element={user ? <UserHome /> : <Home />} />
         <Route path="login" element={<Login />} />
         <Route path="signup" element={<Signup />} />
         <Route path="user-history" element={<UserHome />} />
@@ -65,17 +62,10 @@ const App = () => {
 };
 
 const Layout = () => {
-
-  const user = useSelector(selectUser);
-
   return (
     <div>
       <Nav />
-     { 
-     (user ? <UserHome/> : <Outlet />  )
-     
-     }
-      
+      <Outlet />
       <Footer />
     </div>
   );

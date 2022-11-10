@@ -9,35 +9,27 @@ import {
   Dropdown,
   Avatar,
 } from 'flowbite-react';
-
-import {  useDispatch, useSelector,  } from "react-redux";
+import { useDispatch, useSelector } from 'react-redux';
 
 import cardlogo from '../assets/feature/flashcardlogoalone.png';
 import { logOut } from '../services/user';
 import { logout } from '../features/user/userSlice';
 
 const Nav = () => {
-
-  // eslint-disable-next-line no-unused-vars
-  const  {user}  = useSelector((state) => state.user)
+  const { user } = useSelector((state) => state.user);
   const dispatch = useDispatch();
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
-const handleSignout = async () => {
+  const handleSignout = async () => {
+    const error = logOut();
 
-const error = logOut();
+    if (error === '') {
+      await logOut();
 
-if(error  === ""){
-
-await logOut();
-
-dispatch(logout);
-navigate("/")
-
-}
-
-}
-
+      dispatch(logout);
+      navigate('/');
+    }
+  };
 
   return (
     <Navbar fluid>
@@ -48,46 +40,50 @@ navigate("/")
           alt="Flowbite Logo"
         />
       </Link>
-{!user &&  (
-      <div className="flex space-x-4 md:order-2">
-        <Link to="login">
-          <Button>Log in</Button>
-        </Link>
+      {!user && (
+        <div className="flex space-x-4 md:order-2">
+          <Link to="login">
+            <Button>Log in</Button>
+          </Link>
 
-        <DarkThemeToggle />
-      </div>
-) }
+          <DarkThemeToggle />
+        </div>
+      )}
 
-{ user && (
-      <div className="flex  space-x-4 md:order-2">
-                <DarkThemeToggle />
+      {user && (
+        <div className="flex  space-x-4 md:order-2">
+          <DarkThemeToggle />
 
-        <Dropdown
-          arrowIcon={false}
-          inline
-          label={
-            <Avatar
-              alt="User settings"
-              img= { user.photoUrl ? user.photoUrl : "https://flowbite.com/docs/images/people/profile-picture-5.jpg"}
-              rounded
-            />
-          }
-        >
-          <Dropdown.Header>
-            <span className="block text-sm">  {user.displayName}  </span>
-            <span className="block truncate text-sm font-medium">
-          {user.email}            </span>
-          </Dropdown.Header>
-          <Dropdown.Item>Dashboard</Dropdown.Item>
-          <Dropdown.Item>Settings</Dropdown.Item>
-          <Dropdown.Item>Earnings</Dropdown.Item>
-          <Dropdown.Divider />
-          <Dropdown.Item onClick={handleSignout}>Sign out</Dropdown.Item>
-        </Dropdown>
-        <Navbar.Toggle />
-      </div>
-
-)}
+          <Dropdown
+            arrowIcon={false}
+            inline
+            label={
+              <Avatar
+                alt="User settings"
+                img={
+                  user.photoUrl
+                    ? user.photoUrl
+                    : 'https://flowbite.com/docs/images/people/profile-picture-5.jpg'
+                }
+                rounded
+              />
+            }
+          >
+            <Dropdown.Header>
+              <span className="block text-sm"> {user.displayName} </span>
+              <span className="block truncate text-sm font-medium">
+                {user.email}{' '}
+              </span>
+            </Dropdown.Header>
+            <Dropdown.Item>Dashboard</Dropdown.Item>
+            <Dropdown.Item>Settings</Dropdown.Item>
+            <Dropdown.Item>Earnings</Dropdown.Item>
+            <Dropdown.Divider />
+            <Dropdown.Item onClick={handleSignout}>Sign out</Dropdown.Item>
+          </Dropdown>
+          <Navbar.Toggle />
+        </div>
+      )}
       <Navbar.Collapse>
         <span onClick={useLinkClickHandler('/')}>
           <Navbar.Link href="/">Home</Navbar.Link>
@@ -102,9 +98,6 @@ navigate("/")
 
         <span onClick={useLinkClickHandler('team')}>
           <Navbar.Link href="team">Team</Navbar.Link>
-        </span>
-        <span onClick={useLinkClickHandler('user-history')}>
-          <Navbar.Link href="user-history">User History</Navbar.Link>
         </span>
       </Navbar.Collapse>
 

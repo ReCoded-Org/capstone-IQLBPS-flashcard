@@ -1,15 +1,5 @@
-/* eslint-disable no-unused-vars */
-
 import { signInWithPopup, signOut } from 'firebase/auth';
-import {
-  collection,
-  addDoc,
-  getDocs,
-  query,
-  where,
-  doc,
-  setDoc,
-} from 'firebase/firestore';
+import { doc, setDoc } from 'firebase/firestore';
 
 import {
   auth,
@@ -44,8 +34,7 @@ export const logOut = async () => {
 const signUpToFirebase = async (userData) => {
   try {
     const userCollection = doc(db, 'users', userData.uid);
-
-    const docRef = await setDoc(userCollection, {
+    await setDoc(userCollection, {
       ...userData,
     });
   } catch (e) {
@@ -61,7 +50,6 @@ export const signInWithGoogle = async () => {
       displayName: googleUserAuth.user.displayName,
       photoURL: googleUserAuth.user.photoURL,
     });
-
     const userData = {
       email: googleUserAuth.user.email,
       uid: googleUserAuth.user.uid,

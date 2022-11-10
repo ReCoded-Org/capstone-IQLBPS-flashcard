@@ -1,12 +1,11 @@
-/* eslint-disable no-unused-vars */
 import React from 'react';
-import { Link ,useNavigate  } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { useForm } from 'react-hook-form';
 import * as yup from 'yup';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { useDispatch } from 'react-redux';
-import { registerUser} from '../services/user' ;
+import { registerUser } from '../services/user';
 
 import { login } from '../features/user/userSlice';
 
@@ -26,14 +25,9 @@ const schema = yup.object().shape({
     .oneOf([yup.ref('password')], 'Passwords must match'),
 });
 
-
-
-
 const Signup = () => {
-
   const dispatch = useDispatch();
   const navigate = useNavigate();
-
   const { t } = useTranslation();
   const {
     register,
@@ -45,40 +39,29 @@ const Signup = () => {
     resolver: yupResolver(schema),
   });
 
-    const onSubmit = async (data) => {
-  
+  const onSubmit = async (data) => {
+    const result = await registerUser(data);
 
-     const result =  await registerUser(data);
-
-if(result.error !== ""){
-  
-  setError('emailError', { message: "email already exists" });
-
-
-}else {
-
-  clearErrors("emailError")
-try{
-      // Dispatch the user information for persistence in the redux state
+    if (result.error !== '') {
+      setError('emailError', { message: 'email already exists' });
+    } else {
+      clearErrors('emailError');
+      try {
+        // Dispatch the user information for persistence in the redux state
         dispatch(
           login({
             email: result.user.email,
             uid: result.user.uid,
-            displayName:  result.user.username,
-            photoUrl:  result.user.photoURL,
+            displayName: result.user.username,
+            photoUrl: result.user.photoURL,
           })
-        )
-         navigate("/profile");
-
-        }
-    catch {
+        );
+        navigate('/profile');
+      } catch {
         // console.log('user not updated');
-      };
-
-}
-
-
-    };
+      }
+    }
+  };
 
   return (
     <div>
@@ -116,8 +99,6 @@ try{
                         </span>
                       </p>
                     )}
-
-
                   </label>
                 </div>
 
@@ -135,9 +116,6 @@ try{
                       placeholder="name@company.com"
                       required=""
                       {...register('email')}
-                 
-
-
                     />
                     {errors.email?.message && (
                       <p className="mt-2 text-sm text-red-600 dark:text-red-500">
@@ -146,8 +124,7 @@ try{
                         </span>
                       </p>
                     )}
-
-{errors.emailError && (
+                    {errors.emailError && (
                       <p className="mt-2 text-sm text-red-600 dark:text-red-500">
                         <span className=" font-medium">
                           {t(`${errors.emailError?.message}`)}
