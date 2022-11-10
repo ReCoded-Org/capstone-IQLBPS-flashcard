@@ -1,4 +1,7 @@
+import { useEffect } from 'react';
 import { Routes, Route, Outlet } from 'react-router-dom';
+import { onAuthStateChanged } from 'firebase/auth';
+import { useDispatch, useSelector } from 'react-redux';
 
 import Home from './pages/Home';
 import About from './pages/About';
@@ -13,15 +16,38 @@ import Library from './pages/Library';
 import Review from './pages/Review';
 import UserHome from './pages/UserHome';
 import Footer from './components/Footer';
+import { login, logout, selectUser } from './features/user/userSlice';
+import { auth } from './services/firebaseConfig';
 
 const App = () => {
+  const user = useSelector(selectUser);
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    onAuthStateChanged(auth, (userAuth) => {
+      if (userAuth) {
+        // user is logged in, send the user's details to redux, store the current user in the state
+        dispatch(
+          login({
+            email: userAuth.email,
+            uid: userAuth.uid,
+            displayName: userAuth.displayName,
+            photoUrl: userAuth.photoURL,
+          })
+        );
+      } else {
+        dispatch(logout());
+      }
+    });
+  }, []);
+
   return (
     <Routes>
       <Route path="/" element={<Layout />}>
-        <Route index element={<Home />} />
+        <Route index element={user ? <UserHome /> : <Home />} />
         <Route path="login" element={<Login />} />
         <Route path="signup" element={<Signup />} />
-        <Route path="user-history" element={<UserHome />} />{' '}
+        <Route path="user-history" element={<UserHome />} />
         {/* TODO: fix this later */}
         <Route path="about" element={<About />} />
         <Route path="contact" element={<Contact />} />
