@@ -12,6 +12,7 @@ import {
 import { useDispatch, useSelector } from 'react-redux';
 
 import cardlogo from '../assets/feature/flashcardlogoalone.png';
+import LanguageSelector from './LanguageSelector';
 import { logOut } from '../services/user';
 import { logout } from '../features/user/userSlice';
 
@@ -45,10 +46,10 @@ const Nav = () => {
           <Link to="login">
             <Button>Log in</Button>
           </Link>
-
           <DarkThemeToggle />
         </div>
       )}
+      <LanguageSelector />
 
       {user && (
         <div className="flex  space-x-4 md:order-2">

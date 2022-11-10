@@ -1,5 +1,6 @@
 import { useEffect } from 'react';
 import { Routes, Route, Outlet } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 import { onAuthStateChanged } from 'firebase/auth';
 import { useDispatch, useSelector } from 'react-redux';
 
@@ -47,8 +48,6 @@ const App = () => {
         <Route index element={user ? <UserHome /> : <Home />} />
         <Route path="login" element={<Login />} />
         <Route path="signup" element={<Signup />} />
-        <Route path="user-history" element={<UserHome />} />
-        {/* TODO: fix this later */}
         <Route path="about" element={<About />} />
         <Route path="contact" element={<Contact />} />
         <Route path="team" element={<Team />} />
@@ -62,6 +61,9 @@ const App = () => {
 };
 
 const Layout = () => {
+  const { i18n } = useTranslation();
+  document.body.dir = i18n.dir();
+
   return (
     <div>
       <Nav />
