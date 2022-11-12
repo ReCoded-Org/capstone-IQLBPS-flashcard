@@ -107,13 +107,13 @@ async function uploadImagePromise(image) {
     const uploadTask = uploadBytesResumable(storageRef, image);
     uploadTask.on(
       'state_changed',
-      (error) => {
-        reject(error);
-      },
       () => {
         getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
           resolve(downloadURL);
         });
+      },
+      (error) => {
+        reject(error);
       }
     );
   });
