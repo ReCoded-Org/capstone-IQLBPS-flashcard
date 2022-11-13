@@ -1,8 +1,23 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
+import { useEffect } from "react";
+import { useRouter } from "next/router";
 
 const NoMatch = () => {
+
+  const router = useRouter();
+
+  const handleInput = () => {
+    router.push("/");
+  };
+
+  useEffect(() => {
+    setTimeout(() => {
+      router.push("/");
+    }, 30000);
+  }, []);
+
   const { t } = useTranslation();
 
   return (
