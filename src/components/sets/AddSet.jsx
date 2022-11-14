@@ -2,6 +2,7 @@
 import { t } from 'i18next';
 import { useForm } from 'react-hook-form';
 import ComboBox from './ComboBox';
+import { SetHeader } from './SetHeader';
 
 const categoriesData = [
   { id: 1, name: 'Math' },
@@ -20,15 +21,18 @@ const AddSet = (props) => {
     formState: { errors },
   } = useForm();
 
-  const formSubmitHandler = (data) => {
+  const formSubmitHandler = async(data) => {
+    console.log(data)
     props.handleFormVisibility();
     props.onAddingSet({
       id: Math.floor(Math.random() * 1000),
       name: data.name,
       image: data.image,
       description: data.description,
-      categories: data.categories,
+      categories: data.categories
     });
+    const id = await SetHeader(  data.name,  data.image[0], data.description, data.categories)
+    props.setId(id)
   };
 
   return (

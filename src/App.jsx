@@ -1,5 +1,5 @@
 import { useEffect } from 'react';
-import { Routes, Route, Outlet } from 'react-router-dom';
+import { Routes, Route } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { onAuthStateChanged } from 'firebase/auth';
 import { useDispatch, useSelector } from 'react-redux';
@@ -11,14 +11,13 @@ import Team from './pages/Team';
 import Profile from './pages/Profile';
 import NoMatch from './pages/NoMatch';
 import Login from './pages/Login';
-import Nav from './components/Navbar';
 import Signup from './pages/Signup';
 import Library from './pages/Library';
 import Review from './pages/Review';
 import UserHome from './pages/UserHome';
-import Footer from './components/Footer';
 import { login, logout, selectUser } from './features/user/userSlice';
 import { auth } from './services/firebaseConfig';
+import Sets from './components/sets/Sets'
 
 const App = () => {
   const user = useSelector(selectUser);
@@ -66,9 +65,7 @@ const Layout = () => {
 
   return (
     <div>
-      <Nav />
-      <Outlet />
-      <Footer />
+    <Sets />
     </div>
   );
 };

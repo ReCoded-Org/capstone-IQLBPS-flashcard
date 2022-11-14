@@ -4,6 +4,7 @@ import SelectSet from './SelectSet';
 
 const Sets = () => {
   const [showForm, setShowForm] = useState(false);
+  const [id, setId] =useState()
   const [setss, setSets] = useState([
     {
       id: 1,
@@ -33,6 +34,7 @@ const Sets = () => {
         <AddSet
           handleFormVisibility={handleFormVisibility}
           onAddingSet={onAddingSet}
+          setId={setId}
         />
       ) : (
         <SelectSet sets={setss} handleFormVisibility={handleFormVisibility} />
