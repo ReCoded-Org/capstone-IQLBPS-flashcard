@@ -1,7 +1,7 @@
-import { updateDoc, doc, setDoc } from 'firebase/firestore';
-import {ref, uploadBytesResumable, getDownloadURL} from "firebase/storage"
+import { updateDoc, doc, setDoc, getDoc } from 'firebase/firestore';
+import { ref, uploadBytesResumable, getDownloadURL } from 'firebase/storage';
 import { signInWithPopup, signOut } from 'firebase/auth';
-  
+
 import {
   db,
   storage,
@@ -125,3 +125,23 @@ export const updateUserProfile = async (userId, image) => {
   await updateDoc(user, { photoURL: url });
   return url;
 };
+
+export async function fetchUserInfo(userId) {
+  const docRef = doc(db, 'users', userId);
+  const docSnap = await getDoc(docRef);
+  if (docSnap.exists()) {
+    return docSnap.data();
+  }
+  return null;
+}
+
+export async function fetchUserSets(arrayOfSets) {
+  const sets = await Promise.all(
+    arrayOfSets.map(async (id) => {
+      const docRef = doc(db, 'sets', id);
+      const docSnap = await getDoc(docRef);
+      return docSnap.data();
+    })
+  );
+  return sets;
+}
