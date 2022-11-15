@@ -4,6 +4,7 @@ import SelectSet from './SelectSet';
 
 const Sets = () => {
   const [showForm, setShowForm] = useState(false);
+  const [id, setId] = useState(); //Id can be used when creating the cards
   const [setss, setSets] = useState([
     {
       id: 1,
@@ -33,12 +34,13 @@ const Sets = () => {
         <AddSet
           handleFormVisibility={handleFormVisibility}
           onAddingSet={onAddingSet}
+          setId={setId}
         />
       ) : (
         <SelectSet sets={setss} handleFormVisibility={handleFormVisibility} />
       )}
     </div>
   );
-};
+};;
 
 export default Sets;

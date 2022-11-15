@@ -11,12 +11,10 @@ import Team from './pages/Team';
 import Profile from './pages/Profile';
 import NoMatch from './pages/NoMatch';
 import Login from './pages/Login';
-import Nav from './components/Navbar';
 import Signup from './pages/Signup';
 import Library from './pages/Library';
 import Review from './pages/Review';
 import UserHome from './pages/UserHome';
-import Footer from './components/Footer';
 import { login, logout, selectUser } from './features/user/userSlice';
 import { auth } from './services/firebaseConfig';
 
@@ -66,9 +64,7 @@ const Layout = () => {
 
   return (
     <div>
-      <Nav />
       <Outlet />
-      <Footer />
     </div>
   );
 };
