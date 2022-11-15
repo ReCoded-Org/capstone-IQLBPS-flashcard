@@ -1,5 +1,5 @@
 import { useEffect } from 'react';
-import { Routes, Route } from 'react-router-dom';
+import { Routes, Route, Outlet } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { onAuthStateChanged } from 'firebase/auth';
 import { useDispatch, useSelector } from 'react-redux';
@@ -17,7 +17,6 @@ import Review from './pages/Review';
 import UserHome from './pages/UserHome';
 import { login, logout, selectUser } from './features/user/userSlice';
 import { auth } from './services/firebaseConfig';
-import Sets from './components/sets/Sets'
 
 const App = () => {
   const user = useSelector(selectUser);
@@ -65,7 +64,7 @@ const Layout = () => {
 
   return (
     <div>
-    <Sets />
+      <Outlet />
     </div>
   );
 };
