@@ -1,5 +1,7 @@
-import { useState } from 'react';
-import Card from '../components/Card';
+import { useState } from "react"
+
+import Card from "../components/Card"
+import {updateUserName, updateUserProfile} from '../services/user'
 
 export default function Profile() {
   const myPlaceHolderImage =
@@ -70,7 +72,6 @@ export default function Profile() {
         userName={myPlaceHolderUser}
         myImage={myPlaceHolderImage}
       />
-
       <div className="grid gap-8 lg:gap-16 sm:grid-cols-2 lg:grid-cols-1 ">
         <div className="text-center text-gray-500 dark:text-gray-400">
           <img
@@ -96,16 +97,13 @@ export default function Profile() {
           </div>
         </div>
       </div>
-
       <br />
-
       <div className=" max-w-screen-xl text-left mx-auto ">
         <h2 className="mb-4 mx-5 text-2xl tracking-tight font-extrabold text-gray-900 dark:text-white">
           {myPlaceHolderUser} sets
         </h2>
         <hr className="mx-5 max-w-screen-xl" />
       </div>
-
       <div className="py-8 px-4 mx-auto max-w-screen-xl lg:py-16 lg:px-6 ">
         <div className="grid gap-8 mb-6 lg:mb-16 lg:grid-cols-3 xl:grid-cols-4 md:grid-cols-2">
           {placerHolderData.map((item) => (
@@ -122,11 +120,33 @@ export default function Profile() {
 }
 
 function PopUp({ popUpState, userName, myImage, handlePopUp }) {
+  const [updatedName, setUpdatedUserName] = useState(null);
+  const [userImage, setUserImage] = useState(null);
+  const userID = '3l81U8JCAaaYilKRVLdJWnRG2Z42';
+
   function handleGrayClick(event) {
     if (event.target.id === 'defaultModal') {
       handlePopUp();
     }
   }
+
+  const handleImage = (e) => {
+    if (e.target.files[0]) {
+      setUserImage(e.target.files[0]);
+    }
+  };
+
+  const handleSave = async (e) => {
+    e.preventDefault();
+    if (userImage != null) {
+      await updateUserProfile(userID, userImage);
+    }
+
+    if (updatedName !== null || updatedName.length !== 0)
+      await updateUserName(userID, updatedName);
+
+    handlePopUp();
+  };
 
   return (
     <section>
@@ -165,7 +185,6 @@ function PopUp({ popUpState, userName, myImage, handlePopUp }) {
                 <span className="sr-only">Close modal</span>
               </button>
             </div>
-
             <form action=" ">
               <div className="grid">
                 <img
@@ -173,7 +192,6 @@ function PopUp({ popUpState, userName, myImage, handlePopUp }) {
                   src={myImage}
                   alt={`${userName}Avatar`}
                 />
-
                 <div className="grid sm:w-2/3 sm:mx-auto gap-2 pl-2">
                   <div className="flex justify-center items-center w-full">
                     <label
@@ -202,6 +220,7 @@ function PopUp({ popUpState, userName, myImage, handlePopUp }) {
                         </p>
                       </div>
                       <input
+                        onChange={handleImage}
                         id="dropzone-file"
                         type="file"
                         className="hidden"
@@ -211,7 +230,6 @@ function PopUp({ popUpState, userName, myImage, handlePopUp }) {
                   </div>
                 </div>
               </div>
-
               <div className="grid gap-4 mb-4">
                 <div>
                   <label
@@ -220,6 +238,7 @@ function PopUp({ popUpState, userName, myImage, handlePopUp }) {
                   >
                     Change Username
                     <input
+                      onChange={(e) => setUpdatedUserName(e.target.value)}
                       type="text"
                       name="name"
                       id="name"
@@ -230,7 +249,6 @@ function PopUp({ popUpState, userName, myImage, handlePopUp }) {
                   </label>
                 </div>
               </div>
-
               <div className="items-center space-y-4 sm:space-x-36 sm:flex sm:space-y-0">
                 <button
                   id="cancel-button"
@@ -241,6 +259,7 @@ function PopUp({ popUpState, userName, myImage, handlePopUp }) {
                   Cancel Changes
                 </button>
                 <button
+                  onClick={handleSave}
                   id="submit-button"
                   type="submit"
                   className="py-2 px-4 w-full text-sm font-medium text-center text-white rounded-lg bg-primary-700 sm:w-auto hover:bg-primary-800 focus:ring-4 focus:outline-none focus:ring-primary-300 dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800"
