@@ -57,13 +57,14 @@ export default function PublicProfile() {
         <div className="py-8 px-4 mx-auto max-w-screen-xl lg:py-16 lg:px-6 ">
           <div className="grid gap-8 mb-6 lg:mb-16 lg:grid-cols-3 xl:grid-cols-4 md:grid-cols-2">
             {cardSet.length > 0
-              ? cardSet.map((theSet) => {
+              ? cardSet.map((set) => {
                   return (
                     <Card
-                      id={theSet.id}
-                      coverImage={theSet.image}
-                      title={theSet.name}
-                      description={theSet.description}
+                      key={set.id}
+                      id={set.id}
+                      coverImage={set.image}
+                      title={set.name}
+                      description={set.description}
                     />
                   );
                 })
