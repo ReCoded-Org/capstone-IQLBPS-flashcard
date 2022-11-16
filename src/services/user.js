@@ -1,15 +1,14 @@
 import { updateDoc, doc, setDoc, getDoc } from 'firebase/firestore';
-import { ref, uploadBytesResumable, getDownloadURL } from 'firebase/storage';
 import { signInWithPopup, signOut } from 'firebase/auth';
 
 import {
   db,
-  storage,
   auth,
   provider,
   createUserWithEmailAndPassword,
   updateProfile,
 } from './firebaseConfig';
+import uploadImagePromise from './uploadImage';
 
 const result = {
   user: {
@@ -101,26 +100,8 @@ export const updateUserName = async (userId, userName) => {
   await updateDoc(user, { displayName: userName });
 };
 
-async function uploadImagePromise(image) {
-  return new Promise((resolve, reject) => {
-    const storageRef = ref(storage, `images/${image.name}`);
-    const uploadTask = uploadBytesResumable(storageRef, image);
-    uploadTask.on(
-      'state_changed',
-      () => {
-        getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
-          resolve(downloadURL);
-        });
-      },
-      (error) => {
-        reject(error);
-      }
-    );
-  });
-}
-
 export const updateUserProfile = async (userId, image) => {
-  const url = await uploadImagePromise(image);
+  const url = await uploadImagePromise(image, 'images');
   const user = doc(db, 'users', userId);
   await updateDoc(user, { photoURL: url });
   return url;

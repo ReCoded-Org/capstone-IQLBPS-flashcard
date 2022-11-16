@@ -1,7 +1,7 @@
-/* eslint-disable react/destructuring-assignment */
 import { t } from 'i18next';
 import { useForm } from 'react-hook-form';
 import ComboBox from './ComboBox';
+import { SetHeader } from '../../services/sets';
 
 const categoriesData = [
   { id: 1, name: 'Math' },
@@ -13,22 +13,29 @@ const categoriesData = [
   { id: 7, name: 'History' },
 ];
 
-const AddSet = (props) => {
+const AddSet = ({ setId, handleFormVisibility, onAddingSet }) => {
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm();
 
-  const formSubmitHandler = (data) => {
-    props.handleFormVisibility();
-    props.onAddingSet({
+  const formSubmitHandler = async (data) => {
+    handleFormVisibility();
+    onAddingSet({
       id: Math.floor(Math.random() * 1000),
       name: data.name,
       image: data.image,
       description: data.description,
       categories: data.categories,
     });
+    const id = await SetHeader(
+      data.name,
+      data.image[0],
+      data.description,
+      data.categories
+    );
+    setId(id);
   };
 
   return (
@@ -37,7 +44,7 @@ const AddSet = (props) => {
         type="button"
         className="text-white bg-primary-900 hover:bg-primary-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800 btn-primary w-100 mb-3 float-right"
         onClick={() => {
-          props.handleFormVisibility();
+          handleFormVisibility();
         }}
       >
         {t('CANCEL')}
