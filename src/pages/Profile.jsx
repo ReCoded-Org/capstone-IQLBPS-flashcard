@@ -75,7 +75,7 @@ export default function Profile() {
       <div className="grid gap-8 lg:gap-16 sm:grid-cols-2 lg:grid-cols-1 ">
         <div className="text-center text-gray-500 dark:text-gray-400">
           <img
-            className="my-4 border-4 border-primary-50 mx-auto mb-4 w-50 h-auto rounded-full"
+            className="my-4 border-4 border-primary-50 mx-auto mb-4 w-80 h-auto rounded-full"
             src={myPlaceHolderImage}
             alt={`${myPlaceHolderUser}Avatar`}
           />

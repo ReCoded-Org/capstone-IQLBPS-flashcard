@@ -15,6 +15,9 @@ import Signup from './pages/Signup';
 import Library from './pages/Library';
 import Review from './pages/Review';
 import UserHome from './pages/UserHome';
+import Footer from './components/Footer';
+import Nav from './components/Navbar';
+import PublicProfile from './pages/PublicProfile';
 import { login, logout, selectUser } from './features/user/userSlice';
 import { auth } from './services/firebaseConfig';
 
@@ -52,6 +55,7 @@ const App = () => {
         <Route path="profile" element={<Profile />} />
         <Route path="library" element={<Library />} />
         <Route path="review" element={<Review />} />
+        <Route path="user/:id" element={<PublicProfile />} />
         <Route path="*" element={<NoMatch />} />
       </Route>
     </Routes>
@@ -64,7 +68,9 @@ const Layout = () => {
 
   return (
     <div>
+      <Nav />
       <Outlet />
+      <Footer />
     </div>
   );
 };
