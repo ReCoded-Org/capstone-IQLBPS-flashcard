@@ -17,7 +17,7 @@ import Library from './pages/Library';
 import Review from './pages/Review';
 import UserHome from './pages/UserHome';
 import Footer from './components/Footer';
-import PublicProfile from './components/PublicProfile';
+import PublicProfile from './pages/PublicProfile';
 import { login, logout, selectUser } from './features/user/userSlice';
 import { auth } from './services/firebaseConfig';
 

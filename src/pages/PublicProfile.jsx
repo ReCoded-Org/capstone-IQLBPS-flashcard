@@ -1,45 +1,45 @@
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
-import Card from './Card';
+import Card from '../components/Card';
 
 import { fetchUserInfo, fetchUserSets } from '../services/user';
 
 export default function PublicProfile() {
   const { id } = useParams();
-  const [myData, setMyData] = useState(null);
+  const [user, setUser] = useState(null);
   const [cardSet, setCardSet] = useState([]);
 
   useEffect(() => {
     async function handleFetchUserData() {
-      const user = await fetchUserInfo(id);
-      setMyData(user);
+      const result = await fetchUserInfo(id);
+      setUser(result);
     }
     handleFetchUserData();
   }, []);
 
   useEffect(() => {
-    async function doTheThing() {
-      if (myData) {
-        const userSets = await fetchUserSets(myData.sets);
+    async function handleFetchUserSets() {
+      if (user) {
+        const userSets = await fetchUserSets(user.sets);
         setCardSet(userSets);
       }
     }
-    doTheThing();
-  }, [myData]);
+    handleFetchUserSets();
+  }, [user]);
 
-  if (myData)
+  if (user)
     return (
       <section className="dark:bg-gray-900">
         <div className="grid gap-8 lg:gap-16 sm:grid-cols-2 lg:grid-cols-1 ">
           <div className="text-center text-gray-500 dark:text-gray-400 ">
             <img
               className="my-4 border-4 border-primary-50 mx-auto mb-4 w-80 h-auto rounded-full"
-              src={myData.photoURL}
-              alt={`${myData.displayName}Avatar`}
+              src={user.photoURL}
+              alt={`${user.displayName}Avatar`}
             />
             <div className="mb-4 mt-2 flex gap-2 justify-center mx-auto max-w-screen-xl text-center">
               <h3 className="text-3xl font-bold tracking-tight text-gray-900 dark:text-white">
-                {myData.displayName}
+                {user.displayName}
               </h3>
             </div>
           </div>
@@ -49,7 +49,7 @@ export default function PublicProfile() {
 
         <div className=" max-w-screen-xl text-left mx-auto ">
           <h2 className="mb-4 mx-5 text-2xl tracking-tight font-extrabold text-gray-900 dark:text-white">
-            {myData.displayName} sets
+            {user.displayName} sets
           </h2>
           <hr className="mx-5 max-w-screen-xl" />
         </div>
