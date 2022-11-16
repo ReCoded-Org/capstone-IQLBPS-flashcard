@@ -1,4 +1,4 @@
-/* eslint-disable no-unused-vars */
+import { signInWithPopup, signOut } from 'firebase/auth';
 import {
   updateDoc,
   doc,
@@ -11,8 +11,6 @@ import {
   getDoc,
   where,
 } from 'firebase/firestore';
-import { ref, uploadBytesResumable, getDownloadURL } from 'firebase/storage';
-import { signInWithPopup, signOut } from 'firebase/auth';
 
 import {
   db,
@@ -131,20 +129,15 @@ export async function fetchUserInfo(userId) {
 
 export const latestAddedSets = async () => {
   const setsRef = collection(db, 'sets');
-
   const q = query(setsRef, orderBy('createdAt', 'desc'), limit(3));
-
   const sets = await getDocs(q);
   return sets.docs.map((set) => set.data());
 };
 
 export async function fetchUserSets(id) {
   const setsRef = collection(db, 'sets');
-
   const q = query(setsRef, where('set.id', '==', id));
-
   const sets = await getDocs(q);
-
   return sets.docs.map((set) => set.data());
 }
 
@@ -159,14 +152,10 @@ export async function fetchSetsById(arrayOfSets) {
   return sets;
 }
 
-export const favoritedSets = async (userId) => {
+export const getFavoriteSets = async (userId) => {
   const userRef = doc(db, 'users', userId);
-
   const userData = await getDoc(userRef);
-
   const { favSets } = userData.data();
-
   const favSetsData = await fetchSetsById(favSets);
-
   return favSetsData;
 };

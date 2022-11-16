@@ -1,9 +1,8 @@
 import React from 'react';
+
 import Card from '../Card';
- 
 
 export const ActiveUserSection = ({ list, title }) => {
-
   return (
     <div className="mb-8 rounded-md">
       <p className="text-lg text-black font-bold my-6">
@@ -17,10 +16,7 @@ export const ActiveUserSection = ({ list, title }) => {
             title={set.name}
             key={set?.name}
           />
-        )) 
-       
-        
-        }
+        ))}
       </div>
     </div>
   );
