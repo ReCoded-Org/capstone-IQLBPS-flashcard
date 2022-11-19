@@ -20,7 +20,7 @@ export default function PublicProfile() {
   useEffect(() => {
     async function handleFetchUserSets() {
       if (user) {
-        const userSets = await fetchUserSets(user.sets);
+        const userSets = await fetchUserSets(user.id);
         setCardSet(userSets);
       }
     }
