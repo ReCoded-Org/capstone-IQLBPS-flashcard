@@ -1,58 +1,32 @@
-/* eslint-disable jsx-a11y/label-has-associated-control */
 import { useState, useEffect } from 'react';
 import { v4 as uuidv4 } from 'uuid';
-import {
-  doc,
-  updateDoc,
-  arrayUnion,
-  getDoc,
-  Timestamp,
-  query,
-  onSnapshot,
-} from 'firebase/firestore';
 import { useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
 import Comment from './Comment';
-import db from '../services/firebaseConfig';
+import { createComment, getComments } from '../services/comment';
 
 function CommentPost() {
   const [comment, setComment] = useState(' ');
   const [commentList, setCommentList] = useState([]);
   const { user } = useSelector((state) => state.user);
   const { id } = useParams();
-  const commentCollectionRef = doc(db, 'comments', id);
 
   const handleComment = async (e) => {
     e.preventDefault();
     try {
-      const docRef = await updateDoc(commentCollectionRef, {
-        comments: arrayUnion({
-          user: {
-            id: user.id,
-            name: user.name,
-            photoURL: user.photoURL,
-          },
-          createdAt: Timestamp.now(),
-          text: comment,
-        }),
-      });
-      console.log('Document written with ID: ', docRef?.id);
+      await createComment(id, user, comment);
       setComment('');
     } catch (error) {
-      alert(error);
+      console.log(error);
     }
   };
 
   useEffect(() => {
-    const q = query(doc(db, 'comments', id));
-    const getComments = async () => {
-      // eslint-disable-next-line no-unused-vars
-      const querySnapshot = await getDoc(q);
-      onSnapshot(q, (data) => {
-        setCommentList([...data.data().comments]);
-      });
+    const fetchComments = async () => {
+      const comments = await getComments(id);
+      setCommentList(comments);
     };
-    getComments();
+    fetchComments();
   }, []);
 
   return (
@@ -60,6 +34,7 @@ function CommentPost() {
       <div className="max-w-2xl mx-auto px-4">
         <form className="mb-6">
           <div className="py-2 px-4 mb-4 bg-white rounded-lg rounded-t-lg border border-gray-200 dark:bg-gray-800 dark:border-gray-700">
+            {/* eslint-disable-next-line jsx-a11y/label-has-associated-control */}
             <label htmlFor="comment" className="sr-only">
               Your comment
             </label>
@@ -79,7 +54,6 @@ function CommentPost() {
           >
             Post comment
           </button>
-          {console.log('return the comment', commentList)}
           {commentList.length > 0
             ? commentList.map((co) => {
                 return (
