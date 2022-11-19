@@ -1,6 +1,6 @@
 function FeaturePoints({ features }) {
   return (
-    <div className="bg-amber-100 shadow-lg py-12 mx-auto my-20 z-0 hover:z-10 max-w-6xl block rounded-lg h-1/6">
+    <div className="bg-amber-100 shadow-lg py-12 mx-auto mb-20 z-0 hover:z-10 max-w-6xl block rounded-lg h-1/6">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="mt-10">
           <dl className="space-y-10 md:grid md:grid-cols-2 md:gap-x-8 md:gap-y-10 md:space-y-0">

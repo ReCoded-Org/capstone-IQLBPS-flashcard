@@ -1,9 +1,9 @@
 function Filter() {
   return (
-    <div className="shadow-xl bg-sky-900 rounded-md outline outline-2  outline-offset-2 outline-sky-600  md:w-1/4 max-sm:w-1/2  m-6 p-2 ">
+    <div className="shadow-xl bg-sky-900 rounded-md outline outline-2 outline-offset-2 outline-sky-600 md:w-3/4 max-sm:w-3/4 m-6 p-2 h-fit col-span-1 sticky top-0">
       <h3 className="mb-2 font-semibold text-white">Sorting by</h3>
       <ul className="mb-4 items-center w-full text-sm font-medium text-gray-900 bg-white rounded-lg border border-gray-200 sm:flex dark:bg-gray-700 dark:border-gray-600 dark:text-white gap-x-1">
-        <li className="w-full border-b border-gray-200 sm:border-b-0 sm:border-r dark:border-gray-600">
+        {/* <li className="w-full border-b border-gray-200 sm:border-b-0 sm:border-r dark:border-gray-600">
           <div className="flex items-center pl-1">
             <label
               htmlFor="horizontal-list-radio-license"
@@ -19,7 +19,7 @@ function Filter() {
               Rating
             </label>
           </div>
-        </li>
+        </li> */}
         <li className="w-full border-b border-gray-200 sm:border-b-0 sm:border-r dark:border-gray-600">
           <div className="flex items-center p-1">
             <label
