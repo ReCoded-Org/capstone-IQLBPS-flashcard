@@ -13,12 +13,8 @@ function CommentPost() {
 
   const handleComment = async (e) => {
     e.preventDefault();
-    try {
-      await createComment(id, user, comment);
-      setComment('');
-    } catch (error) {
-      console.log(error);
-    }
+    await createComment(id, user, comment);
+    setComment('');
   };
 
   useEffect(() => {
