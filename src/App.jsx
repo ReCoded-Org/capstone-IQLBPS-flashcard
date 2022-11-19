@@ -3,6 +3,8 @@ import { Routes, Route, Outlet } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { onAuthStateChanged } from 'firebase/auth';
 import { useDispatch, useSelector } from 'react-redux';
+import { auth } from './services/firebaseConfig';
+import { login, logout, selectUser } from './features/user/userSlice';
 
 import Home from './pages/Home';
 import About from './pages/About';
@@ -18,6 +20,8 @@ import UserHome from './pages/UserHome';
 import Footer from './components/Footer';
 import Nav from './components/Navbar';
 import PublicProfile from './pages/PublicProfile';
+import ProtectedRoute from './components/ProtectedRoute'
+import FirebaseAuthContext from './context/FirebaseAuthContext';
 import { login, logout, selectUser } from './features/user/userSlice';
 import { auth } from './services/firebaseConfig';
 import Search from './pages/Search';
@@ -45,6 +49,7 @@ const App = () => {
   }, []);
 
   return (
+    <FirebaseAuthContext>
     <Routes>
       <Route path="/" element={<Layout />}>
         <Route index element={user ? <UserHome /> : <Home />} />
@@ -53,8 +58,12 @@ const App = () => {
         <Route path="about" element={<About />} />
         <Route path="contact" element={<Contact />} />
         <Route path="team" element={<Team />} />
-        <Route path="profile" element={<Profile />} />
-        <Route path="library" element={<Library />} />
+
+        <Route element={<ProtectedRoute />}>
+            <Route path="profile" element={<Profile />} exact/>
+            <Route path="library" element={<Library />} exact/>
+        </Route>
+        
         <Route path="review" element={<Review />} />
         <Route path="search" element={<Search />} />
         <Route path="search/:key" element={<Search />} />
@@ -62,6 +71,7 @@ const App = () => {
         <Route path="*" element={<NoMatch />} />
       </Route>
     </Routes>
+    </FirebaseAuthContext>
   );
 };
 
@@ -71,7 +81,7 @@ const Layout = () => {
 
   return (
     <div>
-      <Nav />
+       <Nav />
       <Outlet />
       <Footer />
     </div>
