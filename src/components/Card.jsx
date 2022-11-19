@@ -1,6 +1,8 @@
 import React from 'react';
 
-const Card = ({ coverImage, title, description }) => {
+const Card = ({ id, coverImage, title, description }) => {
+  // eslint-disable-next-line no-console
+  console.log(id);
   return (
     <article
       className="group h-96 mx-auto w-full max-w-sm transform cursor-pointer rounded-lg bg-cover overflow-hidden bg-no-repeat bg-center shadow-xl duration-500 hover:-translate-y-2"

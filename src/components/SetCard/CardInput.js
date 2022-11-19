@@ -18,7 +18,6 @@ function CardInput({ handleError }) {
 
   const handleText = (e) =>{
     setText(e.target.value);
-    console.log(text);
   }
   const handleFormat = (key) => {
     if (uploader === false) {
