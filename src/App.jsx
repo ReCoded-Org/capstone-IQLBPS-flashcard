@@ -20,6 +20,7 @@ import Nav from './components/Navbar';
 import PublicProfile from './pages/PublicProfile';
 import { login, logout, selectUser } from './features/user/userSlice';
 import { auth } from './services/firebaseConfig';
+import Search from './pages/Search';
 
 const App = () => {
   const user = useSelector(selectUser);
@@ -55,6 +56,8 @@ const App = () => {
         <Route path="profile" element={<Profile />} />
         <Route path="library" element={<Library />} />
         <Route path="review" element={<Review />} />
+        <Route path="search" element={<Search />} />
+        <Route path="search/:key" element={<Search />} />
         <Route path="user/:id" element={<PublicProfile />} />
         <Route path="*" element={<NoMatch />} />
       </Route>
