@@ -1,25 +1,59 @@
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import * as yup from "yup";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
+import { useDispatch } from 'react-redux';
+import { logInWithEmailAndPassword } from '../services/user';
+import { login } from '../features/user/userSlice';
+
 
 import GoogleSignInButton from "../components/GoogleSignInButton";
 
 const loginSchema = yup.object().shape({
-  email: yup.string().email('Must be a valid email address').required('Email is required'),
-  password: yup.string().required("Password is required"),
+  email: yup
+  .string()
+  .email('Must be a valid email address')
+  .required('Email is required'),
+  password: yup
+  .string()
+  .required("Password is required"),
 });
 
 const Login = () => {
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
   const {t} = useTranslation();
-  const { register, handleSubmit, formState: { errors } } = useForm({
+  const { register,setError, clearErrors, handleSubmit, formState: { errors } } = useForm({
     resolver: yupResolver(loginSchema)
   });
 
-  const onSubmit = async (data) => {
+  const onSubmit = async (user) => {
     // eslint-disable-next-line no-console
-    console.log(data);
+    const result = await logInWithEmailAndPassword(user);
+    console.log(result)
+
+    if (result.error.code === 'auth/user-not-found' ) {
+      setError('emailError', { message: 'email does not exists' })
+    } else if (result.error.code === 'auth/wrong-password'){
+      setError('passwordError', { message: 'password is wrong' });
+    }else{
+      clearErrors();
+      try {
+        // Dispatch the user information for persistence in the redux state
+        dispatch(
+          login({
+            email: result.user.email,
+            uid: result.user.uid,
+            displayName: result.user.username,
+            photoUrl: result.user.photoURL,
+          })
+        );
+        navigate('/');
+      } catch {
+        // console.log('user not updated');
+      }
+    } 
   };
 
   return(
@@ -45,6 +79,13 @@ const Login = () => {
                         </span>
                       </p>
                     )}
+                    {errors.emailError && (
+                      <p className="mt-2 text-sm text-red-600 dark:text-red-500">
+                        <span className=" font-medium">
+                          {t(`${errors.emailError?.message}`)}
+                        </span>
+                      </p>
+                    )}
                     </label>
                 </div>
                 <div>
@@ -54,6 +95,13 @@ const Login = () => {
                       <p className="mt-2 text-sm text-red-600 dark:text-red-500">
                         <span className=" font-medium">
                           {t(`${errors.password?.message}`)}
+                        </span>
+                      </p>
+                    )}
+                    {errors.passwordError && (
+                      <p className="mt-2 text-sm text-red-600 dark:text-red-500">
+                        <span className=" font-medium">
+                          {t(`${errors.passwordError?.message}`)}
                         </span>
                       </p>
                     )}

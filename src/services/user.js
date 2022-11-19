@@ -1,5 +1,5 @@
 import { updateDoc, doc, setDoc, getDoc } from 'firebase/firestore';
-import { signInWithPopup, signOut } from 'firebase/auth';
+import { signInWithPopup, signOut, signInWithEmailAndPassword } from 'firebase/auth';
 
 import {
   db,
@@ -9,6 +9,16 @@ import {
   updateProfile,
 } from './firebaseConfig';
 import uploadImagePromise from './uploadImage';
+
+const loginResult = {
+  user: {
+    email: '',
+    uid: '',
+    displayName: '',
+    photoURL: '',
+  },
+  error: '',
+};
 
 const result = {
   user: {
@@ -31,6 +41,26 @@ export const logOut = async () => {
 
   return err;
 };
+
+// login with email and password 
+export const logInWithEmailAndPassword = async(user) =>{
+  try{
+      const userAuth = await signInWithEmailAndPassword(auth, user.email, user.password);
+
+      const userData={
+        email: user.email,
+        uid: userAuth.user.uid,
+        displayName: userAuth.user.displayName,
+        photoURL: userAuth.user.photoURL,
+      }
+      loginResult.user = { ...userData };
+     
+  } catch (error) {
+    loginResult.error = error;
+  }
+  return loginResult
+}
+
 // add signup to firebase
 const signUpToFirebase = async (userData) => {
   try {
