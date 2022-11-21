@@ -1,5 +1,5 @@
 import { updateDoc, doc, setDoc, getDoc } from 'firebase/firestore';
-import { signInWithPopup, signOut, signInWithEmailAndPassword } from 'firebase/auth';
+import { signInWithPopup, signOut, signInWithEmailAndPassword, sendPasswordResetEmail } from 'firebase/auth';
 
 import {
   db,
@@ -10,15 +10,6 @@ import {
 } from './firebaseConfig';
 import uploadImagePromise from './uploadImage';
 
-const loginResult = {
-  user: {
-    email: '',
-    uid: '',
-    displayName: '',
-    photoURL: '',
-  },
-  error: '',
-};
 
 const result = {
   user: {
@@ -53,13 +44,23 @@ export const logInWithEmailAndPassword = async(user) =>{
         displayName: userAuth.user.displayName,
         photoURL: userAuth.user.photoURL,
       }
-      loginResult.user = { ...userData };
+      result.user = { ...userData };
      
   } catch (error) {
-    loginResult.error = error;
+    result.error = error;
   }
-  return loginResult
+  return result
 }
+
+// Reset passworn through sendin a message to the email 
+export const resetPassword = async(user) => {
+  try{
+     await sendPasswordResetEmail(auth, user.email)
+         
+  } catch (error) {
+    result.error = error;
+  }
+} 
 
 // add signup to firebase
 const signUpToFirebase = async (userData) => {
