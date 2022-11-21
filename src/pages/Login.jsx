@@ -25,7 +25,6 @@ const Login = () => {
   const { t } = useTranslation();
   const {
     register,
-    setError,
     clearErrors,
     handleSubmit,
     formState: { errors },
