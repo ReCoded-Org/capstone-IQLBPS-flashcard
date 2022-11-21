@@ -1,30 +1,41 @@
+import { useEffect, useState } from 'react';
+import { useParams } from 'react-router-dom';
 import { v4 as uuidv4 } from 'uuid';
 
 import SetCarousel from './SetCarousel';
 import SetCard from './SetCard';
+import { fetchCardsFromSet } from '../services/sets';
+import Loading from './Loading';
 
 function ContentSection() {
-  const data = [
-    {
-      front: 'FirstSlider',
-      back: 'my sound is waf waf !',
-    },
-    {
-      front: 'SecondSlider',
-      back: 'I round and red',
-    },
-    {
-      front: 'thirdSlider',
-      back: 'Square color brown and use to take lunch ',
-    },
-  ];
+  const [cards, setCards] = useState();
+  const [isLoading, setIsLoading] = useState(true);
 
+  const { id } = useParams();
+
+  useEffect(() => {
+    const fetchCards = async () => {
+      const fetchedCards = await fetchCardsFromSet(id);
+
+      setCards(fetchedCards);
+
+      setIsLoading(false);
+    };
+    fetchCards();
+  }, []);
   return (
-    <SetCarousel>
-      {data.map((item) => (
-        <SetCard key={uuidv4()} front={item.title} back={item.back} />
-      ))}
-    </SetCarousel>
+    <>
+      {' '}
+      {isLoading ? (
+        <Loading />
+      ) : (
+        <SetCarousel>
+          {cards.map((card) => (
+            <SetCard key={uuidv4()} front={card.title} back={card.back} />
+          ))}
+        </SetCarousel>
+      )}
+    </>
   );
 }
 
