@@ -1,8 +1,8 @@
-import moment from "moment"
+import moment from 'moment';
 
 export default function Comment({ userName, date, commentText, userImg }) {
   const commentDate = new Date(date * 1000);
-  const formatedDate = moment(commentDate).format('DD/MM/yyyy');
+  const formatedDate = moment(commentDate).format('DD/MM/yyyy h:mm a');
   const dateTimeFormat = moment(commentDate).format('yyyy-MM-DD');
 
   return (

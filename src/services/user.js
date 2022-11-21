@@ -1,5 +1,16 @@
-import { updateDoc, doc, setDoc, getDoc } from 'firebase/firestore';
 import { signInWithPopup, signOut, signInWithEmailAndPassword } from 'firebase/auth';
+import {
+  updateDoc,
+  doc,
+  setDoc,
+  query,
+  orderBy,
+  limit,
+  collection,
+  getDocs,
+  getDoc,
+  where,
+} from 'firebase/firestore';
 
 import {
   db,
@@ -146,7 +157,21 @@ export async function fetchUserInfo(userId) {
   return null;
 }
 
-export async function fetchUserSets(arrayOfSets) {
+export const latestAddedSets = async () => {
+  const setsRef = collection(db, 'sets');
+  const q = query(setsRef, orderBy('createdAt', 'desc'), limit(3));
+  const sets = await getDocs(q);
+  return sets.docs.map((set) => set.data());
+};
+
+export async function fetchUserSets(id) {
+  const setsRef = collection(db, 'sets');
+  const q = query(setsRef, where('set.id', '==', id));
+  const sets = await getDocs(q);
+  return sets.docs.map((set) => set.data());
+}
+
+export async function fetchSetsById(arrayOfSets) {
   const sets = await Promise.all(
     arrayOfSets.map(async (id) => {
       const docRef = doc(db, 'sets', id);
@@ -156,3 +181,11 @@ export async function fetchUserSets(arrayOfSets) {
   );
   return sets;
 }
+
+export const getFavoriteSets = async (userId) => {
+  const userRef = doc(db, 'users', userId);
+  const userData = await getDoc(userRef);
+  const { favSets } = userData.data();
+  const favSetsData = await fetchSetsById(favSets);
+  return favSetsData;
+};
