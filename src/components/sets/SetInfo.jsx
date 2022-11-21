@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import StarRating from './Rating';
 
-const SetInfo = () => {
+const SetInfo = ({ setsDescription, setphotoUrl, setName }) => {
   // const [value, setValue] = useState(2);
   const [inLibrary, setInLibrary] = useState(false);
 
@@ -14,18 +14,16 @@ const SetInfo = () => {
     setInLibrary((prev) => !prev);
   };
 
+  console.log(setsDescription);
   return (
     <div>
-      <div className="flex flex-col items-center bg-white rounded-lg border shadow-md md:flex-row md:max-w-xl hover:bg-gray-100 dark:border-gray-700 dark:bg-gray-800 dark:hover:bg-gray-700">
-        <div className="flex flex-col justify-between p-4 leading-normal">
+      <div className="mx-auto grid lg:grid-cols-2 items-center bg-white rounded-lg border shadow-md md:grid-cols-1 md:max-w-5xl hover:bg-gray-100 dark:border-gray-700 dark:bg-gray-800 dark:hover:bg-gray-700">
+        <div className="flex flex-col justify-between p-4 leading-normal lg:full">
           <h5 className="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
-            React
+            {setName}
           </h5>
           <p className="mb-3 font-normal text-gray-700 dark:text-gray-400">
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Quo magni
-            repudiandae quae expedita nesciunt atque voluptates eaque maxime?
-            Nobis culpa sapiente nisi quasi vero dolores quisquam blanditiis
-            quam dolorum unde.
+            {setsDescription}
           </p>
           <StarRating />
           <button
@@ -36,12 +34,13 @@ const SetInfo = () => {
             {`${inLibrary ? 'Remove from Library' : 'Add to Library'}`}
           </button>
         </div>
-        <img
-          className="object-cover w-full h-96 rounded-t-lg md:h-auto md:w-48 md:rounded-none md:rounded-l-lg"
-          // src={img} this is the main src to be used when fetching data is implemented
-          src="https://unsplash.com/photos/04X1Yp9hNH8"
-          alt=""
-        />
+        <div className="h-full">
+          <img
+            className="object-cover h-full rounded-t-lg md:rounded-none md:rounded-l-lg"
+            src={setphotoUrl}
+            alt={setName}
+          />
+        </div>
       </div>
     </div>
   );

@@ -5,9 +5,8 @@ import { db } from '../services/firebaseConfig';
 import Comment from './Comment';
 import CommentPost from './CommentPost';
 
-export default function CommentsSection() {
+export default function CommentsSection({ commentId }) {
   const [comments, setComments] = useState();
-  const commentId = 'kOTHmdsH9cNG5PXKwrZy';
 
   useEffect(() => {
     async function fetchComments() {

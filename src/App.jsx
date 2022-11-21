@@ -3,6 +3,8 @@ import { Routes, Route, Outlet } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { onAuthStateChanged } from 'firebase/auth';
 import { useDispatch, useSelector } from 'react-redux';
+import { auth } from './services/firebaseConfig';
+import { login, logout, selectUser } from './features/user/userSlice';
 
 import Home from './pages/Home';
 import About from './pages/About';
@@ -15,8 +17,11 @@ import Signup from './pages/Signup';
 import Library from './pages/Library';
 import Review from './pages/Review';
 import UserHome from './pages/UserHome';
-import { login, logout, selectUser } from './features/user/userSlice';
-import { auth } from './services/firebaseConfig';
+import Footer from './components/Footer';
+import Nav from './components/Navbar';
+import PublicProfile from './pages/PublicProfile';
+import ProtectedRoute from './components/ProtectedRoute'
+import FirebaseAuthContext from './context/FirebaseAuthContext';
 
 const App = () => {
   const user = useSelector(selectUser);
@@ -41,6 +46,7 @@ const App = () => {
   }, []);
 
   return (
+    <FirebaseAuthContext>
     <Routes>
       <Route path="/" element={<Layout />}>
         <Route index element={user ? <UserHome /> : <Home />} />
@@ -49,12 +55,18 @@ const App = () => {
         <Route path="about" element={<About />} />
         <Route path="contact" element={<Contact />} />
         <Route path="team" element={<Team />} />
-        <Route path="profile" element={<Profile />} />
-        <Route path="library" element={<Library />} />
+
+        <Route element={<ProtectedRoute />}>
+            <Route path="profile" element={<Profile />} exact/>
+            <Route path="library" element={<Library />} exact/>
+        </Route>
+        
         <Route path="review" element={<Review />} />
+        <Route path="user/:id" element={<PublicProfile />} />
         <Route path="*" element={<NoMatch />} />
       </Route>
     </Routes>
+    </FirebaseAuthContext>
   );
 };
 
@@ -64,7 +76,9 @@ const Layout = () => {
 
   return (
     <div>
+       <Nav />
       <Outlet />
+      <Footer />
     </div>
   );
 };
