@@ -152,13 +152,6 @@ export async function fetchSetsById(arrayOfSets) {
   return sets;
 }
 
-export async function fetchCardsFromSet(setId) {
-  const setsRef = doc(db, 'sets', setId);
-  const cards = await getDoc(setsRef);
-
-  return cards.data().cards;
-}
-
 export const getFavoriteSets = async (userId) => {
   const userRef = doc(db, 'users', userId);
   const userData = await getDoc(userRef);
