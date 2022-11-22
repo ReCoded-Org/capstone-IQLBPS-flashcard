@@ -136,6 +136,13 @@ const Login = () => {
                     </p>
                   )}
                 </label>
+                {formError && (
+                  <p className="mt-2 text-sm text-red-600 dark:text-red-500">
+                    <span className=" font-medium">
+                      {t(`Password or email is wrong`)}
+                    </span>
+                  </p>
+                )}
               </div>
               <button
                 type="submit"
@@ -162,13 +169,6 @@ const Login = () => {
                   Reset Password
                 </Link>
               </p>
-              {formError && (
-                <p className="mt-2 text-sm text-red-600 dark:text-red-500">
-                  <span className=" font-medium">
-                    {t(`Password or email is wrong`)}
-                  </span>
-                </p>
-              )}
             </form>
           </div>
         </div>
