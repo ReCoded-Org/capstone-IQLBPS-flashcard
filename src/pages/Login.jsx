@@ -25,7 +25,6 @@ const Login = () => {
   const { t } = useTranslation();
   const {
     register,
-    clearErrors,
     handleSubmit,
     formState: { errors },
   } = useForm({
@@ -33,13 +32,12 @@ const Login = () => {
   });
 
   const onSubmit = async (user) => {
-    // eslint-disable-next-line no-console
     const result = await logInWithEmailAndPassword(user);
 
     if (result.error.code) {
       setFormError(true);
     } else {
-      clearErrors();
+      setFormError(false);
       try {
         dispatch(
           login({
@@ -153,6 +151,15 @@ const Login = () => {
                   className="font-medium text-primary-600 hover:underline dark:text-primary-500"
                 >
                   Sign up
+                </Link>
+              </p>
+              <p className="text-sm font-light text-gray-500 dark:text-gray-400">
+                {t('Forgot password?')}
+                <Link
+                  to="/reset"
+                  className="font-medium text-primary-600 hover:underline dark:text-primary-500"
+                >
+                  Reset Password
                 </Link>
               </p>
               {formError && (

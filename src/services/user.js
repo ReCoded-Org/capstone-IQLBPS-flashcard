@@ -48,12 +48,12 @@ export const logInWithEmailAndPassword = async(user) =>{
   try{
       const userAuth = await signInWithEmailAndPassword(auth, user.email, user.password);
 
-      const userData={
+      const userData = {
         email: user.email,
         uid: userAuth.user.uid,
         displayName: userAuth.user.displayName,
         photoURL: userAuth.user.photoURL,
-      }
+      };
       result.user = { ...userData };
      
   } catch (error) {
