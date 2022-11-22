@@ -11,6 +11,7 @@ export const ActiveUserSection = ({ list, title }) => {
       <div className="h-96 md:h-full sm:h-full text-black flex flex-row flex-wrap  items-start justify-start gap-8">
         {list.map((set) => (
           <Card
+            id={set.id}
             coverImage={set?.image}
             description={set?.description}
             title={set.name}
