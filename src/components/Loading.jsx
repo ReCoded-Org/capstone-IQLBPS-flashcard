@@ -1,4 +1,4 @@
-import Spinner from 'flowbite-react';
+import { Spinner } from 'flowbite-react';
 
 const Loading = () => {
   return <Spinner aria-label="loading" size="xl" />;
