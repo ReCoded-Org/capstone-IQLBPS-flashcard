@@ -161,14 +161,14 @@ export const latestAddedSets = async () => {
   const setsRef = collection(db, 'sets');
   const q = query(setsRef, orderBy('createdAt', 'desc'), limit(3));
   const sets = await getDocs(q);
-  return sets.docs.map((set) => set.data());
+  return sets.docs.map((set) => ({ id: set.id, ...set.data() }));
 };
 
 export async function fetchUserSets(id) {
   const setsRef = collection(db, 'sets');
   const q = query(setsRef, where('set.id', '==', id));
   const sets = await getDocs(q);
-  return sets.docs.map((set) => set.data());
+  return sets.docs.map((set) => ({ id: set.id, ...set.data() }));
 }
 
 export async function fetchSetsById(arrayOfSets) {
