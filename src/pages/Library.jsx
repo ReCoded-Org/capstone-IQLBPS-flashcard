@@ -1,6 +1,8 @@
+import { Link } from "react-router-dom";
 import Card from "../components/Card";
 
-function Library() {
+function Library(id) {
+
     const MyPlaceholderData = [
         {
             id : 1,
@@ -17,11 +19,12 @@ function Library() {
     ]
 
     return (
+        <Link to={`/search/${id}`} >
       <div className="flex flex-wrap -mb-4">
         {
             MyPlaceholderData.map((item) => {
                 return (<div className="w-1/3 mb-4"> 
-                            <Card
+                            <Card 
                                 key = {item.id}
                                 coverImage = {item.image}
                                 title = {item.name}
@@ -31,6 +34,7 @@ function Library() {
             })
         }
       </div>  
+        </Link>
     );
 }
 
