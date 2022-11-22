@@ -23,6 +23,7 @@ import PublicProfile from './pages/PublicProfile';
 import ProtectedRoute from './components/ProtectedRoute';
 import FirebaseAuthContext from './context/FirebaseAuthContext';
 import Search from './pages/Search';
+import Reset from './pages/Reset';
 
 const App = () => {
   const user = useSelector(selectUser);
@@ -52,6 +53,7 @@ const App = () => {
         <Route path="/" element={<Layout />}>
           <Route index element={user ? <UserHome /> : <Home />} />
           <Route path="login" element={<Login />} />
+          <Route path="reset" element={<Reset />} />
           <Route path="signup" element={<Signup />} />
           <Route path="about" element={<About />} />
           <Route path="contact" element={<Contact />} />
