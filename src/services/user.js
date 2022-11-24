@@ -1,4 +1,4 @@
-import { signInWithPopup, signOut } from 'firebase/auth';
+import { signInWithPopup, signOut, signInWithEmailAndPassword, sendPasswordResetEmail } from 'firebase/auth';
 import {
   updateDoc,
   doc,
@@ -19,7 +19,7 @@ import {
   createUserWithEmailAndPassword,
   updateProfile,
 } from './firebaseConfig';
-import uploadFilePromise from './uploadFile';
+import uploadImagePromise from './uploadImage';
 
 const result = {
   user: {
@@ -42,6 +42,36 @@ export const logOut = async () => {
 
   return err;
 };
+
+// login with email and password 
+export const logInWithEmailAndPassword = async(user) =>{
+  try{
+      const userAuth = await signInWithEmailAndPassword(auth, user.email, user.password);
+
+      const userData = {
+        email: user.email,
+        uid: userAuth.user.uid,
+        displayName: userAuth.user.displayName,
+        photoURL: userAuth.user.photoURL,
+      };
+      result.user = { ...userData };
+     
+  } catch (error) {
+    result.error = error;
+  }
+  return result
+}
+
+// Reset passworn through sendin a message to the email 
+export const resetPassword = async(user) => {
+  try{
+     await sendPasswordResetEmail(auth, user.email)
+         
+  } catch (error) {
+    result.error = error;
+  }
+} 
+
 // add signup to firebase
 const signUpToFirebase = async (userData) => {
   try {
@@ -131,14 +161,14 @@ export const latestAddedSets = async () => {
   const setsRef = collection(db, 'sets');
   const q = query(setsRef, orderBy('createdAt', 'desc'), limit(3));
   const sets = await getDocs(q);
-  return sets.docs.map((set) => set.data());
+  return sets.docs.map((set) => ({ id: set.id, ...set.data() }));
 };
 
 export async function fetchUserSets(id) {
   const setsRef = collection(db, 'sets');
   const q = query(setsRef, where('set.id', '==', id));
   const sets = await getDocs(q);
-  return sets.docs.map((set) => set.data());
+  return sets.docs.map((set) => ({ id: set.id, ...set.data() }));
 }
 
 export async function fetchSetsById(arrayOfSets) {

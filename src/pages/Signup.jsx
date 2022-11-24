@@ -1,9 +1,12 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { useForm } from 'react-hook-form';
 import * as yup from 'yup';
 import { yupResolver } from '@hookform/resolvers/yup';
+import { useDispatch } from 'react-redux';
+import { registerUser } from '../services/user';
+import { login } from '../features/user/userSlice';
 
 const schema = yup.object().shape({
   username: yup.string().required('username is required'),
@@ -13,7 +16,7 @@ const schema = yup.object().shape({
     .required('Email is required'),
   password: yup
     .string()
-    .min(4, 'password is less than 4 characters')
+    .min(6, 'password is less than 6 characters')
     .required('password is required'),
   conPassword: yup
     .string()
@@ -22,19 +25,42 @@ const schema = yup.object().shape({
 });
 
 const Signup = () => {
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
   const { t } = useTranslation();
   const {
     register,
+    setError,
+    clearErrors,
     formState: { errors },
     handleSubmit,
   } = useForm({
     resolver: yupResolver(schema),
   });
 
-    const onSubmit = (data) => {
-      // eslint-disable-next-line no-console
-      console.log(data);
-    };
+  const onSubmit = async (data) => {
+    const result = await registerUser(data);
+
+    if (result.error !== '') {
+      setError('emailError', { message: 'email already exists' });
+    } else {
+      clearErrors('emailError');
+      try {
+        // Dispatch the user information for persistence in the redux state
+        dispatch(
+          login({
+            email: result.user.email,
+            uid: result.user.uid,
+            displayName: result.user.username,
+            photoUrl: result.user.photoURL,
+          })
+        );
+        navigate('/profile');
+      } catch {
+        // console.log('user not updated');
+      }
+    }
+  };
 
   return (
     <div>
@@ -90,10 +116,17 @@ const Signup = () => {
                       required=""
                       {...register('email')}
                     />
-                    {errors.email && (
+                    {errors.email?.message && (
                       <p className="mt-2 text-sm text-red-600 dark:text-red-500">
                         <span className=" font-medium">
                           {t(`${errors.email?.message}`)}
+                        </span>
+                      </p>
+                    )}
+                    {errors.emailError && (
+                      <p className="mt-2 text-sm text-red-600 dark:text-red-500">
+                        <span className=" font-medium">
+                          {t(`${errors.emailError?.message}`)}
                         </span>
                       </p>
                     )}
