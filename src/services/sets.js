@@ -1,4 +1,5 @@
-import { addDoc, collection, getDoc, doc } from 'firebase/firestore';
+import { addDoc, collection, doc, getDoc } from 'firebase/firestore';
+
 import uploadImagePromise from './uploadImage';
 import { db } from './firebaseConfig';
 
@@ -25,4 +26,10 @@ export async function fetchSetData(id) {
   const docSnap = await getDoc(docRef);
   data = docSnap.data();
   return data;
+}
+
+export async function fetchCardsFromSet(setId) {
+  const setsRef = doc(db, 'sets', setId);
+  const cards = await getDoc(setsRef);
+  return cards.data().cards;
 }

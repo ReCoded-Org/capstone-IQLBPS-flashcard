@@ -1,85 +1,327 @@
 import React from 'react';
-import { Link } from "react-router-dom"
+import { Link } from 'react-router-dom';
+import aboutimage from '../assets/feature/about.png';
 
 const About = () => {
   return (
     <div>
-    <section className="bg-white dark:bg-gray-900">
-      <div className="gap-8 items-center py-8 px-4 mx-auto max-w-screen-xl xl:gap-16 md:grid md:grid-cols-2 sm:py-16 lg:px-6">
-        <div className="mt-4 md:mt-0">
-          <h2 className="mb-4 text-4xl tracking-tight font-extrabold text-gray-900 dark:text-white">Lets create more tools and ideas that brings us together.</h2>
-          <p className="mb-6 font-light text-gray-500 md:text-lg dark:text-gray-400">Flowbite helps you connect with friends and communities of people who share your interests. Connecting with your friends and family as well as discovering new ones is easy with features like Groups.</p>
-          <Link to="/login"
-            className="inline-flex items-center justify-center px-5 py-3 mr-3 text-base font-medium text-center text-white rounded-lg bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:ring-primary-300 dark:focus:ring-primary-900">
-            Get started
-          </Link>
+      <section className="bg-white dark:bg-gray-900">
+        <div className="gap-8 items-center py-8 px-4 mx-auto max-w-screen-xl xl:gap-16 md:grid md:grid-cols-2 sm:py-16 lg:px-6">
+          <div className="mt-4 md:mt-0">
+            <h2 className="mb-4 text-4xl tracking-tight font-extrabold text-gray-900 dark:text-white">
+              Let&apos;s make our own flashcards.
+            </h2>
+            <p className="mb-6 fontLight text-gray-500 md:textLg dark:text-gray-400">
+              Using our flashcard maker website, you can easily create your own
+              set of flashcards! Simply enter a term and its definition. You can
+              even include images. Once your flashcard set is finished, you can
+              easily study it.
+            </p>
+            <Link
+              to="/login"
+              className="inline-flex items-center justify-center px-5 py-3 mr-3 text-base font-medium text-center text-white roundedLg bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:ring-primary-300 dark:focus:ring-primary-900"
+            >
+              Get started
+            </Link>
+          </div>
+          
+          <div className="w-full  dark:block">
+            <img src={aboutimage} alt="dasgboard" />
+          </div>
         </div>
-        <div className="w-full dark:hidden">
-          <img className="w-full dark:hidden" src="https://flowbite.s3.amazonaws.com/blocks/marketing-ui/cta/cta-dashboard-mockup.svg" alt=""/>
+      </section>
+      <section className="bg-white dark:bg-gray-900">
+        <div className="py-8 px-4 mx-auto max-w-screen-xl sm:py-16 lg:px-6">
+          <div className="max-w-screen-md mb-8 lg:mb-16">
+            <h2 className="mb-4 text-4xl tracking-tight font-extrabold text-gray-900 dark:text-white">
+              Why you Should Use Cardly?
+            </h2>
+            <p className="text-gray-500 sm:text-xl dark:text-gray-400">
+              we believe that anyone can learn anything. All it takes is a
+              determined spirit, the right guidance and the right tools to see
+              it through.
+            </p>
+          </div>
+          <div className="space-y-8 md:grid md:grid-cols-2 lg:grid-cols-3 md:gap-12 md:space-y-0">
+            <div>
+              <div className="flex justify-center items-center mb-4 w-10 h-10 rounded-full bg-primary-100 lg:h-12 lg:w-12 dark:bg-primary-900">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  viewBox="0 0 256 256"
+                  id="IconChangeColor"
+                  height="65"
+                  width="65"
+                >
+                  <rect width="256" height="256" fill="none" />
+                  <rect
+                    x="28"
+                    y="84"
+                    width="160"
+                    height="128"
+                    rx="8"
+                    fill="none"
+                    stroke="#486189"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth="15"
+                  />
+                  <path
+                    d="M64,44H220a8,8,0,0,1,8,8V176"
+                    fill="none"
+                    stroke="#486189"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth="15"
+                    id="mainIconPathAttribute"
+                  />
+                </svg>
+              </div>
+              <h3 className="mb-2 text-xl font-bold dark:text-white">
+                Convert your notes
+              </h3>
+              <p className="text-gray-500 dark:text-gray-400">
+                You can easily convert your notes into sets of flashcards for a
+                very effective self-testing approach.
+              </p>
+            </div>
+            <div>
+              <div className="flex justify-center items-center mb-4 w-10 h-10 rounded-full bg-primary-100 lg:h-12 lg:w-12 dark:bg-primary-900">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256">
+                  <rect width="256" height="256" fill="none" />
+                  <line
+                    x1="128"
+                    y1="176"
+                    x2="128"
+                    y2="80"
+                    fill="none"
+                    stroke="#486189"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth="12"
+                  />
+                  <path
+                    d="M88,144a40,40,0,1,1-40,40v-6.7"
+                    fill="none"
+                    stroke="#486189"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth="12"
+                  />
+                  <path
+                    d="M168,144a40,40,0,1,0,40,40v-6.7"
+                    fill="none"
+                    stroke="#486189"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth="12"
+                  />
+                  <path
+                    d="M72,180H64A48,48,0,0,1,48,86.7V72a40,40,0,0,1,80,0V184"
+                    fill="none"
+                    stroke="#486189"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth="12"
+                  />
+                  <path
+                    d="M184,180h8a48,48,0,0,0,16-93.3V72a40,40,0,0,0-80,0"
+                    fill="none"
+                    stroke="#486189"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth="12"
+                  />
+                  <path
+                    d="M88,84v8a28,28,0,0,1-28,28"
+                    fill="none"
+                    stroke="#486189"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth="12"
+                  />
+                  <path
+                    d="M168,84v8a28,28,0,0,0,28,28"
+                    fill="none"
+                    stroke="#486189"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth="12"
+                  />
+                </svg>
+              </div>
+              <h3 className="mb-2 text-xl font-bold dark:text-white">
+                Enhance your memory
+              </h3>
+              <p className="text-gray-500 dark:text-gray-400">
+                flashcards promote active learning and active recall.
+              </p>
+            </div>
+            <div>
+              <div className="flex justify-center items-center mb-4 w-10 h-10 rounded-full bg-primary-100 lg:h-12 lg:w-12 dark:bg-primary-900">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  viewBox="0 0 24 24"
+                  id="IconChangeColor"
+                  height="100"
+                  width="100"
+                >
+                  <path
+                    d="M17,9H7a1,1,0,0,0,0,2H17a1,1,0,0,0,0-2Zm-4,4H7a1,1,0,0,0,0,2h6a1,1,0,0,0,0-2ZM12,2A10,10,0,0,0,2,12a9.89,9.89,0,0,0,2.26,6.33l-2,2a1,1,0,0,0-.21,1.09A1,1,0,0,0,3,22h9A10,10,0,0,0,12,2Zm0,18H5.41l.93-.93a1,1,0,0,0,0-1.41A8,8,0,1,1,12,20Z"
+                    id="mainIconPathAttribute"
+                    fill="#486189"
+                  />
+                </svg>
+              </div>
+              <h3 className="mb-2 text-xl font-bold dark:text-white">
+                Leave comments
+              </h3>
+              <p className="text-gray-500 dark:text-gray-400">
+                Give feedback and discuss particular parts of your sets with
+                others.
+              </p>
+            </div>
+            <div>
+              <div className="flex justify-center items-center mb-4 w-10 h-10 rounded-full bg-primary-100 lg:h-12 lg:w-12 dark:bg-primary-900">
+                <svg
+                  width="93"
+                  height="93"
+                  strokeWidth="1.5"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                  id="IconChangeColor"
+                >
+                  <path
+                    d="M4.62323 5.24841C2.99408 7.02743 2 9.39765 2 12C2 17.5229 6.47715 22 12 22C14.5361 22 16.8517 21.0559 18.6146 19.5"
+                    stroke="#486189"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    id="mainIconPathAttribute"
+                    fill="none"
+                  />
+                  <path
+                    d="M21.3021 15.6775C21.7525 14.5392 22 13.2985 22 12C22 6.47715 17.5228 2 12 2C10.7687 2 9.58934 2.22255 8.5 2.62961"
+                    stroke="#486189"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    id="mainIconPathAttribute"
+                    fill="none"
+                  />
+                  <path
+                    d="M9 15C9.64448 15.8593 10.8428 16.3494 12 16.391C13.1141 16.431 14.1901 16.0554 14.6973 15.1933"
+                    stroke="#486189"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    id="mainIconPathAttribute"
+                    fill="none"
+                  />
+                  <path
+                    d="M12 16.391V18.5"
+                    stroke="#486189"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    id="mainIconPathAttribute"
+                    fill="none"
+                  />
+                  <path
+                    d="M9.5 9.5C9.5 10.6811 10.3525 11.1647 11.3862 11.5"
+                    stroke="#486189"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    id="mainIconPathAttribute"
+                    fill="none"
+                  />
+                  <path
+                    d="M15 8.5C14.315 7.81501 13.1087 7.33855 12 7.30872V5.5"
+                    stroke="#486189"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    id="mainIconPathAttribute"
+                    fill="none"
+                  />
+                  <path
+                    d="M3 3L21 21"
+                    stroke="#486189"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    id="mainIconPathAttribute"
+                    fill="none"
+                  />
+                </svg>
+              </div>
+              <h3 className="mb-2 text-xl font-bold dark:text-white">
+                Save your money
+              </h3>
+              <p className="text-gray-500 dark:text-gray-400">
+                Flashcard is completely free. All you have to do is sign up and
+                start.
+              </p>
+            </div>
+            <div>
+              <div className="flex justify-center items-center mb-4 w-10 h-10 rounded-full bg-primary-100 lg:h-12 lg:w-12 dark:bg-primary-900">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="36"
+                  height="36"
+                  fill="currentColor"
+                  className="bi bi-translate"
+                  viewBox="0 0 16 16"
+                  id="IconChangeColor"
+                >
+                  <path
+                    d="M4.545 6.714 4.11 8H3l1.862-5h1.284L8 8H6.833l-.435-1.286H4.545zm1.634-.736L5.5 3.956h-.049l-.679 2.022H6.18z"
+                    id="mainIconPathAttribute"
+                    // fill="#ffffff"
+                    fill="#486189"
+                  />
+                  <path
+                    d="M0 2a2 2 0 0 1 2-2h7a2 2 0 0 1 2 2v3h3a2 2 0 0 1 2 2v7a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2v-3H2a2 2 0 0 1-2-2V2zm2-1a1 1 0 0 0-1 1v7a1 1 0 0 0 1 1h7a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H2zm7.138 9.995c.193.301.402.583.63.846-.748.575-1.673 1.001-2.768 1.292.178.217.451.635.555.867 1.125-.359 2.08-.844 2.886-1.494.777.665 1.739 1.165 2.93 1.472.133-.254.414-.673.629-.89-1.125-.253-2.057-.694-2.82-1.284.681-.747 1.222-1.651 1.621-2.757H14V8h-3v1.047h.765c-.318.844-.74 1.546-1.272 2.13a6.066 6.066 0 0 1-.415-.492 1.988 1.988 0 0 1-.94.31z"
+                    id="mainIconPathAttribute"
+                    // fill="#ffffff"
+                    fill="#486189"
+                  />
+                </svg>
+              </div>
+              <h3 className="mb-2 text-xl font-bold dark:text-white">
+                Choose your language
+              </h3>
+              <p className="text-gray-500 dark:text-gray-400">
+                Switch between two languages: Arabic or English.
+              </p>
+            </div>
+            <div>
+              <div className="flex justify-center items-center mb-4 w-10 h-10 rounded-full bg-primary-100 lg:h-12 lg:w-12 dark:bg-primary-900">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="99"
+                  height="99"
+                  viewBox="0 0 512 512"
+                  id="IconChangeColor"
+                >
+                  <title>ionicons-v5-j</title>
+                  <path
+                    d="M160,136c0-30.62,4.51-61.61,16-88C99.57,81.27,48,159.32,48,248c0,119.29,96.71,216,216,216,88.68,0,166.73-51.57,200-128-26.39,11.49-57.38,16-88,16C256.71,352,160,255.29,160,136Z"
+                    fill="none"
+                    stroke="#486189"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth="32"
+                    id="mainIconPathAttribute"
+                  />
+                </svg>
+              </div>
+              <h3 className="mb-2 text-xl font-bold dark:text-white">
+                Dark Mode
+              </h3>
+              <p className="text-gray-500 dark:text-gray-400">
+                You can easily switch between light and dark modes.
+              </p>
+            </div>
+          </div>
         </div>
-        <div className="w-full hidden dark:block">
-          <img src='https://flowbite.s3.amazonaws.com/blocks/marketing-ui/cta/cta-dashboard-mockup-dark.svg' alt="dasgboard" />
-        </div>
-      </div>
-    </section>
-    
-    <section className="bg-white dark:bg-gray-900">
-  <div className="py-8 px-4 mx-auto max-w-screen-xl sm:py-16 lg:px-6">
-      <div className="max-w-screen-md mb-8 lg:mb-16">
-          <h2 className="mb-4 text-4xl tracking-tight font-extrabold text-gray-900 dark:text-white">Designed for business teams like yours</h2>
-          <p className="text-gray-500 sm:text-xl dark:text-gray-400">Here at Flowbite we focus on markets where technology, innovation, and capital can unlock long-term value and drive economic growth.</p>
-      </div>
-      <div className="space-y-8 md:grid md:grid-cols-2 lg:grid-cols-3 md:gap-12 md:space-y-0">
-          <div>
-              <div className="flex justify-center items-center mb-4 w-10 h-10 rounded-full bg-primary-100 lg:h-12 lg:w-12 dark:bg-primary-900">
-                  <svg className="w-5 h-5 text-primary-600 lg:w-6 lg:h-6 dark:text-primary-300" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fillRule="evenodd" d="M3 3a1 1 0 000 2v8a2 2 0 002 2h2.586l-1.293 1.293a1 1 0 101.414 1.414L10 15.414l2.293 2.293a1 1 0 001.414-1.414L12.414 15H15a2 2 0 002-2V5a1 1 0 100-2H3zm11.707 4.707a1 1 0 00-1.414-1.414L10 9.586 8.707 8.293a1 1 0 00-1.414 0l-2 2a1 1 0 101.414 1.414L8 10.414l1.293 1.293a1 1 0 001.414 0l4-4z" clipRule="evenodd"/></svg>
-              </div>
-              <h3 className="mb-2 text-xl font-bold dark:text-white">Marketing</h3>
-              <p className="text-gray-500 dark:text-gray-400">Plan it, create it, launch it. Collaborate seamlessly with all  the organization and hit your marketing goals every month with our marketing plan.</p>
-          </div>
-          <div>
-              <div className="flex justify-center items-center mb-4 w-10 h-10 rounded-full bg-primary-100 lg:h-12 lg:w-12 dark:bg-primary-900">
-                  <svg className="w-5 h-5 text-primary-600 lg:w-6 lg:h-6 dark:text-primary-300" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M10.394 2.08a1 1 0 00-.788 0l-7 3a1 1 0 000 1.84L5.25 8.051a.999.999 0 01.356-.257l4-1.714a1 1 0 11.788 1.838L7.667 9.088l1.94.831a1 1 0 00.787 0l7-3a1 1 0 000-1.838l-7-3zM3.31 9.397L5 10.12v4.102a8.969 8.969 0 00-1.05-.174 1 1 0 01-.89-.89 11.115 11.115 0 01.25-3.762zM9.3 16.573A9.026 9.026 0 007 14.935v-3.957l1.818.78a3 3 0 002.364 0l5.508-2.361a11.026 11.026 0 01.25 3.762 1 1 0 01-.89.89 8.968 8.968 0 00-5.35 2.524 1 1 0 01-1.4 0zM6 18a1 1 0 001-1v-2.065a8.935 8.935 0 00-2-.712V17a1 1 0 001 1z"/></svg>
-              </div>
-              <h3 className="mb-2 text-xl font-bold dark:text-white">Legal</h3>
-              <p className="text-gray-500 dark:text-gray-400">Protect your organization, devices and stay compliant with our structured workflows and custom permissions made for you.</p>
-          </div>
-          <div>
-              <div className="flex justify-center items-center mb-4 w-10 h-10 rounded-full bg-primary-100 lg:h-12 lg:w-12 dark:bg-primary-900">
-                  <svg className="w-5 h-5 text-primary-600 lg:w-6 lg:h-6 dark:text-primary-300" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fillRule="evenodd" d="M6 6V5a3 3 0 013-3h2a3 3 0 013 3v1h2a2 2 0 012 2v3.57A22.952 22.952 0 0110 13a22.95 22.95 0 01-8-1.43V8a2 2 0 012-2h2zm2-1a1 1 0 011-1h2a1 1 0 011 1v1H8V5zm1 5a1 1 0 011-1h.01a1 1 0 110 2H10a1 1 0 01-1-1z" clipRule="evenodd"/><path d="M2 13.692V16a2 2 0 002 2h12a2 2 0 002-2v-2.308A24.974 24.974 0 0110 15c-2.796 0-5.487-.46-8-1.308z"/></svg>                    
-              </div>
-              <h3 className="mb-2 text-xl font-bold dark:text-white">Business Automation</h3>
-              <p className="text-gray-500 dark:text-gray-400">Auto-assign tasks, send Slack messages, and much more. Now power up with hundreds of new templates to help you get started.</p>
-          </div>
-          <div>
-              <div className="flex justify-center items-center mb-4 w-10 h-10 rounded-full bg-primary-100 lg:h-12 lg:w-12 dark:bg-primary-900">
-                  <svg className="w-5 h-5 text-primary-600 lg:w-6 lg:h-6 dark:text-primary-300" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M8.433 7.418c.155-.103.346-.196.567-.267v1.698a2.305 2.305 0 01-.567-.267C8.07 8.34 8 8.114 8 8c0-.114.07-.34.433-.582zM11 12.849v-1.698c.22.071.412.164.567.267.364.243.433.468.433.582 0 .114-.07.34-.433.582a2.305 2.305 0 01-.567.267z"/><path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-13a1 1 0 10-2 0v.092a4.535 4.535 0 00-1.676.662C6.602 6.234 6 7.009 6 8c0 .99.602 1.765 1.324 2.246.48.32 1.054.545 1.676.662v1.941c-.391-.127-.68-.317-.843-.504a1 1 0 10-1.51 1.31c.562.649 1.413 1.076 2.353 1.253V15a1 1 0 102 0v-.092a4.535 4.535 0 001.676-.662C13.398 13.766 14 12.991 14 12c0-.99-.602-1.765-1.324-2.246A4.535 4.535 0 0011 9.092V7.151c.391.127.68.317.843.504a1 1 0 101.511-1.31c-.563-.649-1.413-1.076-2.354-1.253V5z" clipRule="evenodd"/></svg>
-              </div>
-              <h3 className="mb-2 text-xl font-bold dark:text-white">Finance</h3>
-              <p className="text-gray-500 dark:text-gray-400">Audit-proof software built for critical financial operations like month-end close and quarterly budgeting.</p>
-          </div>
-          <div>
-              <div className="flex justify-center items-center mb-4 w-10 h-10 rounded-full bg-primary-100 lg:h-12 lg:w-12 dark:bg-primary-900">
-                  <svg className="w-5 h-5 text-primary-600 lg:w-6 lg:h-6 dark:text-primary-300" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M7 3a1 1 0 000 2h6a1 1 0 100-2H7zM4 7a1 1 0 011-1h10a1 1 0 110 2H5a1 1 0 01-1-1zM2 11a2 2 0 012-2h12a2 2 0 012 2v4a2 2 0 01-2 2H4a2 2 0 01-2-2v-4z"/></svg>
-              </div>
-              <h3 className="mb-2 text-xl font-bold dark:text-white">Enterprise Design</h3>
-              <p className="text-gray-500 dark:text-gray-400">Craft beautiful, delightful experiences for both marketing and product with real cross-company collaboration.</p>
-          </div>
-          <div>
-              <div className="flex justify-center items-center mb-4 w-10 h-10 rounded-full bg-primary-100 lg:h-12 lg:w-12 dark:bg-primary-900">
-                  <svg className="w-5 h-5 text-primary-600 lg:w-6 lg:h-6 dark:text-primary-300" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fillRule="evenodd" d="M11.49 3.17c-.38-1.56-2.6-1.56-2.98 0a1.532 1.532 0 01-2.286.948c-1.372-.836-2.942.734-2.106 2.106.54.886.061 2.042-.947 2.287-1.561.379-1.561 2.6 0 2.978a1.532 1.532 0 01.947 2.287c-.836 1.372.734 2.942 2.106 2.106a1.532 1.532 0 012.287.947c.379 1.561 2.6 1.561 2.978 0a1.533 1.533 0 012.287-.947c1.372.836 2.942-.734 2.106-2.106a1.533 1.533 0 01.947-2.287c1.561-.379 1.561-2.6 0-2.978a1.532 1.532 0 01-.947-2.287c.836-1.372-.734-2.942-2.106-2.106a1.532 1.532 0 01-2.287-.947zM10 13a3 3 0 100-6 3 3 0 000 6z" clipRule="evenodd"/></svg>
-              </div>
-              <h3 className="mb-2 text-xl font-bold dark:text-white">Operations</h3>
-              <p className="text-gray-500 dark:text-gray-400">Keep your company’s lights on with customizable, iterative, and structured workflows built for all efficient teams and individual.</p>
-          </div>
-      </div>
-  </div>
-</section>
-</div>
-    
-    
-  )
-
-}
+      </section>
+    </div>
+  );
+};
 
 export default About;

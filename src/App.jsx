@@ -23,6 +23,8 @@ import Nav from './components/Navbar';
 import PublicProfile from './pages/PublicProfile';
 import ProtectedRoute from './components/ProtectedRoute';
 import FirebaseAuthContext from './context/FirebaseAuthContext';
+import Search from './pages/Search';
+import Reset from './pages/Reset';
 
 const App = () => {
   const user = useSelector(selectUser);
@@ -52,6 +54,7 @@ const App = () => {
         <Route path="/" element={<Layout />}>
           <Route index element={user ? <UserHome /> : <Home />} />
           <Route path="login" element={<Login />} />
+          <Route path="reset" element={<Reset />} />
           <Route path="signup" element={<Signup />} />
           <Route path="about" element={<About />} />
           <Route path="contact" element={<Contact />} />
@@ -63,8 +66,10 @@ const App = () => {
           </Route>
 
           <Route path="review" element={<Review />} />
-          <Route path="user/:id" element={<PublicProfile />} />
           <Route path="set/:id" element={<SetPage />} />
+          <Route path="search" element={<Search />} />
+          <Route path="search/:key" element={<Search />} />
+          <Route path="user/:id" element={<PublicProfile />} />
           <Route path="*" element={<NoMatch />} />
         </Route>
       </Routes>

@@ -6,7 +6,6 @@ import * as yup from 'yup';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { useDispatch } from 'react-redux';
 import { registerUser } from '../services/user';
-
 import { login } from '../features/user/userSlice';
 
 const schema = yup.object().shape({
