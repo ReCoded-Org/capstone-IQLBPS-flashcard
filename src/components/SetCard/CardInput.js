@@ -3,9 +3,9 @@ import FileBox from './FileBox';
 import TextArea from './TextArea';
 import UploadFile from './UploadFile';
 
-function CardInput({ handleError }) {
+function CardInput({ handleError, handleData }) {
   const [file, setFile] = useState();
-  const [text, setText] = useState('');
+ // const [text, setText] = useState('');
 
   const [textFormat, setTextFormat] = useState({
     italic: false,
@@ -17,7 +17,12 @@ function CardInput({ handleError }) {
   const [isUploaded, setIsUploaded] = useState(false);
 
   const handleText = (e) =>{
-    setText(e.target.value);
+    console.log(e.target.style.cssText)
+    console.log(e.target)
+    
+   
+    handleData({type: 'text', data: `<span style="${e.target.style.cssText}">${e.target.value}</span>`});
+   
   }
   const handleFormat = (key) => {
     if (uploader === false) {
@@ -25,7 +30,9 @@ function CardInput({ handleError }) {
         return { ...prev, [key]: !prev[key] };
       });
     }
+   // handleText(text);
     setUploader(false);
+   // console.log(text);
   };
 
   const handleUploader = () => {
@@ -34,10 +41,10 @@ function CardInput({ handleError }) {
 
   const uploadFile = (e) => {
     const uploadedFile = e.target.files[0];
-
+console.log(uploadedFile);
     if (
       !uploadedFile.type.includes('image') &&
-      !uploadedFile.type.includes('mp3')
+      !uploadedFile.type.includes('audio')
     ) {
       handleError({
         type: 'error',
@@ -46,6 +53,8 @@ function CardInput({ handleError }) {
       return;
     }
     setFile(uploadedFile);
+    handleData({type : uploadedFile.type.includes('image')?'image': 'audio'
+    , data: uploadedFile});
     setUploader(false);
     setIsUploaded(true);
   };
