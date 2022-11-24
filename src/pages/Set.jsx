@@ -1,34 +1,33 @@
 import { useEffect, useState } from 'react';
-import { getDoc, doc } from 'firebase/firestore';
+import { useParams } from 'react-router-dom';
+import { fetchSetData } from '../services/sets';
 
 import CommentsSection from '../components/CommentSection';
 import SetInfo from '../components/sets/SetInfo';
-
-import { db } from '../services/firebaseConfig';
+import ContentSection from '../components/ContentSection';
 
 export default function SetPage() {
-  const setID = 'LQv2gpxEUmxILoBG420g';
-
+  const setID = useParams().id;
   const [mySetData, setMySetData] = useState();
+
   useEffect(() => {
     async function fetchUser() {
-      const docRef = doc(db, 'sets', setID);
-      const docSnap = await getDoc(docRef);
-      if (docSnap.exists) {
-        setMySetData(docSnap.data());
-      }
+      const myData = await fetchSetData(setID);
+      setMySetData(myData);
     }
     fetchUser();
   }, []);
 
   return mySetData ? (
-    <div className="dark:bg-gray-900">
+    <div className="dark:bg-gray-900 pt-5">
       <SetInfo
         setsDescription={mySetData.description}
         setphotoUrl={mySetData.image}
         setName={mySetData.name}
+        setID={setID}
       />
-      <CommentsSection commentId={mySetData.commentsId} />
+      <ContentSection cards={mySetData.cards} />
+      <CommentsSection commentId={setID} />
     </div>
   ) : null;
 }

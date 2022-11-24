@@ -17,10 +17,11 @@ import Signup from './pages/Signup';
 import Library from './pages/Library';
 import Review from './pages/Review';
 import UserHome from './pages/UserHome';
+import SetPage from './pages/Set';
 import Footer from './components/Footer';
 import Nav from './components/Navbar';
 import PublicProfile from './pages/PublicProfile';
-import ProtectedRoute from './components/ProtectedRoute'
+import ProtectedRoute from './components/ProtectedRoute';
 import FirebaseAuthContext from './context/FirebaseAuthContext';
 
 const App = () => {
@@ -47,25 +48,26 @@ const App = () => {
 
   return (
     <FirebaseAuthContext>
-    <Routes>
-      <Route path="/" element={<Layout />}>
-        <Route index element={user ? <UserHome /> : <Home />} />
-        <Route path="login" element={<Login />} />
-        <Route path="signup" element={<Signup />} />
-        <Route path="about" element={<About />} />
-        <Route path="contact" element={<Contact />} />
-        <Route path="team" element={<Team />} />
+      <Routes>
+        <Route path="/" element={<Layout />}>
+          <Route index element={user ? <UserHome /> : <Home />} />
+          <Route path="login" element={<Login />} />
+          <Route path="signup" element={<Signup />} />
+          <Route path="about" element={<About />} />
+          <Route path="contact" element={<Contact />} />
+          <Route path="team" element={<Team />} />
 
-        <Route element={<ProtectedRoute />}>
-            <Route path="profile" element={<Profile />} exact/>
-            <Route path="library" element={<Library />} exact/>
+          <Route element={<ProtectedRoute />}>
+            <Route path="profile" element={<Profile />} exact />
+            <Route path="library" element={<Library />} exact />
+          </Route>
+
+          <Route path="review" element={<Review />} />
+          <Route path="user/:id" element={<PublicProfile />} />
+          <Route path="set/:id" element={<SetPage />} />
+          <Route path="*" element={<NoMatch />} />
         </Route>
-        
-        <Route path="review" element={<Review />} />
-        <Route path="user/:id" element={<PublicProfile />} />
-        <Route path="*" element={<NoMatch />} />
-      </Route>
-    </Routes>
+      </Routes>
     </FirebaseAuthContext>
   );
 };
@@ -76,7 +78,7 @@ const Layout = () => {
 
   return (
     <div>
-       <Nav />
+      <Nav />
       <Outlet />
       <Footer />
     </div>

@@ -1,7 +1,6 @@
 import { useEffect, useState } from 'react';
-import { doc, getDoc } from 'firebase/firestore';
-
-import { db } from '../services/firebaseConfig';
+import { v4 as uuidv4 } from 'uuid';
+import { getComments } from '../services/comment';
 import Comment from './Comment';
 import CommentPost from './CommentPost';
 
@@ -10,11 +9,8 @@ export default function CommentsSection({ commentId }) {
 
   useEffect(() => {
     async function fetchComments() {
-      const docRef = doc(db, 'comments', commentId);
-      const docSnap = await getDoc(docRef);
-      if (docSnap.exists()) {
-        setComments(docSnap.data());
-      }
+      const thisSetComments = await getComments(commentId);
+      setComments(thisSetComments);
     }
     fetchComments();
   }, []);
@@ -27,22 +23,30 @@ export default function CommentsSection({ commentId }) {
             Comments
           </h2>
         </div>
-        {comments
-          ? Object.values(comments).map((comment) => {
-              return comment.map((item) => {
-                return (
-                  <Comment
-                    // key={item.ID}
-                    userName={item.user.name}
-                    date={item.createdAt.seconds}
-                    commentText={item.text}
-                    userImg={item.user.photoURL}
-                  />
-                );
-              });
-            })
-          : null}
-        <CommentPost />
+        {comments ? (
+          Object.values(comments).map((comment) => {
+            return comment.map((item) => {
+              return (
+                <Comment
+                  key={uuidv4()}
+                  userName={item.user.name}
+                  date={item.createdAt.seconds}
+                  userId={item.user.id}
+                  commentText={item.text}
+                  userImg={item.user.photoURL}
+                />
+              );
+            });
+          })
+        ) : (
+          <p className="italic text-slate-400 dark:text-slate-600">
+            there are no comments for this set <br />{' '}
+            <span className="font-bold text-slate-600	dark:text-slate-400">
+              be the first !!!
+            </span>
+          </p>
+        )}
+        <CommentPost setComments={setComments} comments={comments} />
       </div>
     </section>
   );

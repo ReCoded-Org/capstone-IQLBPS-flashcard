@@ -1,5 +1,4 @@
-import { addDoc, collection } from 'firebase/firestore';
-
+import { addDoc, collection, getDoc, doc } from 'firebase/firestore';
 import uploadImagePromise from './uploadImage';
 import { db } from './firebaseConfig';
 
@@ -19,3 +18,11 @@ export const SetHeader = async (
   });
   return docRef.id;
 };
+
+export async function fetchSetData(id) {
+  let data = '';
+  const docRef = doc(db, 'sets', id);
+  const docSnap = await getDoc(docRef);
+  data = docSnap.data();
+  return data;
+}

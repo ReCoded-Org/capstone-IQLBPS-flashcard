@@ -10,6 +10,8 @@ import {
   getDocs,
   getDoc,
   where,
+  arrayRemove,
+  arrayUnion,
 } from 'firebase/firestore';
 
 import {
@@ -159,3 +161,16 @@ export const getFavoriteSets = async (userId) => {
   const favSetsData = await fetchSetsById(favSets);
   return favSetsData;
 };
+
+export async function handleFavoriteSetsArray(inLibrary, id, setID) {
+  const favSetRef = doc(db, 'users', id);
+  if (inLibrary) {
+    await updateDoc(favSetRef, {
+      favSets: arrayRemove(setID),
+    });
+  } else {
+    await updateDoc(favSetRef, {
+      favSets: arrayUnion(setID),
+    });
+  }
+}

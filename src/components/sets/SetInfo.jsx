@@ -1,20 +1,31 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+import { useSelector } from 'react-redux';
+
+import { fetchUserInfo, handleFavoriteSetsArray } from '../../services/user';
 import StarRating from './Rating';
 
-const SetInfo = ({ setsDescription, setphotoUrl, setName }) => {
+const SetInfo = ({ setsDescription, setphotoUrl, setName, setID }) => {
   // const [value, setValue] = useState(2);
-  const [inLibrary, setInLibrary] = useState(false);
 
-  const handleButtoClick = () => {
-    if (inLibrary) {
-      // if in library, remove from library}
-    } else {
-      // if not in library, add to library}
+  const setRatingValue = 4;
+
+  const [inLibrary, setInLibrary] = useState();
+  const { user } = useSelector((state) => state.user);
+
+  useEffect(() => {
+    async function CheckIfIN() {
+      const userData = await fetchUserInfo(user.uid);
+      const exist = userData.favSets.find((item) => item === setID);
+      setInLibrary(exist);
     }
+    CheckIfIN();
+  }, []);
+
+  const handleButtoClick = async () => {
+    await handleFavoriteSetsArray(inLibrary, user.uid, setID);
+
     setInLibrary((prev) => !prev);
   };
-
-  console.log(setsDescription);
   return (
     <div>
       <div className="mx-auto grid lg:grid-cols-2 items-center bg-white rounded-lg border shadow-md md:grid-cols-1 md:max-w-5xl hover:bg-gray-100 dark:border-gray-700 dark:bg-gray-800 dark:hover:bg-gray-700">
@@ -25,7 +36,7 @@ const SetInfo = ({ setsDescription, setphotoUrl, setName }) => {
           <p className="mb-3 font-normal text-gray-700 dark:text-gray-400">
             {setsDescription}
           </p>
-          <StarRating />
+          <StarRating setRatingValue={setRatingValue} />
           <button
             onClick={handleButtoClick}
             className="bg-primary-800 hover:bg-primary-700 text-white font-bold py-2 px-4 rounded mt-4 w-2/3"
@@ -34,9 +45,9 @@ const SetInfo = ({ setsDescription, setphotoUrl, setName }) => {
             {`${inLibrary ? 'Remove from Library' : 'Add to Library'}`}
           </button>
         </div>
-        <div className="h-full">
+        <div className="bg-gray-200 dark:bg-gray-600">
           <img
-            className="object-cover h-full rounded-t-lg md:rounded-none md:rounded-l-lg"
+            className="h-52 mx-auto object-cover h-full rounded-t-lg md:rounded-none md:rounded-l-lg"
             src={setphotoUrl}
             alt={setName}
           />

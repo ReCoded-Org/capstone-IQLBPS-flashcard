@@ -1,31 +1,31 @@
-import { useState, useEffect } from 'react';
-import { v4 as uuidv4 } from 'uuid';
+import { useState } from 'react';
 import { useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
-import Comment from './Comment';
-import { createComment, getComments } from '../services/comment';
+import { Timestamp } from 'firebase/firestore';
+import { createComment } from '../services/comment';
 
-function CommentPost() {
+function CommentPost({ setComments, comments }) {
   const [comment, setComment] = useState(' ');
-  const [commentList, setCommentList] = useState([]);
   const { user } = useSelector((state) => state.user);
   const { id } = useParams();
 
   const handleComment = async (e) => {
     e.preventDefault();
     await createComment(id, user, comment);
+    const newComment = {
+      user: {
+        id: user.uid,
+        name: user.displayName,
+        photoURL: user.photoUrl,
+      },
+      createdAt: Timestamp.now(),
+      text: comment,
+    };
+    setComments({ comments: [...comments.comments, newComment] });
     setComment('');
   };
 
-  useEffect(() => {
-    const fetchComments = async () => {
-      const comments = await getComments(id);
-      setCommentList(comments);
-    };
-    fetchComments();
-  }, []);
-
-  return (
+  return user ? (
     <section className="bg-white dark:bg-gray-900 py-8 lg:py-16">
       <div className="max-w-2xl mx-auto px-4">
         <form className="mb-6">
@@ -50,22 +50,9 @@ function CommentPost() {
           >
             Post comment
           </button>
-          {commentList.length > 0
-            ? commentList.map((co) => {
-                return (
-                  <Comment
-                    key={uuidv4()}
-                    userName={co.name}
-                    date={co.createdAt.seconds}
-                    commentText={co.text}
-                    userImg={co.photoURL}
-                  />
-                );
-              })
-            : null}
         </form>
       </div>
     </section>
-  );
+  ) : null;
 }
 export default CommentPost;
