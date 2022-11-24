@@ -21,7 +21,11 @@ function CommentPost({ setComments, comments }) {
       createdAt: Timestamp.now(),
       text: comment,
     };
-    setComments({ comments: [...comments.comments, newComment] });
+    if (comments) {
+      setComments({ comments: [...comments.comments, newComment] });
+    } else {
+      setComments({ comments: [newComment] });
+    }
     setComment('');
   };
 

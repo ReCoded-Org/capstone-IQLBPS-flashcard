@@ -26,7 +26,7 @@ export default function SetPage() {
         setName={mySetData.name}
         setID={setID}
       />
-      <ContentSection cards={mySetData.cards} />
+      <ContentSection setsCards={mySetData.cards} />
       <CommentsSection commentId={setID} />
     </div>
   ) : null;

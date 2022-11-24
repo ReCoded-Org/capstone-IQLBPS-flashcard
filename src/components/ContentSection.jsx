@@ -1,15 +1,13 @@
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { v4 as uuidv4 } from 'uuid';
-
 import SetCarousel from './SetCarousel';
 import SetCard from './SetCard';
-
 import { fetchCardsFromSet } from '../services/sets';
 import Loading from './Loading';
 
-function ContentSection({ cards }) {
-  const [cards, setCards] = useState();
+function ContentSection({ setsCards }) {
+  const [cards, setCards] = useState(setsCards);
   const [isLoading, setIsLoading] = useState(true);
 
   const { id } = useParams();
