@@ -1,4 +1,10 @@
-import { signInWithPopup, signOut, signInWithEmailAndPassword, sendPasswordResetEmail } from 'firebase/auth';
+import {
+  signInWithPopup,
+  signOut,
+  signInWithEmailAndPassword,
+  sendPasswordResetEmail,
+  getAuth,
+} from 'firebase/auth';
 import {
   updateDoc,
   doc,
@@ -43,34 +49,36 @@ export const logOut = async () => {
   return err;
 };
 
-// login with email and password 
-export const logInWithEmailAndPassword = async(user) =>{
-  try{
-      const userAuth = await signInWithEmailAndPassword(auth, user.email, user.password);
+// login with email and password
+export const logInWithEmailAndPassword = async (user) => {
+  try {
+    const userAuth = await signInWithEmailAndPassword(
+      auth,
+      user.email,
+      user.password
+    );
 
-      const userData = {
-        email: user.email,
-        uid: userAuth.user.uid,
-        displayName: userAuth.user.displayName,
-        photoURL: userAuth.user.photoURL,
-      };
-      result.user = { ...userData };
-     
+    const userData = {
+      email: user.email,
+      uid: userAuth.user.uid,
+      displayName: userAuth.user.displayName,
+      photoURL: userAuth.user.photoURL,
+    };
+    result.user = { ...userData };
   } catch (error) {
     result.error = error;
   }
-  return result
-}
+  return result;
+};
 
-// Reset passworn through sendin a message to the email 
-export const resetPassword = async(user) => {
-  try{
-     await sendPasswordResetEmail(auth, user.email)
-         
+// Reset passworn through sendin a message to the email
+export const resetPassword = async (user) => {
+  try {
+    await sendPasswordResetEmail(auth, user.email);
   } catch (error) {
     result.error = error;
   }
-} 
+};
 
 // add signup to firebase
 const signUpToFirebase = async (userData) => {
@@ -138,13 +146,30 @@ export const registerUser = async (user) => {
 
 export const updateUserName = async (userId, userName) => {
   const user = doc(db, 'users', userId);
+  // eslint-disable-next-line no-shadow
+  const auth = getAuth();
+
   await updateDoc(user, { displayName: userName });
+
+  updateProfile(auth.currentUser, {
+    displayName: userName,
+  })
+    .then(() => {
+      console.log('success');
+    })
+    .catch((error) => {
+      console.log(error);
+    });
 };
 
 export const updateUserProfile = async (userId, image) => {
   const url = await uploadImagePromise(image, 'images');
   const user = doc(db, 'users', userId);
   await updateDoc(user, { photoURL: url });
+  await updateProfile(auth.currentUser, {
+    photoURL: url,
+  });
+
   return url;
 };
 
@@ -166,7 +191,7 @@ export const latestAddedSets = async () => {
 
 export async function fetchUserSets(id) {
   const setsRef = collection(db, 'sets');
-  const q = query(setsRef, where('set.id', '==', id));
+  const q = query(setsRef, where('user.id', '==', id));
   const sets = await getDocs(q);
   return sets.docs.map((set) => ({ id: set.id, ...set.data() }));
 }
