@@ -151,15 +151,9 @@ export const updateUserName = async (userId, userName) => {
 
   await updateDoc(user, { displayName: userName });
 
-  updateProfile(auth.currentUser, {
+  await updateProfile(auth.currentUser, {
     displayName: userName,
-  })
-    .then(() => {
-      console.log('success');
-    })
-    .catch((error) => {
-      console.log(error);
-    });
+  });
 };
 
 export const updateUserProfile = async (userId, image) => {
