@@ -24,14 +24,8 @@ const About = () => {
               Get started
             </Link>
           </div>
-          <div className="w-full dark:hidden">
-            <img
-              className="w-full dark:hidden"
-              src="https://flowbite.s3.amazonaws.com/blocks/marketing-ui/cta/cta-dashboard-mockup.svg"
-              alt=""
-            />
-          </div>
-          <div className="w-full hidden dark:block">
+          
+          <div className="w-full  dark:block">
             <img src={aboutimage} alt="dasgboard" />
           </div>
         </div>
