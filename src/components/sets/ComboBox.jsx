@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-expressions */
 /* eslint-disable react/destructuring-assignment */
 import { Fragment, useState } from 'react';
 import { Combobox, Transition } from '@headlessui/react';
@@ -61,6 +62,9 @@ const ComboBox = (props) => {
                       }`
                     }
                     value={el}
+                    onClick={(e) =>
+                      props.newSet && props.setCategory(e.target.outerText)
+                    }
                   >
                     {({ sel, active }) => (
                       <>
