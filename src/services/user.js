@@ -113,6 +113,7 @@ export const signInWithGoogle = async () => {
   } catch (er) {
     result.error = er;
   }
+  return result;
 };
 
 // Create a new user with Firebase
