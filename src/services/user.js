@@ -3,6 +3,8 @@ import {
   signOut,
   signInWithEmailAndPassword,
   sendPasswordResetEmail,
+  getAuth,
+
 } from 'firebase/auth';
 import {
   updateDoc,
@@ -148,13 +150,24 @@ export const registerUser = async (user) => {
 
 export const updateUserName = async (userId, userName) => {
   const user = doc(db, 'users', userId);
+  // eslint-disable-next-line no-shadow
+  const auth = getAuth();
+
   await updateDoc(user, { displayName: userName });
+
+  await updateProfile(auth.currentUser, {
+    displayName: userName,
+  });
 };
 
 export const updateUserProfile = async (userId, image) => {
   const url = await uploadImagePromise(image, 'images');
   const user = doc(db, 'users', userId);
   await updateDoc(user, { photoURL: url });
+  await updateProfile(auth.currentUser, {
+    photoURL: url,
+  });
+
   return url;
 };
 
@@ -176,7 +189,7 @@ export const latestAddedSets = async () => {
 
 export async function fetchUserSets(id) {
   const setsRef = collection(db, 'sets');
-  const q = query(setsRef, where('set.id', '==', id));
+  const q = query(setsRef, where('user.id', '==', id));
   const sets = await getDocs(q);
   return sets.docs.map((set) => ({ id: set.id, ...set.data() }));
 }
