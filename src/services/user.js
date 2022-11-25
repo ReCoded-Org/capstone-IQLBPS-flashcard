@@ -1,4 +1,9 @@
-import { signInWithPopup, signOut, signInWithEmailAndPassword, sendPasswordResetEmail } from 'firebase/auth';
+import {
+  signInWithPopup,
+  signOut,
+  signInWithEmailAndPassword,
+  sendPasswordResetEmail,
+} from 'firebase/auth';
 import {
   updateDoc,
   doc,
@@ -43,34 +48,36 @@ export const logOut = async () => {
   return err;
 };
 
-// login with email and password 
-export const logInWithEmailAndPassword = async(user) =>{
-  try{
-      const userAuth = await signInWithEmailAndPassword(auth, user.email, user.password);
+// login with email and password
+export const logInWithEmailAndPassword = async (user) => {
+  try {
+    const userAuth = await signInWithEmailAndPassword(
+      auth,
+      user.email,
+      user.password
+    );
 
-      const userData = {
-        email: user.email,
-        uid: userAuth.user.uid,
-        displayName: userAuth.user.displayName,
-        photoURL: userAuth.user.photoURL,
-      };
-      result.user = { ...userData };
-     
+    const userData = {
+      email: user.email,
+      uid: userAuth.user.uid,
+      displayName: userAuth.user.displayName,
+      photoURL: userAuth.user.photoURL,
+    };
+    result.user = { ...userData };
   } catch (error) {
     result.error = error;
   }
-  return result
-}
+  return result;
+};
 
-// Reset passworn through sendin a message to the email 
-export const resetPassword = async(user) => {
-  try{
-     await sendPasswordResetEmail(auth, user.email)
-         
+// Reset passworn through sendin a message to the email
+export const resetPassword = async (user) => {
+  try {
+    await sendPasswordResetEmail(auth, user.email);
   } catch (error) {
     result.error = error;
   }
-} 
+};
 
 // add signup to firebase
 const signUpToFirebase = async (userData) => {
@@ -104,6 +111,7 @@ export const signInWithGoogle = async () => {
   } catch (er) {
     result.error = er;
   }
+  return result;
 };
 
 // Create a new user with Firebase
