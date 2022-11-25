@@ -1,5 +1,4 @@
 import React from 'react';
-
 import FeaturePoints from '../components/feature/FeaturePoints';
 import FeatureCard from '../components/feature/FeatureCard';
 import Hero from '../components/Hero';

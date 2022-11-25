@@ -20,6 +20,14 @@ export const SetHeader = async (
   return docRef.id;
 };
 
+export async function fetchSetData(id) {
+  let data = '';
+  const docRef = doc(db, 'sets', id);
+  const docSnap = await getDoc(docRef);
+  data = docSnap.data();
+  return data;
+}
+
 export async function fetchCardsFromSet(setId) {
   const setsRef = doc(db, 'sets', setId);
   const cards = await getDoc(setsRef);

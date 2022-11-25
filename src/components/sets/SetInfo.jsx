@@ -1,33 +1,42 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+import { useSelector } from 'react-redux';
+
+import { fetchUserInfo, handleFavoriteSetsArray } from '../../services/user';
 import StarRating from './Rating';
 
-const SetInfo = () => {
+const SetInfo = ({ setsDescription, setphotoUrl, setName, setID }) => {
   // const [value, setValue] = useState(2);
-  const [inLibrary, setInLibrary] = useState(false);
 
-  const handleButtoClick = () => {
-    if (inLibrary) {
-      // if in library, remove from library}
-    } else {
-      // if not in library, add to library}
+  const setRatingValue = 4;
+
+  const [inLibrary, setInLibrary] = useState();
+  const { user } = useSelector((state) => state.user);
+
+  useEffect(() => {
+    async function CheckIfIN() {
+      const userData = await fetchUserInfo(user.uid);
+      const exist = userData.favSets.find((item) => item === setID);
+      setInLibrary(exist);
     }
+    CheckIfIN();
+  }, []);
+
+  const handleButtoClick = async () => {
+    await handleFavoriteSetsArray(inLibrary, user.uid, setID);
+
     setInLibrary((prev) => !prev);
   };
-
   return (
     <div>
-      <div className="flex flex-col items-center bg-white rounded-lg border shadow-md md:flex-row md:max-w-xl hover:bg-gray-100 dark:border-gray-700 dark:bg-gray-800 dark:hover:bg-gray-700">
-        <div className="flex flex-col justify-between p-4 leading-normal">
+      <div className="mx-auto grid lg:grid-cols-2 items-center bg-white rounded-lg border shadow-md md:grid-cols-1 md:max-w-5xl hover:bg-gray-100 dark:border-gray-700 dark:bg-gray-800 dark:hover:bg-gray-700">
+        <div className="flex flex-col justify-between p-4 leading-normal lg:full">
           <h5 className="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
-            React
+            {setName}
           </h5>
           <p className="mb-3 font-normal text-gray-700 dark:text-gray-400">
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Quo magni
-            repudiandae quae expedita nesciunt atque voluptates eaque maxime?
-            Nobis culpa sapiente nisi quasi vero dolores quisquam blanditiis
-            quam dolorum unde.
+            {setsDescription}
           </p>
-          <StarRating />
+          <StarRating setRatingValue={setRatingValue} />
           <button
             onClick={handleButtoClick}
             className="bg-primary-800 hover:bg-primary-700 text-white font-bold py-2 px-4 rounded mt-4 w-2/3"
@@ -36,12 +45,13 @@ const SetInfo = () => {
             {`${inLibrary ? 'Remove from Library' : 'Add to Library'}`}
           </button>
         </div>
-        <img
-          className="object-cover w-full h-96 rounded-t-lg md:h-auto md:w-48 md:rounded-none md:rounded-l-lg"
-          // src={img} this is the main src to be used when fetching data is implemented
-          src="https://unsplash.com/photos/04X1Yp9hNH8"
-          alt=""
-        />
+        <div className="bg-gray-200 dark:bg-gray-600">
+          <img
+            className="h-52 mx-auto object-cover h-full rounded-t-lg md:rounded-none md:rounded-l-lg"
+            src={setphotoUrl}
+            alt={setName}
+          />
+        </div>
       </div>
     </div>
   );

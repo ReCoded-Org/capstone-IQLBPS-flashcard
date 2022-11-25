@@ -1,14 +1,13 @@
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { v4 as uuidv4 } from 'uuid';
-
 import SetCarousel from './SetCarousel';
 import SetCard from './SetCard';
 import { fetchCardsFromSet } from '../services/sets';
 import Loading from './Loading';
 
-function ContentSection() {
-  const [cards, setCards] = useState();
+function ContentSection({ setsCards }) {
+  const [cards, setCards] = useState(setsCards);
   const [isLoading, setIsLoading] = useState(true);
 
   const { id } = useParams();
@@ -24,8 +23,10 @@ function ContentSection() {
     fetchCards();
   }, []);
   return (
-    <>
-      {' '}
+    <div className="lg:max-w-5xl md:w-full mx-auto mt-20">
+      <h2 className="text-lg lg:text-2xl font-bold text-gray-900 dark:text-white mb-2">
+        Set&#39;s cards
+      </h2>
       {isLoading ? (
         <Loading />
       ) : (
@@ -35,7 +36,7 @@ function ContentSection() {
           ))}
         </SetCarousel>
       )}
-    </>
+    </div>
   );
 }
 
