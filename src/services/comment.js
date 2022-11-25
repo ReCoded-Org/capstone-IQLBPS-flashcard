@@ -10,7 +10,7 @@ export async function createComment(id, currentUser, comment) {
         user: {
           id: currentUser.uid,
           name: currentUser.displayName,
-          photoURL: currentUser.photoUrl,
+          photoURL: currentUser.photoURL,
         },
         createdAt: Timestamp.now(),
         text: comment,
