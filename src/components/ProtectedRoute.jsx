@@ -1,5 +1,6 @@
 import React, { useContext } from 'react';
 import { Outlet, Navigate } from 'react-router-dom';
+
 import { AuthContext } from '../context/FirebaseAuthContext';
 
 export default function ProtectedRoute() {

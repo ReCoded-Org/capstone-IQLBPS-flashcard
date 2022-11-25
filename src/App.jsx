@@ -17,6 +17,7 @@ import Signup from './pages/Signup';
 import Library from './pages/Library';
 import Review from './pages/Review';
 import UserHome from './pages/UserHome';
+import SetPage from './pages/Set';
 import Footer from './components/Footer';
 import Nav from './components/Navbar';
 import PublicProfile from './pages/PublicProfile';
@@ -65,6 +66,7 @@ const App = () => {
           </Route>
 
           <Route path="review" element={<Review />} />
+          <Route path="set/:id" element={<SetPage />} />
           <Route path="search" element={<Search />} />
           <Route path="search/:key" element={<Search />} />
           <Route path="user/:id" element={<PublicProfile />} />

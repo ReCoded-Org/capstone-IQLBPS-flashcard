@@ -35,14 +35,15 @@ const UserHome = () => {
 
   return (
     <section className="bg-white dark:bg-gray-900  flex flex-col  overflow-autos p-4 pb-20">
-      
       {isLoadingFav ? (
-      
-      favoriteSets ?  "" :  <Loading/>  
+        favoriteSets ? (
+          ''
+        ) : (
+          <Loading />
+        )
       ) : (
         <ActiveUserSection list={favoriteSets} title="Your Favorites" />
       )}
-
 
       {isLoadingLatest ? (
         <Loading />

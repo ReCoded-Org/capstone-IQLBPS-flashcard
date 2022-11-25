@@ -1,25 +1,37 @@
-import { signInWithPopup } from 'firebase/auth';
-import { auth, provider } from '../services/firebaseConfig';
+import { useDispatch } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
+import { login } from '../features/user/userSlice';
+import {signInWithGoogle} from '../services/user'
 
 const GoogleSignInButton = () => {
-  const signInWithGoogle = () => {
-    signInWithPopup(auth, provider)
-      .then((result) => {
-        const name = result.user.displayName;
-        const { email } = result.user.email;
-        const profilePic = result.user.photoURL;
-        localStorage.getItem('name', name);
-        localStorage.getItem('email', email);
-        localStorage.getItem('profilePic', profilePic);
-      })
-      .catch((error) => {
-            // eslint-disable-next-line no-console
-        console.log(error)});
-  };
+ 
+  const navigate = useNavigate();
+
+  const dispatch = useDispatch();
+
+const googleSignIn = async () => {
+
+const result = await signInWithGoogle();
+
+try {
+  dispatch(
+    login({
+      email: result.user.email,
+      uid: result.user.uid,
+      displayName: result.user.username,
+      photoUrl: result.user.photoURL,
+    })
+  );
+  navigate('/');
+} catch {
+  // console.log('user not updated');
+}
+
+}
 
   return (
     <button
-      onClick={signInWithGoogle}
+      onClick={googleSignIn}
       type="button"
       className="text-white bg-[#4285F4] hover:bg-[#4285F4]/90 focus:ring-4 focus:outline-none focus:ring-[#4285F4]/50 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center dark:focus:ring-[#4285F4]/55 mr-2 mb-2"
     >
