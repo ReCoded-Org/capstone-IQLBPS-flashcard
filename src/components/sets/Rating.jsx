@@ -1,7 +1,7 @@
 import { useState } from 'react';
 
-const Rating = () => {
-  const [rating, setRating] = useState(0);
+const Rating = ({ setRatingValue }) => {
+  const [rating, setRating] = useState(setRatingValue);
   const [hover, setHover] = useState(0);
   const stars = [...Array(5)].map((star, idx) => {
     const ratingValue = idx + 1;

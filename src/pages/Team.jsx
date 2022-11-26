@@ -1,6 +1,6 @@
 import React from 'react';
 import TeamMember from '../components/TeamMember';
-import data from '../services/TeamInfo.json';
+import { teamInfo } from '../services/TeamInfo';
 
 const Team = () => {
   return (
@@ -12,7 +12,7 @@ const Team = () => {
           </h2>
         </div>
         <div className="grid gap-8 lg:gap-16 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
-          {data.map((item) => {
+          {teamInfo.map((item) => {
             return (
               <TeamMember
                 key={item.ID}

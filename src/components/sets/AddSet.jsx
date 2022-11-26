@@ -1,16 +1,19 @@
+/* eslint-disable react/jsx-boolean-value */
+import { useState } from 'react';
 import { t } from 'i18next';
 import { useForm } from 'react-hook-form';
 import ComboBox from './ComboBox';
 import { SetHeader } from '../../services/sets';
 
 const categoriesData = [
-  { id: 1, name: 'Math' },
-  { id: 2, name: 'Algebra' },
-  { id: 3, name: 'Geometry' },
-  { id: 4, name: 'Chemisty' },
-  { id: 5, name: 'Physics' },
-  { id: 6, name: 'Biology' },
-  { id: 7, name: 'History' },
+  { id: 1, name: 'Science' },
+  { id: 2, name: 'Medical & Nursing' },
+  { id: 3, name: 'Health & Fitness' },
+  { id: 4, name: 'Business & Finance' },
+  { id: 5, name: 'Technology & Engineering' },
+  { id: 6, name: 'Random Knowledge' },
+  { id: 7, name: 'Languages' },
+  { id: 8, name: 'Exams' },
 ];
 
 const AddSet = ({ setId, handleFormVisibility, onAddingSet }) => {
@@ -20,6 +23,8 @@ const AddSet = ({ setId, handleFormVisibility, onAddingSet }) => {
     formState: { errors },
   } = useForm();
 
+  const [category, setCategory] = useState('');
+
   const formSubmitHandler = async (data) => {
     handleFormVisibility();
     onAddingSet({
@@ -27,13 +32,13 @@ const AddSet = ({ setId, handleFormVisibility, onAddingSet }) => {
       name: data.name,
       image: data.image,
       description: data.description,
-      categories: data.categories,
+      categories: category,
     });
     const id = await SetHeader(
       data.name,
       data.image[0],
       data.description,
-      data.categories
+      category
     );
     setId(id);
   };
@@ -105,7 +110,13 @@ const AddSet = ({ setId, handleFormVisibility, onAddingSet }) => {
           </label>
         </div>
         <div className="mb-6">
-          <ComboBox data={categoriesData} register={register} errors={errors} />
+          <ComboBox
+            data={categoriesData}
+            register={register}
+            errors={errors}
+            newSet={true}
+            setCategory={setCategory}
+          />
         </div>
         <button
           type="submit"

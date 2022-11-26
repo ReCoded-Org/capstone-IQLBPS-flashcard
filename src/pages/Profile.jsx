@@ -1,56 +1,38 @@
-import { useState } from "react"
+import { useEffect , useState} from "react";
+import { useSelector } from "react-redux";
 
 import Card from "../components/Card"
-import {updateUserName, updateUserProfile} from '../services/user'
+import {fetchUserSets, updateUserName, updateUserProfile} from '../services/user'
 
 export default function Profile() {
-  const myPlaceHolderImage =
-    'https://flowbite.s3.amazonaws.com/blocks/marketing-ui/avatars/bonnie-green.png';
-  const myPlaceHolderUser = 'Sara Khalil';
-  const placerHolderData = [
-    {
-      name: 'Bonnie Green',
-      job: 'CEO & Web Developer',
-      about:
-        'Bonnie drives the technical strategy of the flowbite platform and brand.',
-      image:
-        'https://flowbite.s3.amazonaws.com/blocks/marketing-ui/avatars/bonnie-green.png',
-    },
-    {
-      name: 'Jese Leos',
-      job: 'CTO',
-      about:
-        'Jese drives the technical strategy of the flowbite platform and brand.',
-      image:
-        'https://flowbite.s3.amazonaws.com/blocks/marketing-ui/avatars/jese-leos.ng',
-    },
 
-    {
-      name: 'Michael Gough',
-      job: 'Senior Front-end Developer',
-      about:
-        'Michael drives the technical strategy of the flowbite platform and brand.',
-      image:
-        'https://flowbite.s3.amazonaws.com/blocks/marketing-ui/avatars/michael-gouch.png',
-    },
 
-    {
-      name: 'Lana Byrd',
-      job: 'Marketing & Sale',
-      about:
-        'Lana drives the technical strategy of the flowbite platform and brand.',
-      image:
-        'https://flowbite.s3.amazonaws.com/blocks/marketing-ui/avatars/sofia-mcguire.png',
-    },
-    {
-      name: 'Lana Byrd',
-      job: 'Marketing & Sale',
-      about:
-        'Lana drives the technical strategy of the flowbite platform and brand.',
-      image:
-        'https://flowbite.s3.amazonaws.com/blocks/marketing-ui/avatars/sofia-mcguire.png',
-    },
-  ];
+  const { user } = useSelector((state) => state.user);
+
+
+  const myPlaceHolderImage = !user.photoURL ? "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460__480.png" : user.photoURL;
+  const myPlaceHolderUser = user.displayName;
+
+  const [userSets , setUserSets] = useState([]);
+  const [loadingSets , setLoadingSets] = useState(true);
+
+  
+  useEffect(()=> {
+
+   const getUserSets = async() => {
+ const sets =   await fetchUserSets(user.uid)
+setUserSets(sets) ;
+
+
+if(sets !== 0)
+setLoadingSets(false);
+else
+setLoadingSets(true);
+   }
+
+   getUserSets();
+  }, [])
+ 
 
   const [popUpState, setPopUpState] = useState('hidden');
 
@@ -106,13 +88,16 @@ export default function Profile() {
       </div>
       <div className="py-8 px-4 mx-auto max-w-screen-xl lg:py-16 lg:px-6 ">
         <div className="grid gap-8 mb-6 lg:mb-16 lg:grid-cols-3 xl:grid-cols-4 md:grid-cols-2">
-          {placerHolderData.map((item) => (
+          { !loadingSets && (userSets.map((set) => (
             <Card
-              coverImage={item.image}
-              title={item.name}
-              description={item.about}
+            id={set.id}
+              coverImage={set.image}
+              title={set.name}
+              description={set.description}
             />
-          ))}
+          ))
+          
+          )}
         </div>
       </div>
     </section>
@@ -122,7 +107,10 @@ export default function Profile() {
 function PopUp({ popUpState, userName, myImage, handlePopUp }) {
   const [updatedName, setUpdatedUserName] = useState(null);
   const [userImage, setUserImage] = useState(null);
-  const userID = '3l81U8JCAaaYilKRVLdJWnRG2Z42';
+  const [userDefaultImage, setUserDefaultImage] = useState(null);
+
+
+  const { user } = useSelector((state) => state.user);
 
   function handleGrayClick(event) {
     if (event.target.id === 'defaultModal') {
@@ -133,17 +121,18 @@ function PopUp({ popUpState, userName, myImage, handlePopUp }) {
   const handleImage = (e) => {
     if (e.target.files[0]) {
       setUserImage(e.target.files[0]);
+      setUserDefaultImage(URL.createObjectURL(e.target.files[0]))
     }
   };
 
   const handleSave = async (e) => {
     e.preventDefault();
     if (userImage != null) {
-      await updateUserProfile(userID, userImage);
+      await updateUserProfile(user.uid, userImage);
     }
 
-    if (updatedName !== null || updatedName.length !== 0)
-      await updateUserName(userID, updatedName);
+    if (updatedName !== user.displayName || updatedName.length !== 0)
+      await updateUserName(user.uid, updatedName);
 
     handlePopUp();
   };
@@ -155,9 +144,9 @@ function PopUp({ popUpState, userName, myImage, handlePopUp }) {
         tabIndex="-1"
         onClick={handleGrayClick}
         aria-hidden="true"
-        className={`${popUpState} bg-gray-200 bg-opacity-50 overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center inset-0 h-modal h-full`}
+        className={`${popUpState} bg-gray-200 bg-opacity-50 overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center inset-0`}
       >
-        <div className="relative p-4 w-full max-w-lg h-full md:h-auto mx-auto">
+        <div className="relative p-4  w-full max-w-lg h-full md:h-auto mx-auto">
           <div className="relative p-4 bg-white rounded-lg shadow dark:bg-gray-800 sm:p-5">
             <div className="flex justify-between items-center pb-4 mb-4 rounded-t border-b sm:mb-5 dark:border-gray-600">
               <h3 className="text-lg font-semibold text-gray-900 dark:text-white">
@@ -188,8 +177,8 @@ function PopUp({ popUpState, userName, myImage, handlePopUp }) {
             <form action=" ">
               <div className="grid">
                 <img
-                  className="my-4 border-4 border-primary-50 mx-auto mb-4 h-auto rounded-full col-start-1 col-end-2 row-start-1 row-end-2"
-                  src={myImage}
+                  className="rounded-full my-4 border-4 border-primary-50 mx-auto mb-4 w-80 h-auto"
+                  src={!userImage? myImage : userDefaultImage}
                   alt={`${userName}Avatar`}
                 />
                 <div className="grid sm:w-2/3 sm:mx-auto gap-2 pl-2">

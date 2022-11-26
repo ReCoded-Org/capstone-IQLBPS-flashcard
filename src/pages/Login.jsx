@@ -26,6 +26,7 @@ const Login = () => {
   const {
     register,
     handleSubmit,
+    reset,
     formState: { errors },
   } = useForm({
     resolver: yupResolver(loginSchema),
@@ -34,8 +35,10 @@ const Login = () => {
   const onSubmit = async (user) => {
     const result = await logInWithEmailAndPassword(user);
 
-    if (result.error.code) {
+    if (result.error !== '') {
       setFormError(true);
+      result.error = ''
+      reset()
     } else {
       setFormError(false);
       try {
@@ -98,13 +101,6 @@ const Login = () => {
                       </span>
                     </p>
                   )}
-                  {errors.emailError && (
-                    <p className="mt-2 text-sm text-red-600 dark:text-red-500">
-                      <span className=" font-medium">
-                        {t(`${errors.emailError?.message}`)}
-                      </span>
-                    </p>
-                  )}
                 </label>
               </div>
               <div>
@@ -125,13 +121,6 @@ const Login = () => {
                     <p className="mt-2 text-sm text-red-600 dark:text-red-500">
                       <span className=" font-medium">
                         {t(`${errors.password?.message}`)}
-                      </span>
-                    </p>
-                  )}
-                  {errors.passwordError && (
-                    <p className="mt-2 text-sm text-red-600 dark:text-red-500">
-                      <span className=" font-medium">
-                        {t(`${errors.passwordError?.message}`)}
                       </span>
                     </p>
                   )}
