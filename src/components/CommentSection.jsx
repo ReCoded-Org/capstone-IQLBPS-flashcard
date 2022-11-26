@@ -1,3 +1,4 @@
+import { useTranslation } from 'react-i18next';
 import { useEffect, useState } from 'react';
 import { v4 as uuidv4 } from 'uuid';
 import { getComments } from '../services/comment';
@@ -6,7 +7,7 @@ import CommentPost from './CommentPost';
 
 export default function CommentsSection({ commentId }) {
   const [comments, setComments] = useState();
-
+  const { t } = useTranslation();
   useEffect(() => {
     async function fetchComments() {
       const thisSetComments = await getComments(commentId);
@@ -20,7 +21,7 @@ export default function CommentsSection({ commentId }) {
       <div className="max-w-2xl mx-auto px-4">
         <div className="flex justify-between items-center mb-6">
           <h2 className="text-lg lg:text-2xl font-bold text-gray-900 dark:text-white">
-            Comments
+            {t("Comments")}
           </h2>
         </div>
         {comments ? (
@@ -40,9 +41,9 @@ export default function CommentsSection({ commentId }) {
           })
         ) : (
           <p className="italic text-slate-400 dark:text-slate-600">
-            there are no comments for this set <br />{' '}
+            {t("there are no comments for this set")} <br />{' '}
             <span className="font-bold text-slate-600	dark:text-slate-400">
-              be the first !!!
+              {t("be the first !!!")}
             </span>
           </p>
         )}

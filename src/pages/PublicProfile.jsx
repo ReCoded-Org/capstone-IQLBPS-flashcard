@@ -1,10 +1,12 @@
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 import Card from '../components/Card';
 
 import { fetchUserInfo, fetchUserSets } from '../services/user';
 
 export default function PublicProfile() {
+  const { t } = useTranslation();
   const { id } = useParams();
   const [user, setUser] = useState(null);
   const [cardSet, setCardSet] = useState([]);
@@ -49,7 +51,7 @@ export default function PublicProfile() {
 
         <div className=" max-w-screen-xl text-left mx-auto ">
           <h2 className="mb-4 mx-5 text-2xl tracking-tight font-extrabold text-gray-900 dark:text-white">
-            {user.displayName} sets
+            {user.displayName} {t("sets")}
           </h2>
           <hr className="mx-5 max-w-screen-xl" />
         </div>

@@ -1,10 +1,11 @@
-import { t } from 'i18next';
+import { useTranslation } from 'react-i18next';
 import React, { useRef } from 'react';
 import { useForm } from 'react-hook-form';
 
 import sendEmail from '../services/contact';
 
 const Contact = () => {
+  const { t } = useTranslation();
   const {
     register,
     formState: { errors },

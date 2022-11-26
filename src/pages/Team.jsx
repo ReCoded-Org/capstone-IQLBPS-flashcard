@@ -1,9 +1,10 @@
-import { t } from 'i18next';
+import { useTranslation } from 'react-i18next';
 import React from 'react';
 import TeamMember from '../components/TeamMember';
 import { teamInfo } from '../services/TeamInfo';
 
 const Team = () => {
+  const { t } = useTranslation();
   return (
     <section className="bg-white dark:bg-gray-900">
       <div className="py-8 px-4 mx-auto max-w-screen-xl text-center lg:py-16 lg:px-6">

@@ -1,4 +1,7 @@
+import { useTranslation } from 'react-i18next';
+
 function FeaturePoints({ features }) {
+  const { t } = useTranslation();
   return (
     <div className="bg-amber-100 shadow-lg py-12 mx-auto mb-20 z-0 hover:z-10 max-w-6xl block rounded-lg h-1/6">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
@@ -11,11 +14,11 @@ function FeaturePoints({ features }) {
                     <img src={feature.icon} alt="" />
                   </div>
                   <p className="ml-16 text-lg font-medium leading-6 text-gray-900">
-                    {feature.name}
+                    {t(feature.name)}
                   </p>
                 </dt>
                 <dd className="mt-2 ml-16 text-base text-gray-500">
-                  {feature.description}
+                  {t(feature.description)}
                 </dd>
               </div>
             ))}

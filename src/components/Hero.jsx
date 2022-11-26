@@ -1,9 +1,9 @@
 import { Link } from "react-router-dom"
-import { t } from 'i18next';
+import { useTranslation } from 'react-i18next';
 import card from '../assets/Cards.gif'
 
 export default function Hero(){
-
+    const { t } = useTranslation();
 
 return(
     <section className="bg-primary dark:bg-gray-900">

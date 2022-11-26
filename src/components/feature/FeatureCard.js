@@ -1,6 +1,7 @@
-import { t } from "i18next";
+import { useTranslation } from 'react-i18next';
 
 function FeatureCard({ feature }) {
+  const { t } = useTranslation();
   return (
     <section className="bg-amber-100 shadow-lg mx-auto mb-20 z-0 hover:z-10 max-w-6xl block rounded-lg h-1/6">
       <div className="grid max-w-screen-xl px-4 py-8 mx-auto lg:gap-8 xl:gap-0 lg:py-16 lg:grid-cols-12">
