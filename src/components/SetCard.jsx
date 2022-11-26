@@ -1,5 +1,3 @@
-/* eslint-disable react/button-has-type */
-/* eslint-disable jsx-a11y/control-has-associated-label */
 import React, { useRef } from 'react';
 import Flippy, { FrontSide, BackSide } from 'react-flippy';
 
@@ -16,15 +14,19 @@ const SetCard = ({ front, back }) => {
         // and other props, which will go to div
         style={{ width: '200px', height: '200px' }} /// these are optional style, it is not necessary
       >
-        <FrontSide style={{ backgroundColor: 'white', curser:'pointer' }}>
+        <FrontSide style={{ backgroundColor: 'white', curser: 'pointer' }}>
           {front} <br />
+          {/* eslint-disable-next-line jsx-a11y/control-has-associated-label */}
           <button
+            type="button"
             onClick={() => {
               ref.current.toggle();
             }}
           />
         </FrontSide>
-        <BackSide style={{ backgroundColor: 'white' , curser:'pointer'}}>{back}</BackSide>
+        <BackSide style={{ backgroundColor: 'white', curser: 'pointer' }}>
+          {back}
+        </BackSide>
       </Flippy>
     </div>
     //
