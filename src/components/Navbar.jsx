@@ -10,6 +10,7 @@ import {
   Avatar,
 } from 'flowbite-react';
 import { useDispatch, useSelector } from 'react-redux';
+import { t } from 'i18next';
 
 import cardlogo from '../assets/feature/flashcardlogoalone.png';
 import { logOut } from '../services/user';
@@ -43,7 +44,7 @@ const Nav = () => {
       {!user && (
         <div className="flex space-x-4 md:order-2">
           <Link to="login">
-            <Button>Log in</Button>
+            <Button>{t("Log in")}</Button>
           </Link>
           <DarkThemeToggle />
         </div>
@@ -75,17 +76,17 @@ const Nav = () => {
               </span>
             </Dropdown.Header>
             <Dropdown.Item>Dashboard</Dropdown.Item>
-            <Dropdown.Item>Settings</Dropdown.Item>
+            <Dropdown.Item>{t("Settings")}</Dropdown.Item>
             <Dropdown.Item>Earnings</Dropdown.Item>
             <Dropdown.Divider />
-            <Dropdown.Item onClick={handleSignout}>Sign out</Dropdown.Item>
+            <Dropdown.Item onClick={handleSignout}>{t("Sign out")}</Dropdown.Item>
           </Dropdown>
           <Navbar.Toggle />
         </div>
       )}
       <Navbar.Collapse>
         <span onClick={useLinkClickHandler('/')}>
-          <Navbar.Link href="/">Home</Navbar.Link>
+          <Navbar.Link href="/">{t("Home")}</Navbar.Link>
         </span>
         <Dropdown
           arrowIcon={false}
@@ -93,7 +94,7 @@ const Nav = () => {
           label={
             <>
               <span className="text-gray-700 dark:text-gray-400 ">
-                Categories
+                {t("Categories")}
               </span>
               <svg
                 className="ml-1 w-5 h-5"
@@ -119,14 +120,14 @@ const Nav = () => {
         </Dropdown>
 
         <span onClick={useLinkClickHandler('about')}>
-          <Navbar.Link href="about">About</Navbar.Link>
+          <Navbar.Link href="about">{t("About")}</Navbar.Link>
         </span>
         <span onClick={useLinkClickHandler('contact')}>
-          <Navbar.Link href="contact">Contact</Navbar.Link>
+          <Navbar.Link href="contact">{t("Contact")}</Navbar.Link>
         </span>
 
         <span onClick={useLinkClickHandler('team')}>
-          <Navbar.Link href="team">Team</Navbar.Link>
+          <Navbar.Link href="team">{t("Team")}</Navbar.Link>
         </span>
       </Navbar.Collapse>
 
@@ -153,7 +154,7 @@ const Nav = () => {
               type="text"
               id="search-navbar"
               className="block p-2 pl-10 w-full text-gray-900 bg-gray-50 rounded-lg border border-gray-300 sm:text-sm focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-              placeholder="Search..."
+              placeholder={t("Search...")}
               onKeyDown={(e) =>
                 e.key === 'Enter' && navigate(`/search/${e.target.value}`)
               }

@@ -1,4 +1,5 @@
 
+import { t } from 'i18next';
 import React from 'react';
 import { Link } from 'react-router-dom';
 import LanguageSelector from './LanguageSelector';
@@ -11,27 +12,27 @@ const Footer = () => {
         <a href="https://flowbite.com/" className="hover:underline">
           Cardly™
         </a>
-        . All Rights Reserved.
+        . {t("All Rights Reserved.")}
       </span>
       <ul className="flex flex-wrap items-center mt-3 text-sm text-gray-500 dark:text-gray-400 sm:mt-0">
         <li>
           <Link to="/" className="mr-4 hover:underline md:mr-6 ">
-            About
+            {t("About")}
           </Link>
         </li>
         <li>
           <Link to="/" className="mr-4 hover:underline md:mr-6">
-            Privacy Policy
+            {t("Privacy Policy")}
           </Link>
         </li>
         <li>
           <Link to="/" className="mr-4 hover:underline md:mr-6">
-            Licensing
+            {t("Licensing")}
           </Link>
         </li>
         <li>
           <Link to="l" className="hover:underline">
-            Contact
+            {t("Contact")}
           </Link>
         </li>
         <li className=" ml-10 ">

@@ -1,6 +1,7 @@
 /* eslint-disable no-nested-ternary */
 import React, { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
+import { t } from 'i18next';
 
 import { ActiveUserSection } from '../components/user/ActiveUserSection';
 import { getFavoriteSets, latestAddedSets } from '../services/user';
@@ -42,13 +43,13 @@ const UserHome = () => {
           <Loading />
         )
       ) : (
-        <ActiveUserSection list={favoriteSets} title="Your Favorites" />
+        <ActiveUserSection list={favoriteSets} title={t("Your Favorites")} />
       )}
 
       {isLoadingLatest ? (
         <Loading />
       ) : (
-        <ActiveUserSection list={latestSets} title="Latest Sets" />
+        <ActiveUserSection list={latestSets} title={t("Latest Sets")} />
       )}
     </section>
   );
