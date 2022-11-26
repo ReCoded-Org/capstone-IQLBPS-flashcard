@@ -2,7 +2,7 @@ import { ref, uploadBytesResumable, getDownloadURL } from 'firebase/storage';
 
 import { storage } from './firebaseConfig';
 
-async function uploadImagePromise(image, bucket) {
+async function uploadFilePromise(image, bucket) {
   return new Promise((resolve, reject) => {
     const storageRef = ref(storage, `${bucket}/${image.name}`);
     const uploadTask = uploadBytesResumable(storageRef, image);
@@ -20,4 +20,4 @@ async function uploadImagePromise(image, bucket) {
   });
 }
 
-export default uploadImagePromise;
+export default uploadFilePromise;

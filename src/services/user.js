@@ -28,7 +28,7 @@ import {
   createUserWithEmailAndPassword,
   updateProfile,
 } from './firebaseConfig';
-import uploadImagePromise from './uploadImage';
+import uploadFilePromise from './uploadFile';
 
 const result = {
   user: {
@@ -161,7 +161,7 @@ export const updateUserName = async (userId, userName) => {
 };
 
 export const updateUserProfile = async (userId, image) => {
-  const url = await uploadImagePromise(image, 'images');
+  const url = await uploadFilePromise(image, 'images');
   const user = doc(db, 'users', userId);
   await updateDoc(user, { photoURL: url });
   await updateProfile(auth.currentUser, {

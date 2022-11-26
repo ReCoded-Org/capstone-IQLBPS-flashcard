@@ -1,32 +1,34 @@
-/* eslint-disable no-unused-expressions */
-/* eslint-disable react/destructuring-assignment */
 import { Fragment, useState } from 'react';
 import { Combobox, Transition } from '@headlessui/react';
 import { CheckIcon, ChevronUpDownIcon } from '@heroicons/react/20/solid';
 
-const ComboBox = (props) => {
-  const [selected, setSelected] = useState(props.data[0]);
+const ComboBox = ({ data, register, setCategory, newSet, errors, setId } ) => {
+  const [selected, setSelected] = useState([data[0]]);
   const [query, setQuery] = useState('');
 
   const filteredData =
     query === ''
-      ? props.data
-      : props.data.filter((el) =>
+      ?  data
+      :  data.filter((el) =>
           el.name
             .toLowerCase()
             .replace(/\s+/g, '')
             .includes(query.toLowerCase().replace(/\s+/g, ''))
         );
-
+      const onChange =(set)=>{
+        setId(set.id);
+        setSelected(set);
+      }
   return (
     <div className="w-full">
-      <Combobox value={selected} onChange={setSelected}>
+      <Combobox value={selected} onChange={onChange}>
         <div className="relative mt-1">
           <div className="relative w-full cursor-default overflow-hidden rounded-lg bg-white text-left shadow-md focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75 focus-visible:ring-offset-2 focus-visible:ring-offset-teal-300 sm:text-sm">
             <Combobox.Input
               className="bg-gray-50 w-full border border-gray-300 py-2 pl-3 pr-10 text-sm leading-5 focus:ring-0"
               displayValue={(el) => el.name}
-              {...props.register('categories', {
+              placeholder = "Search for set"
+              {...register('categories', {
                 required: 'Please enter category',
               })}
               onChange={(event) => setQuery(event.target.value)}
@@ -63,7 +65,7 @@ const ComboBox = (props) => {
                     }
                     value={el}
                     onClick={(e) =>
-                      props.newSet && props.setCategory(e.target.outerText)
+                       newSet &&  setCategory(e.target.outerText)
                     }
                   >
                     {({ sel, active }) => (
@@ -75,7 +77,7 @@ const ComboBox = (props) => {
                         >
                           {el.name}
                         </span>
-                        {selected ? (
+                        {active ? (
                           <span
                             className={`absolute inset-y-0 left-0 flex items-center pl-3 ${
                               active ? 'text-white' : 'text-primary-600'
@@ -93,9 +95,9 @@ const ComboBox = (props) => {
           </Transition>
         </div>
       </Combobox>
-      {props.errors.categories && (
+      { errors.categories && (
         <div className="text-sm font-medium text-red-500">
-          {props.errors.categories.message}
+          { errors.categories.message}
         </div>
       )}
     </div>
