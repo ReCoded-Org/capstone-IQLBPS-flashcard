@@ -1,9 +1,8 @@
-/* eslint-disable react/destructuring-assignment */
 import { t } from 'i18next';
 import React from 'react';
 import ComboBox from './ComboBox';
 
-const SelectSet = ({handleFormVisibility ,sets, setId }) => {
+const SelectSet = ({ handleFormVisibility, sets, setId }) => {
   return (
     <div className="py-8 lg:py-16 px-4 mx-auto max-w-screen-md">
       <button
@@ -15,7 +14,7 @@ const SelectSet = ({handleFormVisibility ,sets, setId }) => {
       </button>
       <label htmlFor="sets" className="text-xl font-bold ml-2">
         {t('Choose From Current Sets')}
-        <ComboBox data={sets} register={() => {}} errors={{}} setId={setId}/>
+        <ComboBox data={sets} register={() => {}} errors={{}} setId={setId} />
       </label>
     </div>
   );
