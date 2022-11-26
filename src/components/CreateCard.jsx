@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import Alert from './alert/Alert';
 import CardInput from './SetCard/CardInput';
-import { CreateNewCard } from '../services/CardService';
+import { CreateNewCard } from '../services/card';
 import uploadFilePromise from '../services/uploadFile';
 
 function CreateCard({id}) {
