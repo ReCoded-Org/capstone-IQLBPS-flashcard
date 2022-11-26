@@ -64,6 +64,7 @@ const App = () => {
           <Route element={<ProtectedRoute />}>
             <Route path="profile" element={<Profile />} exact />
             <Route path="library" element={<Library />} exact />
+            <Route path="set/new" element={<CreateSet />} />
           </Route>
 
           <Route path="review" element={<Review />} />
@@ -71,7 +72,6 @@ const App = () => {
           <Route path="search" element={<Search />} />
           <Route path="search/:key" element={<Search />} />
           <Route path="user/:id" element={<PublicProfile />} />
-          <Route path='set/new' element={<CreateSet/>}/>
           <Route path="*" element={<NoMatch />} />
         </Route>
       </Routes>
