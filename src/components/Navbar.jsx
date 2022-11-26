@@ -14,6 +14,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import cardlogo from '../assets/feature/flashcardlogoalone.png';
 import { logOut } from '../services/user';
 import { logout } from '../features/user/userSlice';
+import { categoriesData } from '../services/constant';
 
 const Nav = () => {
   const { user } = useSelector((state) => state.user);
@@ -87,6 +88,7 @@ const Nav = () => {
         <span onClick={useLinkClickHandler('/')}>
           <Navbar.Link href="/">Home</Navbar.Link>
         </span>
+
         <Dropdown
           arrowIcon={false}
           inline
@@ -111,11 +113,13 @@ const Nav = () => {
             </>
           }
         >
-          <Dropdown.Item>Math</Dropdown.Item>
-          <Dropdown.Item>Science</Dropdown.Item>
-          <Dropdown.Item>Entertiment</Dropdown.Item>
-          <Dropdown.Item>History</Dropdown.Item>
-          <Dropdown.Item>Geography</Dropdown.Item>
+          {categoriesData.map((category) => (
+            <Dropdown.Item key={category.id}>
+              <Link to={`/search/${category.name.toLowerCase()}`}>
+                {category.name}
+              </Link>
+            </Dropdown.Item>
+          ))}
         </Dropdown>
 
         <span onClick={useLinkClickHandler('about')}>
