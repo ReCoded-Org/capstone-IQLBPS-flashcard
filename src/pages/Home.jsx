@@ -6,6 +6,7 @@ import {
   LEARNING_FEATURES,
   WEBSITE_FEATURES,
 } from '../assets/feature/Features';
+import UserFeedback from '../components/UserFeedback';
 
 const Home = () => {
   return (
@@ -19,6 +20,11 @@ const Home = () => {
       <div className="bg-primary dark:bg-gray-900 py-20">
         <FeaturePoints features={WEBSITE_FEATURES} />
       </div>
+
+
+<UserFeedback/>
+
+    
     </div>
   );
 };
