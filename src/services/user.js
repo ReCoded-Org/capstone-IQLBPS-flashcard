@@ -4,7 +4,6 @@ import {
   signInWithEmailAndPassword,
   sendPasswordResetEmail,
   getAuth,
-
 } from 'firebase/auth';
 import {
   updateDoc,
@@ -28,7 +27,7 @@ import {
   createUserWithEmailAndPassword,
   updateProfile,
 } from './firebaseConfig';
-import uploadImagePromise from './uploadImage';
+import uploadFilePromise from './uploadFile';
 
 const result = {
   user: {
@@ -161,7 +160,7 @@ export const updateUserName = async (userId, userName) => {
 };
 
 export const updateUserProfile = async (userId, image) => {
-  const url = await uploadImagePromise(image, 'images');
+  const url = await uploadFilePromise(image, 'images');
   const user = doc(db, 'users', userId);
   await updateDoc(user, { photoURL: url });
   await updateProfile(auth.currentUser, {
@@ -199,7 +198,7 @@ export async function fetchSetsById(arrayOfSets) {
     arrayOfSets.map(async (id) => {
       const docRef = doc(db, 'sets', id);
       const docSnap = await getDoc(docRef);
-      return docSnap.data();
+      return { ...docSnap.data(), id };
     })
   );
   return sets;

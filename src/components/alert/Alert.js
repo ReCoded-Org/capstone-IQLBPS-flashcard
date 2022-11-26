@@ -13,6 +13,9 @@ export default function Alert({ type, title }) {
     case 'success':
       color='green';
       break;
+    case 'warning':
+      color='yellow';
+      break;
     default:
       break;
   }

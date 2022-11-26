@@ -9,7 +9,6 @@ const SetInfo = ({ setsDescription, setphotoUrl, setName, setID }) => {
   // const [value, setValue] = useState(2);
   const { t } = useTranslation();
   const setRatingValue = 4;
-
   const [inLibrary, setInLibrary] = useState();
   const { user } = useSelector((state) => state.user);
 

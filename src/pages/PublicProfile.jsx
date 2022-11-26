@@ -1,9 +1,10 @@
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
+import { v4 as uuidv4 } from 'uuid';
 import { useTranslation } from 'react-i18next';
 import Card from '../components/Card';
 
-import { fetchUserInfo, fetchUserSets } from '../services/user';
+import { fetchUserInfo, fetchSetsById } from '../services/user';
 
 export default function PublicProfile() {
   const { t } = useTranslation();
@@ -22,7 +23,7 @@ export default function PublicProfile() {
   useEffect(() => {
     async function handleFetchUserSets() {
       if (user) {
-        const userSets = await fetchUserSets(user.id);
+        const userSets = await fetchSetsById(user.sets);
         setCardSet(userSets);
       }
     }
@@ -62,7 +63,7 @@ export default function PublicProfile() {
               ? cardSet.map((set) => {
                   return (
                     <Card
-                      key={set.id}
+                      key={uuidv4()}
                       id={set.id}
                       coverImage={set.image}
                       title={set.name}

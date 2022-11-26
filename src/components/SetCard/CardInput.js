@@ -3,9 +3,8 @@ import FileBox from './FileBox';
 import TextArea from './TextArea';
 import UploadFile from './UploadFile';
 
-function CardInput({ handleError }) {
+function CardInput({ handleError, handleData }) {
   const [file, setFile] = useState();
-  const [text, setText] = useState('');
 
   const [textFormat, setTextFormat] = useState({
     italic: false,
@@ -16,9 +15,12 @@ function CardInput({ handleError }) {
   const [uploader, setUploader] = useState(false);
   const [isUploaded, setIsUploaded] = useState(false);
 
-  const handleText = (e) =>{
-    setText(e.target.value);
-  }
+  const handleText = (e) => {
+    handleData({
+      type: 'text',
+      data: `<span style="${e.target.style.cssText}">${e.target.value}</span>`,
+    });
+  };
   const handleFormat = (key) => {
     if (uploader === false) {
       setTextFormat((prev) => {
@@ -34,10 +36,9 @@ function CardInput({ handleError }) {
 
   const uploadFile = (e) => {
     const uploadedFile = e.target.files[0];
-
     if (
       !uploadedFile.type.includes('image') &&
-      !uploadedFile.type.includes('mp3')
+      !uploadedFile.type.includes('audio')
     ) {
       handleError({
         type: 'error',
@@ -46,6 +47,10 @@ function CardInput({ handleError }) {
       return;
     }
     setFile(uploadedFile);
+    handleData({
+      type: uploadedFile.type.includes('image') ? 'image' : 'audio',
+      data: uploadedFile,
+    });
     setUploader(false);
     setIsUploaded(true);
   };
@@ -209,7 +214,9 @@ function CardInput({ handleError }) {
           </div>
         </div>
         <div className="py-2 px-4 bg-white rounded-b-lg dark:bg-gray-800  ">
-          {!uploader && !isUploaded && <TextArea textFormat={textFormat} handleText={handleText} />}
+          {!uploader && !isUploaded && (
+            <TextArea textFormat={textFormat} handleText={handleText} />
+          )}
 
           {uploader && <UploadFile uploadFile={uploadFile} />}
 

@@ -1,21 +1,23 @@
 import { addDoc, collection, doc, getDoc } from 'firebase/firestore';
 
-import uploadImagePromise from './uploadImage';
+import uploadFilePromise from './uploadFile';
 import { db } from './firebaseConfig';
 
 export const SetHeader = async (
   setName,
   setImage,
   setDescription,
-  setCategories
+  setCategories,
+  user
 ) => {
-  const url = await uploadImagePromise(setImage, 'set');
+  const url = await uploadFilePromise(setImage, 'set');
   const setsCollecion = collection(db, 'sets');
   const docRef = await addDoc(setsCollecion, {
     name: setName,
     image: url,
     description: setDescription,
     categories: setCategories,
+    user: { name: user.displayName, id: user.uid, photoURL: user.photoURL },
   });
   return docRef.id;
 };

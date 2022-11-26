@@ -1,22 +1,17 @@
-/* eslint-disable react/jsx-boolean-value */
 import { useState } from 'react';
 import { t } from 'i18next';
 import { useForm } from 'react-hook-form';
+import { useSelector } from 'react-redux';
+
 import ComboBox from './ComboBox';
 import { SetHeader } from '../../services/sets';
+import { categoriesData } from '../../services/constant';
 
-const categoriesData = [
-  { id: 1, name: 'Science' },
-  { id: 2, name: 'Medical & Nursing' },
-  { id: 3, name: 'Health & Fitness' },
-  { id: 4, name: 'Business & Finance' },
-  { id: 5, name: 'Technology & Engineering' },
-  { id: 6, name: 'Random Knowledge' },
-  { id: 7, name: 'Languages' },
-  { id: 8, name: 'Exams' },
-];
+
 
 const AddSet = ({ setId, handleFormVisibility, onAddingSet }) => {
+  const { user } = useSelector((state) => state.user);
+
   const {
     register,
     handleSubmit,
@@ -27,19 +22,21 @@ const AddSet = ({ setId, handleFormVisibility, onAddingSet }) => {
 
   const formSubmitHandler = async (data) => {
     handleFormVisibility();
+    const id = await SetHeader(
+      data.name,
+      data.image[0],
+      data.description,
+      category,
+      user
+    );
     onAddingSet({
-      id: Math.floor(Math.random() * 1000),
+       id,
       name: data.name,
       image: data.image,
       description: data.description,
       categories: category,
     });
-    const id = await SetHeader(
-      data.name,
-      data.image[0],
-      data.description,
-      category
-    );
+
     setId(id);
   };
 
@@ -114,8 +111,9 @@ const AddSet = ({ setId, handleFormVisibility, onAddingSet }) => {
             data={categoriesData}
             register={register}
             errors={errors}
-            newSet={true}
+            newSet
             setCategory={setCategory}
+            setId={() => {} }
           />
         </div>
         <button

@@ -25,6 +25,7 @@ import ProtectedRoute from './components/ProtectedRoute';
 import FirebaseAuthContext from './context/FirebaseAuthContext';
 import Search from './pages/Search';
 import Reset from './pages/Reset';
+import CreateSet from './pages/CreateSet'
 
 const App = () => {
   const user = useSelector(selectUser);
@@ -63,6 +64,7 @@ const App = () => {
           <Route element={<ProtectedRoute />}>
             <Route path="profile" element={<Profile />} exact />
             <Route path="library" element={<Library />} exact />
+            <Route path="set/new" element={<CreateSet />} />
           </Route>
 
           <Route path="review" element={<Review />} />

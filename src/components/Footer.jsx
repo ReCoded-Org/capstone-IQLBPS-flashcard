@@ -36,11 +36,8 @@ const Footer = () => {
           </Link>
         </li>
         <li className=" ml-10 ">
-
-        <LanguageSelector />
-
+          <LanguageSelector />
         </li>
-
       </ul>
     </footer>
   );
