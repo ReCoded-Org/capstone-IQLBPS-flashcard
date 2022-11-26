@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import ReactHtmlParser from 'react-html-parser';
+import { useParams } from 'react-router-dom';
 import Alert from '../../components/alert/Alert';
 import CardInput from '../../components/SetCard/CardInput';
 import { CreateNewCard } from '../../services/CardService';
@@ -7,13 +7,14 @@ import uploadFilePromise from '../../services/uploadFile';
 
 function CreateCard() {
   const [alert, setAlert] = useState({ type: '', title: '' });
-  const [isError, setIsError] = useState(false);
+  const [showAlert, setShowAlert] = useState(false);
   const [frontCard, setFrontCard] = useState({ type: '', data: null });
   const [backCard, setBackCard] = useState({ type: '', data: null });
+  const setId = useParams();
 
-  const handleError = (error) => {
-    setIsError(true);
-    setTimeout(() => setIsError(false), 2500);
+  const handleAlert = (error) => {
+    setShowAlert(true);
+    setTimeout(() => setShowAlert(false), 2500);
     setAlert(error);
   };
 
@@ -31,53 +32,40 @@ function CreateCard() {
     }
   }
   async function processCardData() {
+    const frontObj = frontCard;
+    const backObj = backCard;
     if (frontCard.type !== 'text') {
-     const link = await uploadFilePromise(frontCard.data, frontCard.type)
-        console.log('from set state');
-        setFrontCard((prev) => {
-         // console.log(result);
-
-          // console.log('linkkkkk', link)
-          return { ...prev, data: link };
-        });
-    
+      frontObj.data = await uploadFilePromise(frontCard.data, frontCard.type);
     }
     if (backCard.type !== 'text') {
-      setBackCard(async (prev) => {
-        return {
-          ...prev,
-          data: await uploadFilePromise(backCard.data, backCard.type),
-        };
-      });
+      backObj.data = await uploadFilePromise(frontCard.data, frontCard.type);
     }
+    return { frontObj, backObj };
   }
 
   const handleCreateCard = async () => {
     try {
       validateDataCard();
-      await processCardData();
-      await CreateNewCard(frontCard, backCard);
-      handleError({ type: 'success', title: 'New card created successfully' });
+      const { frontObj, backObj } = await processCardData();
+      await CreateNewCard(setId.id, frontObj, backObj);
+
+      handleAlert({ type: 'success', title: 'New card created successfully' });
     } catch (error) {
-      handleError({ type: 'error', title: `${error.message}` });
+      handleAlert({ type: 'error', title: `${error.message}` });
     }
   };
-
-  function textData() {
-    return <div>{ReactHtmlParser(frontCard.data)}</div>;
-  }
   return (
     <div>
-      {isError && <Alert type={alert.type} title={alert.title} />}
+      {showAlert && <Alert type={alert.type} title={alert.title} />}
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4 m-16 ">
         <CardInput
           key={1}
-          handleError={handleError}
+          handleError={handleAlert}
           handleData={handleFrontCardData}
         />
         <CardInput
           key={2}
-          handleError={handleError}
+          handleError={handleAlert}
           handleData={handleBackCardData}
         />
       </div>
@@ -95,7 +83,6 @@ function CreateCard() {
         >
           Create new card
         </button>
-        {textData()}
       </div>
     </div>
   );

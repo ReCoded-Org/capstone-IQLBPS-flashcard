@@ -5,7 +5,6 @@ import UploadFile from './UploadFile';
 
 function CardInput({ handleError, handleData }) {
   const [file, setFile] = useState();
- // const [text, setText] = useState('');
 
   const [textFormat, setTextFormat] = useState({
     italic: false,
@@ -16,23 +15,19 @@ function CardInput({ handleError, handleData }) {
   const [uploader, setUploader] = useState(false);
   const [isUploaded, setIsUploaded] = useState(false);
 
-  const handleText = (e) =>{
-    console.log(e.target.style.cssText)
-    console.log(e.target)
-    
-   
-    handleData({type: 'text', data: `<span style="${e.target.style.cssText}">${e.target.value}</span>`});
-   
-  }
+  const handleText = (e) => {
+    handleData({
+      type: 'text',
+      data: `<span style="${e.target.style.cssText}">${e.target.value}</span>`,
+    });
+  };
   const handleFormat = (key) => {
     if (uploader === false) {
       setTextFormat((prev) => {
         return { ...prev, [key]: !prev[key] };
       });
     }
-   // handleText(text);
     setUploader(false);
-   // console.log(text);
   };
 
   const handleUploader = () => {
@@ -41,7 +36,6 @@ function CardInput({ handleError, handleData }) {
 
   const uploadFile = (e) => {
     const uploadedFile = e.target.files[0];
-console.log(uploadedFile);
     if (
       !uploadedFile.type.includes('image') &&
       !uploadedFile.type.includes('audio')
@@ -53,8 +47,10 @@ console.log(uploadedFile);
       return;
     }
     setFile(uploadedFile);
-    handleData({type : uploadedFile.type.includes('image')?'image': 'audio'
-    , data: uploadedFile});
+    handleData({
+      type: uploadedFile.type.includes('image') ? 'image' : 'audio',
+      data: uploadedFile,
+    });
     setUploader(false);
     setIsUploaded(true);
   };
@@ -218,7 +214,9 @@ console.log(uploadedFile);
           </div>
         </div>
         <div className="py-2 px-4 bg-white rounded-b-lg dark:bg-gray-800  ">
-          {!uploader && !isUploaded && <TextArea textFormat={textFormat} handleText={handleText} />}
+          {!uploader && !isUploaded && (
+            <TextArea textFormat={textFormat} handleText={handleText} />
+          )}
 
           {uploader && <UploadFile uploadFile={uploadFile} />}
 

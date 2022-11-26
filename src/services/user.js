@@ -19,7 +19,7 @@ import {
   createUserWithEmailAndPassword,
   updateProfile,
 } from './firebaseConfig';
-import uploadImagePromise from './uploadImage';
+import uploadFilePromise from './uploadFile';
 
 const result = {
   user: {

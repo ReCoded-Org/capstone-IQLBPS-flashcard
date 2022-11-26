@@ -1,6 +1,6 @@
 import { addDoc, collection, doc, getDoc } from 'firebase/firestore';
 
-import uploadImagePromise from './uploadImage';
+import uploadFilePromise from './uploadFile';
 import { db } from './firebaseConfig';
 
 export const SetHeader = async (
@@ -9,7 +9,7 @@ export const SetHeader = async (
   setDescription,
   setCategories
 ) => {
-  const url = await uploadImagePromise(setImage, 'set');
+  const url = await uploadFilePromise(setImage, 'set');
   const setsCollecion = collection(db, 'sets');
   const docRef = await addDoc(setsCollecion, {
     name: setName,
