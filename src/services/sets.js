@@ -7,7 +7,8 @@ export const SetHeader = async (
   setName,
   setImage,
   setDescription,
-  setCategories
+  setCategories,
+  user
 ) => {
   const url = await uploadFilePromise(setImage, 'set');
   const setsCollecion = collection(db, 'sets');
@@ -16,6 +17,7 @@ export const SetHeader = async (
     image: url,
     description: setDescription,
     categories: setCategories,
+    user: { name: user.displayName, id: user.uid, photoURL: user.photoURL },
   });
   return docRef.id;
 };

@@ -1,16 +1,14 @@
 import { useState } from 'react';
-import { useParams } from 'react-router-dom';
-import Alert from '../../components/alert/Alert';
-import CardInput from '../../components/SetCard/CardInput';
-import { CreateNewCard } from '../../services/CardService';
-import uploadFilePromise from '../../services/uploadFile';
+import Alert from './alert/Alert';
+import CardInput from './SetCard/CardInput';
+import { CreateNewCard } from '../services/CardService';
+import uploadFilePromise from '../services/uploadFile';
 
-function CreateCard() {
+function CreateCard({id}) {
   const [alert, setAlert] = useState({ type: '', title: '' });
   const [showAlert, setShowAlert] = useState(false);
   const [frontCard, setFrontCard] = useState({ type: '', data: null });
   const [backCard, setBackCard] = useState({ type: '', data: null });
-  const setId = useParams();
 
   const handleAlert = (error) => {
     setShowAlert(true);
@@ -44,10 +42,14 @@ function CreateCard() {
   }
 
   const handleCreateCard = async () => {
+    if(id === null){
+      handleAlert({ type: 'error', title: "There is no set selected" })
+      return
+    }
     try {
       validateDataCard();
       const { frontObj, backObj } = await processCardData();
-      await CreateNewCard(setId.id, frontObj, backObj);
+      await CreateNewCard(id, frontObj, backObj);
 
       handleAlert({ type: 'success', title: 'New card created successfully' });
     } catch (error) {

@@ -25,7 +25,7 @@ import ProtectedRoute from './components/ProtectedRoute';
 import FirebaseAuthContext from './context/FirebaseAuthContext';
 import Search from './pages/Search';
 import Reset from './pages/Reset';
-import CreateCard from './pages/SetPages/CreateCard';
+import CreateSet from './pages/CreateSet'
 
 const App = () => {
   const user = useSelector(selectUser);
@@ -71,7 +71,7 @@ const App = () => {
           <Route path="search" element={<Search />} />
           <Route path="search/:key" element={<Search />} />
           <Route path="user/:id" element={<PublicProfile />} />
-          <Route path='set/:id/newCard' element={<CreateCard/>}/>
+          <Route path='set/new' element={<CreateSet/>}/>
           <Route path="*" element={<NoMatch />} />
         </Route>
       </Routes>
