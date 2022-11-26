@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { Link } from 'react-router-dom';
 import LanguageSelector from './LanguageSelector';
@@ -35,11 +34,8 @@ const Footer = () => {
           </Link>
         </li>
         <li className=" ml-10 ">
-
-        <LanguageSelector />
-
+          <LanguageSelector />
         </li>
-
       </ul>
     </footer>
   );

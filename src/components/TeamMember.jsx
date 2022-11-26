@@ -1,10 +1,10 @@
 import React from 'react';
 
-const TeamMember = ({name, image, position, social}) => {
+const TeamMember = ({ name, image, position, social }) => {
   const { github, twitter } = social;
 
   return (
-    <div  className="text-center text-gray-500 dark:text-gray-400 ">
+    <div className="text-center text-gray-500 dark:text-gray-400 ">
       <img
         className="mx-auto mb-4 w-34 h-36 rounded-lg"
         src={image}
