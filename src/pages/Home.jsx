@@ -1,6 +1,8 @@
 import React from 'react';
 import FeaturePoints from '../components/feature/FeaturePoints';
 import FeatureCard from '../components/feature/FeatureCard';
+import UserFeedback from '../components/feature/UserFeedback';
+
 import Hero from '../components/Hero';
 import {
   LEARNING_FEATURES,
@@ -19,6 +21,10 @@ const Home = () => {
       <div className="bg-primary dark:bg-gray-900 py-20">
         <FeaturePoints features={WEBSITE_FEATURES} />
       </div>
+
+
+<UserFeedback/>
+    
     </div>
   );
 };
