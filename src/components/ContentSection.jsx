@@ -7,7 +7,6 @@ import SetCard from './SetCard';
 import { fetchCardsFromSet } from '../services/sets';
 import Loading from './Loading';
 
-
 function ContentSection({ setsCards }) {
   const { t } = useTranslation();
   const [cards, setCards] = useState(setsCards);
@@ -28,14 +27,18 @@ function ContentSection({ setsCards }) {
   return (
     <div className="lg:max-w-5xl md:w-full mx-auto mt-20">
       <h2 className="text-lg lg:text-2xl font-bold text-gray-900 dark:text-white mb-2">
-        {t("Set&#39;s cards")}
+        {t('Set&#39;s cards')}
       </h2>
       {isLoading ? (
         <Loading />
       ) : (
         <SetCarousel>
           {cards.map((card) => (
-            <SetCard key={uuidv4()} front={card.title} back={card.back} />
+            <SetCard
+              key={uuidv4()}
+              front={card.frontData || card.front}
+              back={card.backData || card.back}
+            />
           ))}
         </SetCarousel>
       )}
