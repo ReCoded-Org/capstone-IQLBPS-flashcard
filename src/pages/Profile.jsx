@@ -9,13 +9,13 @@ import {
   updateUserProfile,
 } from '../services/user';
 
+import DefaultProfile from '../assets/Default_profile.jpg';
+
 export default function Profile() {
   const { user } = useSelector((state) => state.user);
   const { t } = useTranslation();
 
-  const myPlaceHolderImage = !user.photoURL
-    ? 'https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460__480.png'
-    : user.photoURL;
+  const myPlaceHolderImage = !user.photoURL ? DefaultProfile : user.photoURL;
   const myPlaceHolderUser = user.displayName;
 
   const [userSets, setUserSets] = useState([]);
@@ -25,13 +25,12 @@ export default function Profile() {
     const getUserSets = async () => {
       const sets = await fetchSetsById(user.sets);
       setUserSets(sets);
-
       if (sets !== 0) setLoadingSets(false);
       else setLoadingSets(true);
     };
 
     getUserSets();
-  }, []);
+  }, [user.sets]);
 
   const [popUpState, setPopUpState] = useState('hidden');
 
@@ -73,7 +72,7 @@ export default function Profile() {
               type="button"
               onClick={handlePopUp}
             >
-              {t("Edit Profile")}
+              {t('Edit Profile')}
             </button>
           </div>
         </div>
@@ -81,7 +80,7 @@ export default function Profile() {
       <br />
       <div className=" max-w-screen-xl text-left mx-auto ">
         <h2 className="mb-4 mx-5 text-2xl tracking-tight font-extrabold text-gray-900 dark:text-white">
-          {myPlaceHolderUser} {t("sets")}
+          {myPlaceHolderUser} {t('sets')}
         </h2>
         <hr className="mx-5 max-w-screen-xl" />
       </div>
@@ -153,7 +152,7 @@ function PopUp({ popUpState, userName, myImage, handlePopUp }) {
           <div className="relative p-4 bg-white rounded-lg shadow dark:bg-gray-800 sm:p-5">
             <div className="flex justify-between items-center pb-4 mb-4 rounded-t border-b sm:mb-5 dark:border-gray-600">
               <h3 className="text-lg font-semibold text-gray-900 dark:text-white">
-                {t("Change Info")}
+                {t('Change Info')}
               </h3>
               <button
                 type="button"
@@ -228,7 +227,7 @@ function PopUp({ popUpState, userName, myImage, handlePopUp }) {
                     htmlFor="name"
                     className="block my-2 text-sm font-medium text-gray-900 dark:text-white"
                   >
-                    {t("Change Username")}
+                    {t('Change Username')}
                     <input
                       onChange={handleUserName}
                       type="text"
@@ -248,7 +247,7 @@ function PopUp({ popUpState, userName, myImage, handlePopUp }) {
                   type="button"
                   className="py-2 px-4 w-full text-sm font-medium text-center text-white rounded-lg bg-red-700 sm:w-auto hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-800"
                 >
-                  {t("Cancel Changes")}
+                  {t('Cancel Changes')}
                 </button>
                 <button
                   onClick={handleSave}
@@ -256,7 +255,7 @@ function PopUp({ popUpState, userName, myImage, handlePopUp }) {
                   type="submit"
                   className="py-2 px-4 w-full text-sm font-medium text-center text-white rounded-lg bg-primary-700 sm:w-auto hover:bg-primary-800 focus:ring-4 focus:outline-none focus:ring-primary-300 dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800"
                 >
-                  {t("Confirm Changes")}
+                  {t('Confirm Changes')}
                 </button>
               </div>
             </form>

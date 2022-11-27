@@ -6,7 +6,7 @@ import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { useDispatch } from 'react-redux';
 
-import { logInWithEmailAndPassword } from '../services/user';
+import { fetchUserInfo, logInWithEmailAndPassword } from '../services/user';
 import { login } from '../features/user/userSlice';
 import GoogleSignInButton from '../components/GoogleSignInButton';
 
@@ -37,17 +37,20 @@ const Login = () => {
 
     if (result.error !== '') {
       setFormError(true);
-      result.error = ''
-      reset()
+      result.error = '';
+      reset();
     } else {
       setFormError(false);
       try {
+        const userInfo = await fetchUserInfo(result.user.uid);
         dispatch(
           login({
             email: result.user.email,
             uid: result.user.uid,
-            displayName: result.user.username,
-            photoUrl: result.user.photoURL,
+            displayName: userInfo.displayName,
+            photoURL: userInfo.photoURL,
+            sets: userInfo.sets,
+            favSets: userInfo.favSets,
           })
         );
         navigate('/');
@@ -85,7 +88,7 @@ const Login = () => {
                   htmlFor="email"
                   className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
                 >
-                 {t( "Your email")}
+                  {t('Your email')}
                   <input
                     type="email"
                     name="email"
@@ -108,7 +111,7 @@ const Login = () => {
                   htmlFor="password"
                   className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
                 >
-                  {t("Password")}
+                  {t('Password')}
                   <input
                     type="password"
                     name="password"
@@ -137,7 +140,7 @@ const Login = () => {
                 type="submit"
                 className="w-full text-white bg-primary-600 hover:bg-primary-700 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800"
               >
-                {t("Sign in")}
+                {t('Sign in')}
               </button>
               <GoogleSignInButton />
               <p className="text-sm font-light text-gray-500 dark:text-gray-400">
@@ -146,7 +149,7 @@ const Login = () => {
                   to="/signup"
                   className="font-medium text-primary-600 hover:underline dark:text-primary-500"
                 >
-                  {t("Sign up")}
+                  {t('Sign up')}
                 </Link>
               </p>
               <p className="text-sm font-light text-gray-500 dark:text-gray-400">
@@ -155,7 +158,7 @@ const Login = () => {
                   to="/reset"
                   className="font-medium text-primary-600 hover:underline dark:text-primary-500"
                 >
-                  {t("Reset Password")}
+                  {t('Reset Password')}
                 </Link>
               </p>
             </form>

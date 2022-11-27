@@ -5,7 +5,7 @@ import { onAuthStateChanged } from 'firebase/auth';
 import { useDispatch, useSelector } from 'react-redux';
 import { auth } from './services/firebaseConfig';
 import { login, logout, selectUser } from './features/user/userSlice';
-
+import { fetchUserInfo } from './services/user';
 import Home from './pages/Home';
 import About from './pages/About';
 import Contact from './pages/Contact';
@@ -25,28 +25,38 @@ import ProtectedRoute from './components/ProtectedRoute';
 import FirebaseAuthContext from './context/FirebaseAuthContext';
 import Search from './pages/Search';
 import Reset from './pages/Reset';
-import CreateSet from './pages/CreateSet'
+import CreateSet from './pages/CreateSet';
 
 const App = () => {
   const user = useSelector(selectUser);
   const dispatch = useDispatch();
 
   useEffect(() => {
-    onAuthStateChanged(auth, (userAuth) => {
+    const getUserInfo = async (id) => {
+      const userInfo = await fetchUserInfo(id);
+      return userInfo;
+    };
+    const unsubscribe = onAuthStateChanged(auth, async (userAuth) => {
       if (userAuth) {
         // user is logged in, send the user's details to redux, store the current user in the state
+        const userInfo = await getUserInfo(userAuth.uid);
         dispatch(
           login({
             email: userAuth.email,
             uid: userAuth.uid,
             displayName: userAuth.displayName,
             photoURL: userAuth.photoURL,
+            sets: userInfo.sets,
+            favSets: userInfo.favSets,
           })
         );
       } else {
         dispatch(logout());
       }
     });
+    return () => {
+      unsubscribe();
+    };
   }, []);
 
   return (
