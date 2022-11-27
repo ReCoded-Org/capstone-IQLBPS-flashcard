@@ -11,11 +11,11 @@ import {
 } from 'flowbite-react';
 import { useDispatch, useSelector } from 'react-redux';
 import { t } from 'i18next';
-
 import cardlogo from '../assets/feature/flashcardlogoalone.png';
 import { logOut } from '../services/user';
 import { logout } from '../features/user/userSlice';
 import { categoriesData } from '../services/constant';
+import defaultProfile from '../assets/Default_profile.jpg';
 
 const Nav = () => {
   const { user } = useSelector((state) => state.user);
@@ -45,7 +45,7 @@ const Nav = () => {
       {!user && (
         <div className="flex space-x-4 md:order-2">
           <Link to="login">
-            <Button>{t("Log in")}</Button>
+            <Button>{t('Log in')}</Button>
           </Link>
           <DarkThemeToggle />
         </div>
@@ -61,11 +61,7 @@ const Nav = () => {
             label={
               <Avatar
                 alt="User settings"
-                img={
-                  user.photoUrl
-                    ? user.photoUrl
-                    : 'https://flowbite.com/docs/images/people/profile-picture-5.jpg'
-                }
+                img={user.photoUrl ? user.photoUrl : defaultProfile}
                 rounded
               />
             }
@@ -76,18 +72,23 @@ const Nav = () => {
                 {user.email}{' '}
               </span>
             </Dropdown.Header>
-            <Dropdown.Item>Dashboard</Dropdown.Item>
-            <Dropdown.Item>{t("Settings")}</Dropdown.Item>
-            <Dropdown.Item>Earnings</Dropdown.Item>
+            <Link to="/profile">
+              <Dropdown.Item>Profile</Dropdown.Item>
+            </Link>
+            <Link to="/set/new">
+              <Dropdown.Item>Create Set</Dropdown.Item>
+            </Link>
             <Dropdown.Divider />
-            <Dropdown.Item onClick={handleSignout}>{t("Sign out")}</Dropdown.Item>
+            <Dropdown.Item onClick={handleSignout}>
+              {t('Sign out')}
+            </Dropdown.Item>
           </Dropdown>
           <Navbar.Toggle />
         </div>
       )}
       <Navbar.Collapse>
         <span onClick={useLinkClickHandler('/')}>
-          <Navbar.Link href="/">{t("Home")}</Navbar.Link>
+          <Navbar.Link href="/">{t('Home')}</Navbar.Link>
         </span>
 
         <Dropdown
@@ -96,7 +97,7 @@ const Nav = () => {
           label={
             <>
               <span className="text-gray-700 dark:text-gray-400 ">
-                {t("Categories")}
+                {t('Categories')}
               </span>
               <svg
                 className="ml-1 w-5 h-5"
@@ -124,14 +125,14 @@ const Nav = () => {
         </Dropdown>
 
         <span onClick={useLinkClickHandler('about')}>
-          <Navbar.Link href="about">{t("About")}</Navbar.Link>
+          <Navbar.Link href="about">{t('About')}</Navbar.Link>
         </span>
         <span onClick={useLinkClickHandler('contact')}>
-          <Navbar.Link href="contact">{t("Contact")}</Navbar.Link>
+          <Navbar.Link href="contact">{t('Contact')}</Navbar.Link>
         </span>
 
         <span onClick={useLinkClickHandler('team')}>
-          <Navbar.Link href="team">{t("Team")}</Navbar.Link>
+          <Navbar.Link href="team">{t('Team')}</Navbar.Link>
         </span>
       </Navbar.Collapse>
 
@@ -158,7 +159,7 @@ const Nav = () => {
               type="text"
               id="search-navbar"
               className="block p-2 pl-10 w-full text-gray-900 bg-gray-50 rounded-lg border border-gray-300 sm:text-sm focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-              placeholder={t("Search...")}
+              placeholder={t('Search...')}
               onKeyDown={(e) =>
                 e.key === 'Enter' && navigate(`/search/${e.target.value}`)
               }
