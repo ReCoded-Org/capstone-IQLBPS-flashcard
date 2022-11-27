@@ -1,10 +1,13 @@
 import { useState, useEffect } from 'react';
 import { useSelector } from 'react-redux';
+import { useTranslation } from 'react-i18next';
 
 import { fetchUserInfo, handleFavoriteSetsArray } from '../../services/user';
 import StarRating from './Rating';
 
 const SetInfo = ({ setsDescription, setphotoUrl, setName, setID }) => {
+  // const [value, setValue] = useState(2);
+  const { t } = useTranslation();
   const setRatingValue = 4;
   const [inLibrary, setInLibrary] = useState();
   const { user } = useSelector((state) => state.user);
@@ -39,7 +42,7 @@ const SetInfo = ({ setsDescription, setphotoUrl, setName, setID }) => {
             className="bg-primary-800 hover:bg-primary-700 text-white font-bold py-2 px-4 rounded mt-4 w-2/3"
             type="button"
           >
-            {`${inLibrary ? 'Remove from Library' : 'Add to Library'}`}
+            {`${inLibrary ? t("Remove from Library") : t("Add to Library")}`}
           </button>
         </div>
         <div className="bg-gray-200 dark:bg-gray-600">

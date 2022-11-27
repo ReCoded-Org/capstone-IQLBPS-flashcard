@@ -1,27 +1,26 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 import aboutimage from '../assets/feature/about.png';
 
 const About = () => {
+  const { t } = useTranslation();
   return (
     <div>
       <section className="bg-white dark:bg-gray-900">
         <div className="gap-8 items-center py-8 px-4 mx-auto max-w-screen-xl xl:gap-16 md:grid md:grid-cols-2 sm:py-16 lg:px-6">
           <div className="mt-4 md:mt-0">
             <h2 className="mb-4 text-4xl tracking-tight font-extrabold text-gray-900 dark:text-white">
-              Let&apos;s make our own flashcards.
+              {t("Let&apos;s make our own flashcards.")}
             </h2>
             <p className="mb-6 fontLight text-gray-500 md:textLg dark:text-gray-400">
-              Using our flashcard maker website, you can easily create your own
-              set of flashcards! Simply enter a term and its definition. You can
-              even include images. Once your flashcard set is finished, you can
-              easily study it.
+              {t("about text")}
             </p>
             <Link
               to="/login"
               className="inline-flex items-center justify-center px-5 py-3 mr-3 text-base font-medium text-center text-white roundedLg bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:ring-primary-300 dark:focus:ring-primary-900"
             >
-              Get started
+              {t("Get started")}
             </Link>
           </div>
           
@@ -34,12 +33,10 @@ const About = () => {
         <div className="py-8 px-4 mx-auto max-w-screen-xl sm:py-16 lg:px-6">
           <div className="max-w-screen-md mb-8 lg:mb-16">
             <h2 className="mb-4 text-4xl tracking-tight font-extrabold text-gray-900 dark:text-white">
-              Why you Should Use Cardly?
+              {t("Why you Should Use")} Cardly?
             </h2>
             <p className="text-gray-500 sm:text-xl dark:text-gray-400">
-              we believe that anyone can learn anything. All it takes is a
-              determined spirit, the right guidance and the right tools to see
-              it through.
+             {t("we believe that anyone can learn anything. All it takes is a determined spirit, the right guidance and the right tools to see it through.")}
             </p>
           </div>
           <div className="space-y-8 md:grid md:grid-cols-2 lg:grid-cols-3 md:gap-12 md:space-y-0">
@@ -77,11 +74,10 @@ const About = () => {
                 </svg>
               </div>
               <h3 className="mb-2 text-xl font-bold dark:text-white">
-                Convert your notes
+                {t("Convert your notes")}
               </h3>
               <p className="text-gray-500 dark:text-gray-400">
-                You can easily convert your notes into sets of flashcards for a
-                very effective self-testing approach.
+                {t("You can easily convert your notes into sets of flashcards for a very effective self-testing approach.")}
               </p>
             </div>
             <div>
@@ -150,10 +146,10 @@ const About = () => {
                 </svg>
               </div>
               <h3 className="mb-2 text-xl font-bold dark:text-white">
-                Enhance your memory
+                {t("Enhance your memory")}
               </h3>
               <p className="text-gray-500 dark:text-gray-400">
-                flashcards promote active learning and active recall.
+                {t("flashcards promote active learning and active recall.")}
               </p>
             </div>
             <div>
@@ -173,11 +169,10 @@ const About = () => {
                 </svg>
               </div>
               <h3 className="mb-2 text-xl font-bold dark:text-white">
-                Leave comments
+                {t("Leave comments")}
               </h3>
               <p className="text-gray-500 dark:text-gray-400">
-                Give feedback and discuss particular parts of your sets with
-                others.
+                {t("Give feedback and discuss particular parts of your sets with others.")}
               </p>
             </div>
             <div>
@@ -250,11 +245,10 @@ const About = () => {
                 </svg>
               </div>
               <h3 className="mb-2 text-xl font-bold dark:text-white">
-                Save your money
+                {t("Save your money")}
               </h3>
               <p className="text-gray-500 dark:text-gray-400">
-                Flashcard is completely free. All you have to do is sign up and
-                start.
+                {t("Cardly is completely free. All you have to do is sign up and start.")}
               </p>
             </div>
             <div>
@@ -283,10 +277,10 @@ const About = () => {
                 </svg>
               </div>
               <h3 className="mb-2 text-xl font-bold dark:text-white">
-                Choose your language
+                {t("Choose your language")}
               </h3>
               <p className="text-gray-500 dark:text-gray-400">
-                Switch between two languages: Arabic or English.
+               {t( "Switch between two languages: Arabic or English.")}
               </p>
             </div>
             <div>
@@ -311,10 +305,10 @@ const About = () => {
                 </svg>
               </div>
               <h3 className="mb-2 text-xl font-bold dark:text-white">
-                Dark Mode
+                {t("Dark Mode")}
               </h3>
               <p className="text-gray-500 dark:text-gray-400">
-                You can easily switch between light and dark modes.
+                {t("You can easily switch between light and dark modes.")}
               </p>
             </div>
           </div>

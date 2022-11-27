@@ -4,11 +4,14 @@
 import { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { query, collection, getDocs, where } from 'firebase/firestore';
+import { useTranslation } from 'react-i18next';
 import { db } from '../services/firebaseConfig';
 import Card from '../components/Card';
 import Filter from '../components/filter/Filter';
 
+
 const Search = () => {
+  const { t } = useTranslation();
   const [sortBy, setSortBy] = useState('');
   const [filteredCategory, setFilterCategory] = useState('');
   const [sets, setSets] = useState([]);
@@ -71,7 +74,7 @@ const Search = () => {
                 />
               ))
           ) : (
-            <h1>NO DATA FOUND!</h1>
+            <h1>{t("NO DATA FOUND!")}</h1>
           )}
         </div>
       </div>
