@@ -37,8 +37,8 @@ const Login = () => {
 
     if (result.error !== '') {
       setFormError(true);
-      result.error = ''
-      reset()
+      result.error = '';
+      reset();
     } else {
       setFormError(false);
       try {
@@ -46,8 +46,8 @@ const Login = () => {
           login({
             email: result.user.email,
             uid: result.user.uid,
-            displayName: result.user.username,
-            photoUrl: result.user.photoURL,
+            displayName: result.user.displayName,
+            photoURL: result.user.photoURL,
           })
         );
         navigate('/');

@@ -15,6 +15,7 @@ import cardlogo from '../assets/feature/flashcardlogoalone.png';
 import { logOut } from '../services/user';
 import { logout } from '../features/user/userSlice';
 import { categoriesData } from '../services/constant';
+import { defaultProfile } from '../assets/Default_profile.jpg';
 
 const Nav = () => {
   const { user } = useSelector((state) => state.user);
@@ -51,7 +52,7 @@ const Nav = () => {
       )}
 
       {user && (
-        <div className="flex  space-x-4 md:order-2">
+        <div className="flex space-x-4 md:order-2">
           <DarkThemeToggle />
 
           <Dropdown
@@ -60,11 +61,7 @@ const Nav = () => {
             label={
               <Avatar
                 alt="User settings"
-                img={
-                  user.photoUrl
-                    ? user.photoUrl
-                    : 'https://flowbite.com/docs/images/people/profile-picture-5.jpg'
-                }
+                img={user.photoURL ? user.photoURL : defaultProfile}
                 rounded
               />
             }
@@ -75,9 +72,12 @@ const Nav = () => {
                 {user.email}{' '}
               </span>
             </Dropdown.Header>
-            <Dropdown.Item>Dashboard</Dropdown.Item>
-            <Dropdown.Item>Settings</Dropdown.Item>
-            <Dropdown.Item>Earnings</Dropdown.Item>
+            <Link to="/profile">
+              <Dropdown.Item>Profile</Dropdown.Item>
+            </Link>
+            <Link to="/set/new">
+              <Dropdown.Item>Create Set</Dropdown.Item>
+            </Link>
             <Dropdown.Divider />
             <Dropdown.Item onClick={handleSignout}>Sign out</Dropdown.Item>
           </Dropdown>
