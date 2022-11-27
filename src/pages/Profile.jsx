@@ -11,6 +11,7 @@ import {
 
 export default function Profile() {
   const { user } = useSelector((state) => state.user);
+  const { t } = useTranslation();
 
   const myPlaceHolderImage = !user.photoURL
     ? 'https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460__480.png'
