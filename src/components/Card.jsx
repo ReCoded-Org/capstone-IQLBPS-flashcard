@@ -5,7 +5,7 @@ const Card = ({ id, coverImage, title, description }) => {
   return (
     <Link to={`/set/${id}`}>
       <article
-        className="group h-96 w-64 mx-auto w-full max-w-sm transform cursor-pointer rounded-lg bg-cover overflow-hidden bg-no-repeat bg-center shadow-xl duration-500 hover:-translate-y-2"
+        className="group h-96 w-72 mx-auto w-full max-w-sm transform cursor-pointer rounded-lg bg-cover overflow-hidden bg-no-repeat bg-center shadow-xl duration-500 hover:-translate-y-2"
         style={{ backgroundImage: `url("${coverImage}")` }}
       >
         <div className="flex w-full h-full transform flex-col flex-wrap bg-black bg-opacity-10 px-5 pt-48 duration-300 hover:bg-opacity-75 hover:backdrop-blur-sm">
