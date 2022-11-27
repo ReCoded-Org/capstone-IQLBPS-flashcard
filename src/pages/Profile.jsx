@@ -1,38 +1,35 @@
-import { useEffect , useState} from "react";
-import { useSelector } from "react-redux";
-
-import Card from "../components/Card"
-import {fetchUserSets, updateUserName, updateUserProfile} from '../services/user'
+import { useEffect, useState } from 'react';
+import { useSelector } from 'react-redux';
+import { v4 as uuidv4 } from 'uuid';
+import Card from '../components/Card';
+import {
+  fetchSetsById,
+  updateUserName,
+  updateUserProfile,
+} from '../services/user';
 
 export default function Profile() {
-
-
   const { user } = useSelector((state) => state.user);
 
-
-  const myPlaceHolderImage = !user.photoURL ? "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460__480.png" : user.photoURL;
+  const myPlaceHolderImage = !user.photoURL
+    ? 'https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460__480.png'
+    : user.photoURL;
   const myPlaceHolderUser = user.displayName;
 
-  const [userSets , setUserSets] = useState([]);
-  const [loadingSets , setLoadingSets] = useState(true);
+  const [userSets, setUserSets] = useState([]);
+  const [loadingSets, setLoadingSets] = useState(true);
 
-  
-  useEffect(()=> {
+  useEffect(() => {
+    const getUserSets = async () => {
+      const sets = await fetchSetsById(user.sets);
+      setUserSets(sets);
 
-   const getUserSets = async() => {
- const sets =   await fetchUserSets(user.uid)
-setUserSets(sets) ;
+      if (sets !== 0) setLoadingSets(false);
+      else setLoadingSets(true);
+    };
 
-
-if(sets !== 0)
-setLoadingSets(false);
-else
-setLoadingSets(true);
-   }
-
-   getUserSets();
-  }, [])
- 
+    getUserSets();
+  }, []);
 
   const [popUpState, setPopUpState] = useState('hidden');
 
@@ -57,7 +54,7 @@ setLoadingSets(true);
       <div className="grid gap-8 lg:gap-16 sm:grid-cols-2 lg:grid-cols-1 ">
         <div className="text-center text-gray-500 dark:text-gray-400">
           <img
-            className="my-4 border-4 border-primary-50 mx-auto mb-4 w-80 h-auto rounded-full"
+            className="my-4 border-4 border-primary-50 mx-auto mb-4 w-80 h-80 rounded-full object-cover"
             src={myPlaceHolderImage}
             alt={`${myPlaceHolderUser}Avatar`}
           />
@@ -88,16 +85,16 @@ setLoadingSets(true);
       </div>
       <div className="py-8 px-4 mx-auto max-w-screen-xl lg:py-16 lg:px-6 ">
         <div className="grid gap-8 mb-6 lg:mb-16 lg:grid-cols-3 xl:grid-cols-4 md:grid-cols-2">
-          { !loadingSets && (userSets.map((set) => (
-            <Card
-            id={set.id}
-              coverImage={set.image}
-              title={set.name}
-              description={set.description}
-            />
-          ))
-          
-          )}
+          {!loadingSets &&
+            userSets.map((set) => (
+              <Card
+                key={uuidv4()}
+                id={set.id}
+                coverImage={set.image}
+                title={set.name}
+                description={set.description}
+              />
+            ))}
         </div>
       </div>
     </section>
@@ -108,7 +105,6 @@ function PopUp({ popUpState, userName, myImage, handlePopUp }) {
   const [updatedName, setUpdatedUserName] = useState(null);
   const [userImage, setUserImage] = useState(null);
   const [userDefaultImage, setUserDefaultImage] = useState(null);
-
 
   const { user } = useSelector((state) => state.user);
 
@@ -121,8 +117,12 @@ function PopUp({ popUpState, userName, myImage, handlePopUp }) {
   const handleImage = (e) => {
     if (e.target.files[0]) {
       setUserImage(e.target.files[0]);
-      setUserDefaultImage(URL.createObjectURL(e.target.files[0]))
+      setUserDefaultImage(URL.createObjectURL(e.target.files[0]));
     }
+  };
+
+  const handleUserName = (e) => {
+    setUpdatedUserName(e.target.value);
   };
 
   const handleSave = async (e) => {
@@ -131,7 +131,7 @@ function PopUp({ popUpState, userName, myImage, handlePopUp }) {
       await updateUserProfile(user.uid, userImage);
     }
 
-    if (updatedName !== user.displayName || updatedName.length !== 0)
+    if (updatedName !== user.displayName && updatedName.length !== 0)
       await updateUserName(user.uid, updatedName);
 
     handlePopUp();
@@ -177,8 +177,8 @@ function PopUp({ popUpState, userName, myImage, handlePopUp }) {
             <form action=" ">
               <div className="grid">
                 <img
-                  className="rounded-full my-4 border-4 border-primary-50 mx-auto mb-4 w-80 h-auto"
-                  src={!userImage? myImage : userDefaultImage}
+                  className="rounded-full my-4 border-4 border-primary-50 mx-auto mb-4 w-80 h-80 h-auto object-cover"
+                  src={!userImage ? myImage : userDefaultImage}
                   alt={`${userName}Avatar`}
                 />
                 <div className="grid sm:w-2/3 sm:mx-auto gap-2 pl-2">
@@ -227,7 +227,7 @@ function PopUp({ popUpState, userName, myImage, handlePopUp }) {
                   >
                     Change Username
                     <input
-                      onChange={(e) => setUpdatedUserName(e.target.value)}
+                      onChange={handleUserName}
                       type="text"
                       name="name"
                       id="name"
