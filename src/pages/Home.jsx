@@ -1,12 +1,13 @@
 import React from 'react';
 import FeaturePoints from '../components/feature/FeaturePoints';
 import FeatureCard from '../components/feature/FeatureCard';
+import UserFeedback from '../components/feature/UserFeedback';
+
 import Hero from '../components/Hero';
 import {
   LEARNING_FEATURES,
   WEBSITE_FEATURES,
 } from '../assets/feature/Features';
-import UserFeedback from '../components/UserFeedback';
 
 const Home = () => {
   return (
@@ -23,7 +24,6 @@ const Home = () => {
 
 
 <UserFeedback/>
-
     
     </div>
   );

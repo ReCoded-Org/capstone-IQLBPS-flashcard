@@ -63,7 +63,7 @@ export const STUDENT_FEEDBACK = [
   {
     username: 'Maryam Lynch',
     userrole: 'Centre College',
-    description: `                    “ Cardly is something I use on a daily basis for my needs. It helps me to memorize business models faster and easier ”
+    description: `                    “ Cardly is something I use on a daily basis for my needs. It helps me to memorize business models faster and easier. ”
       `,
     userimage:
       'https://www.intel.co.uk/content/dam/www/central-libraries/us/en/images/2022-04/adobestock-343789914.jpeg.rendition.intel.web.576.324.jpg',
