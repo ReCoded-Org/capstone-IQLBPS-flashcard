@@ -2,9 +2,12 @@ import { useState } from 'react';
 import { useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
 import { Timestamp } from 'firebase/firestore';
+import { useTranslation } from 'react-i18next';
 import { createComment } from '../services/comment';
 
+
 function CommentPost({ setComments, comments }) {
+  const { t } = useTranslation();
   const [comment, setComment] = useState(' ');
   const { user } = useSelector((state) => state.user);
   const { id } = useParams();
@@ -36,7 +39,7 @@ function CommentPost({ setComments, comments }) {
           <div className="py-2 px-4 mb-4 bg-white rounded-lg rounded-t-lg border border-gray-200 dark:bg-gray-800 dark:border-gray-700">
             {/* eslint-disable-next-line jsx-a11y/label-has-associated-control */}
             <label htmlFor="comment" className="sr-only">
-              Your comment
+              {t("Your comment")}
             </label>
             <textarea
               id="comment"
@@ -52,7 +55,7 @@ function CommentPost({ setComments, comments }) {
             className="inline-flex items-center py-2.5 px-4 text-xs font-medium text-center text-white bg-primary-700 rounded-lg focus:ring-4 focus:ring-primary-200 dark:focus:ring-primary-900 hover:bg-primary-800"
             onClick={handleComment}
           >
-            Post comment
+            {t("Post comment")}
           </button>
         </form>
       </div>
