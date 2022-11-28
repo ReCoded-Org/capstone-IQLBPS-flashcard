@@ -55,7 +55,7 @@ const Signup = () => {
             photoUrl: result.user.photoURL,
           })
         );
-        navigate('/profile');
+        navigate('/');
       } catch {
         // console.log('user not updated');
       }
@@ -69,7 +69,7 @@ const Signup = () => {
           <div className="w-full bg-white rounded-lg shadow dark:border md:mt-0 sm:max-w-md xl:p-0 dark:bg-gray-800 dark:border-gray-700">
             <div className="p-6 space-y-4 md:space-y-6 sm:p-8">
               <h1 className="text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl dark:text-white">
-                {t("Create An Account")}
+                {t('Create An Account')}
               </h1>
               <form
                 className="space-y-4 md:space-y-6"
@@ -81,13 +81,13 @@ const Signup = () => {
                     htmlFor="username"
                     className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
                   >
-                    {t("Enter Your UserName")}
+                    {t('Enter Your UserName')}
                     <input
                       type="username"
                       name="username"
                       id="username"
                       className="bg-gray-50 mt-1 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                      placeholder={t("username")}
+                      placeholder={t('username')}
                       required=""
                       {...register('username')}
                     />
@@ -106,7 +106,7 @@ const Signup = () => {
                     htmlFor="email"
                     className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
                   >
-                    {t("Enter Your Email")}
+                    {t('Enter Your Email')}
                     <input
                       type="email"
                       name="email"
@@ -137,7 +137,7 @@ const Signup = () => {
                     htmlFor="password"
                     className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
                   >
-                    {t("Enter Your Password")}
+                    {t('Enter Your Password')}
                     <input
                       type="password"
                       name="password"
@@ -161,7 +161,7 @@ const Signup = () => {
                     htmlFor="conPassword"
                     className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
                   >
-                    {t("Confirm Your password")}
+                    {t('Confirm Your password')}
                     <input
                       type="password"
                       name="conPassword"
@@ -184,15 +184,15 @@ const Signup = () => {
                   type="submit"
                   className="w-full text-white bg-primary-600 hover:bg-primary-700 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800"
                 >
-                  {t("Create An Account")}
+                  {t('Create An Account')}
                 </button>
                 <p className="text-sm font-light text-gray-500 dark:text-gray-400">
-                  {t("Already have an account?")}
+                  {t('Already have an account?')}
                   <Link
                     to="/login"
                     className="font-medium mx-2 text-primary-600 hover:underline dark:text-primary-500"
                   >
-                    {t("Login here")}
+                    {t('Login here')}
                   </Link>
                 </p>
               </form>
