@@ -9,6 +9,7 @@ import { useDispatch } from 'react-redux';
 import { fetchUserInfo, logInWithEmailAndPassword } from '../services/user';
 import { login } from '../features/user/userSlice';
 import GoogleSignInButton from '../components/GoogleSignInButton';
+import cardlogo from '../assets/feature/flashcardlogoalone.png';
 
 const loginSchema = yup.object().shape({
   email: yup
@@ -69,7 +70,7 @@ const Login = () => {
         >
           <img
             className="w-8 h-8 mr-2"
-            src="https://flowbite.s3.amazonaws.com/blocks/marketing-ui/logo.svg"
+            src={cardlogo}
             alt="logo"
           />
           Cardly
