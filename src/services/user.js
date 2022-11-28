@@ -224,3 +224,10 @@ export async function handleFavoriteSetsArray(inLibrary, id, setID) {
     });
   }
 }
+
+export async function handleUserSetsArray(id, setID) {
+  const SetRef = doc(db, 'users', id);
+  await updateDoc(SetRef, {
+    sets: arrayUnion(setID),
+  });
+}

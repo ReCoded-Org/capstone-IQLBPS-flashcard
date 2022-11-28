@@ -6,8 +6,7 @@ import { useSelector } from 'react-redux';
 import ComboBox from './ComboBox';
 import { SetHeader } from '../../services/sets';
 import { categoriesData } from '../../services/constant';
-
-
+import { handleUserSetsArray } from '../../services/user';
 
 const AddSet = ({ setId, handleFormVisibility, onAddingSet }) => {
   const { user } = useSelector((state) => state.user);
@@ -30,14 +29,15 @@ const AddSet = ({ setId, handleFormVisibility, onAddingSet }) => {
       user
     );
     onAddingSet({
-       id,
+      id,
       name: data.name,
       image: data.image,
       description: data.description,
       categories: category,
     });
-
     setId(id);
+
+    handleUserSetsArray(user.uid, id);
   };
 
   return (
@@ -113,7 +113,7 @@ const AddSet = ({ setId, handleFormVisibility, onAddingSet }) => {
             errors={errors}
             newSet
             setCategory={setCategory}
-            setId={() => {} }
+            setId={() => {}}
           />
         </div>
         <button
