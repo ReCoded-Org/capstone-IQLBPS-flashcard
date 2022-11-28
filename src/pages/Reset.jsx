@@ -6,6 +6,7 @@ import * as yup from 'yup';
 import { yupResolver } from '@hookform/resolvers/yup';
 
 import {resetPassword} from '../services/user'
+import cardlogo from '../assets/feature/flashcardlogoalone.png';
 
 const schema = yup.object().shape({
     email: yup
@@ -39,7 +40,7 @@ return (
         >
           <img
             className="w-8 h-8 mr-2"
-            src="https://flowbite.s3.amazonaws.com/blocks/marketing-ui/logo.svg"
+            src={cardlogo}
             alt="logo"
           />
           Cardly
