@@ -1,6 +1,7 @@
 import React, { useRef } from 'react';
 import Flippy, { FrontSide, BackSide } from 'react-flippy';
-import ReactHtmlParser from 'react-html-parser';
+
+import ReactHtmlParser from 'html-react-parser';
 
 const SetCard = ({ front, back }) => {
   const ref = useRef();
