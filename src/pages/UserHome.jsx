@@ -43,13 +43,13 @@ const UserHome = () => {
           <Loading />
         )
       ) : (
-        <ActiveUserSection list={favoriteSets} title={t("Your Favorites")} />
+        <ActiveUserSection list={favoriteSets} title={t('Your Favorites')} />
       )}
 
       {isLoadingLatest ? (
         <Loading />
       ) : (
-        <ActiveUserSection list={latestSets} title={t("Latest Sets")} />
+        <ActiveUserSection list={latestSets} title={t('Latest Sets')} />
       )}
     </section>
   );
