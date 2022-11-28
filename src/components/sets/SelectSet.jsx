@@ -12,7 +12,7 @@ const SelectSet = ({ handleFormVisibility, sets, setId }) => {
       >
         {t('ADD NEW SET')}
       </button>
-      <label htmlFor="sets" className="text-xl font-bold ml-2">
+      <label htmlFor="sets" className="text-xl font-bold ml-2 dark:text-white">
         {t('Choose From Current Sets')}
         <ComboBox data={sets} register={() => {}} errors={{}} setId={setId} />
       </label>
