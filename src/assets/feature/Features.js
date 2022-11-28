@@ -1,11 +1,13 @@
-import word from './word.svg';
-import star from './star.svg';
-import lang from './lang.svg';
-import user from './user.svg';
+import word from './bookmark-svgrepo-com.svg';
+import star from './star-svgrepo-com.svg';
+import lang from './language-svgrepo-com.svg';
+import user from './add-user-svgrepo-com.svg';
+import studyeasily from './studyeasily.gif';
+import studyperformance from './studyperformance.gif';
 
 export const WEBSITE_FEATURES = [
   {
-    name: 'Saving words',
+    name: '200K+ saved words',
     description: 'You can view all words you learned. And always review them',
     icon: word,
   },
@@ -16,7 +18,7 @@ export const WEBSITE_FEATURES = [
     icon: star,
   },
   {
-    name: 'Using Different language',
+    name: '30K+ Using Different language',
     description: 'You can choose which language you want to use',
     icon: lang,
   },
@@ -30,16 +32,16 @@ export const WEBSITE_FEATURES = [
 
 export const LEARNING_FEATURES = [
   {
-    name: 'Keep Track on your performance',
+    name: 'Keep track of your performance',
     description:
       'you can keep tracking on your progress and see how much you still have to reach your goals',
-    image: 'https://miro.medium.com/max/1198/1*DIq4u0PzaPtayrRnpFr0BA.png',
+    image: studyperformance,
   },
   {
-    name: 'Using Flashcard',
-    description: 'Using flash card to learn new words more easy',
-    image:
-      'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQjHzfTj4bxwBIKpr5ntYLcQKCjFexOTFTjnQ&usqp=CAU',
+    name: 'Memorize faster',
+    description:
+      'With flashcards, you can learn new words more easily and sufficiently',
+    image: studyeasily,
   },
 ];
 
